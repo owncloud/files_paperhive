@@ -21,3 +21,18 @@
 
 namespace OCA\Files_PaperHive\AppInfo;
 
+$app = new Application();
+
+$app->registerRoutes($this, array('routes' => array(
+
+	[
+		'name' => 'PaperHive#load',
+		'url' => '/ajax/loadfile',
+		'verb' => 'GET'
+	],
+	[
+		'name' => 'PaperHive#save',
+		'url' => '/ajax/savefile',
+		'verb' => 'PUT'
+	]
+)));
