@@ -10,13 +10,13 @@
 	<shipped>false</shipped>
 	<default_enable/>
 	<documentation>
-		<user>https://github.com/mrow4a/oc_paperhive/blob/master/README.md</user>
-		<admin>https://github.com/mrow4a/oc_paperhive/blob/master/README.md</admin>
-		<developer>https://github.com/mrow4a/oc_paperhive/blob/master/README.md</developer>
+		<user>https://github.com/mrow4a/files_paperhive/blob/master/README.md</user>
+		<admin>https://github.com/mrow4a/files_paperhive/blob/master/README.md</admin>
+		<developer>https://github.com/mrow4a/files_paperhive/blob/master/README.md</developer>
 	</documentation>
-	<website>https://github.com/mrow4a/oc_paperhive</website>
-	<bugs>https://github.com/mrow4a/oc_paperhive/issues</bugs>
-	<repository type="git">https://github.com/mrow4a/oc_paperhive.git</repository>
+	<website>https://github.com/mrow4a/files_paperhive</website>
+	<bugs>https://github.com/mrow4a/files_paperhive/issues</bugs>
+	<repository type="git">https://github.com/mrow4a/files_paperhive.git</repository>
 	<ocsid>166000</ocsid>
 	<dependencies>
 		<owncloud min-version="9.2" max-version="9.2" />
