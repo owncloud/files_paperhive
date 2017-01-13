@@ -31,8 +31,13 @@ $app->registerRoutes($this, array('routes' => array(
 		'verb' => 'GET'
 	],
 	[
-		'name' => 'PaperHive#save',
-		'url' => '/ajax/savefile',
-		'verb' => 'PUT'
+		'name' => 'PaperHive#getPaperHiveDetails',
+		'url' => '/ajax/getpaperhivedetails',
+		'verb' => 'GET'
+	],
+	[
+		'name' => 'PaperHive#getPaperHiveDocument',
+		'url' => '/ajax/getpaperhivedocument',
+		'verb' => 'GET'
 	]
 )));

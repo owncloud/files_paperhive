@@ -21,33 +21,6 @@
 var Files_PaperHive = {
 
 	/**
-	 * Paperhive base URL
-	 * TODO: Temporarly hardcore the paperhive base URL
-	 */
-	paperhive_base_url: 'https://paperhive.org',
-
-	/**
-	 * Paperhive url for document API
-	 */
-	paperhive_api_url: '/api/documents/',
-
-	/**
-	 * Paperhive url for text API
-	 */
-	paperhive_document_url: '/documents/',
-
-	/**
-	 * Paperhive url for discussions API
-	 */
-	paperhive_discussion_api_endpoint: '/discussions',
-
-
-	/**
-	 * Paperhive file extension
-	 */
-	paperhive_file_extension: '.paperhive',
-
-	/**
 	 * Holds the notification container
 	 */
 	$notification: null,
@@ -61,8 +34,6 @@ var Files_PaperHive = {
 	 * Holds the notification html options
 	 */
 	containerOptions: null,
-
-	defaultAction: null,
 
 	/**
 	 * Gets if is paperhive file
@@ -111,27 +82,50 @@ var Files_PaperHive = {
 	 */
 	initialize: function() {
 		$(document).bind('mouseup', this._onClickDocument);
-		this.container = $('<div class="notification_paperhive"></div>').html(
-			'<div class="icon-paperhive"></div>' +
-			'<div><p class="normal">Visit PaperHive at </p><p class="normal">' + OCA.Files_PaperHive.paperhive_base_url + '</p><p class="normal"> and transform reading into a process of collaboration!</p></div>' +
-			//'<div><span></span></div>' +
-			'<div><p class="bold">Your Book ID </p><p class="normal">is the last fragment of PaperHive document URL.</p></div>' +
-			'<div><p class="normal">Example: </p><p class="normal">' + OCA.Files_PaperHive.paperhive_base_url + OCA.Files_PaperHive.paperhive_document_url + '</p><p class="bold">Ra5WnkxImoOE</p></div>'
-		);
-		this.containerOptions = {
-			isHTML: true,
-			timeout: 30
-		};
 		this.$notification = null;
 		this.registerFileActions();
 	},
 
+	createContainer: function() {
+		var self = this;
+		$.ajax({
+			type: 'GET',
+			url: OC.generateUrl('/apps/files_paperhive/ajax/getpaperhivedetails')
+		})
+			.done(function(phdata) {
+				var containerString = '<div class="icon-paperhive"></div>' +
+					'<div><p class="normal">Visit PaperHive at </p><p class="normal">' +phdata.paperhive_base_url + '</p><p class="normal"> and transform reading into a process of collaboration!</p></div>' +
+					//'<div><span></span></div>' +
+					'<div><p class="bold">Your Book ID </p><p class="normal">is the last fragment of PaperHive document URL.</p></div>' +
+					'<div><p class="normal">Example: </p><p class="normal">' + phdata.paperhive_base_url + phdata.paperhive_document_url + '</p><p class="bold">Ra5WnkxImoOE</p></div>';
+
+				self.container = $('<div class="notification_paperhive"></div>').html(
+					containerString
+				);
+				self.containerOptions = {
+					isHTML: true,
+					timeout: 30
+				};
+				self.$notification = OC.Notification.showHtml(
+					self.container,
+					self.containerOptions
+				);
+			})
+			.fail(function(jqXHR) {
+				var message;
+
+				try{
+					message = JSON.parse(jqXHR.responseText).message;
+				}catch(e){
+				}
+
+				OC.dialogs.alert(message, t('files_paperhive', 'An error occurred!'));
+			});
+	},
+
 	createNotification: function() {
 		if (this.$notification === null){
-			this.$notification = OC.Notification.showHtml(
-				this.container,
-				this.containerOptions
-			);
+			this.createContainer();
 		}
 	},
 
@@ -149,12 +143,13 @@ var Files_PaperHive = {
 	/**
 	 * Loads the data through AJAX
 	 */
-	loadFile: function(dir, filename, success, failure) {
+	loadFile: function(dir, filename, fetchDiscussions, success, failure) {
 		$.get(
 			OC.generateUrl('/apps/files_paperhive/ajax/loadfile'),
 			{
 				filename: filename,
-				dir: dir
+				dir: dir,
+				fetchDiscussions: fetchDiscussions
 			}
 		).done(function(fileContents) {
 			// Call success callback
@@ -169,32 +164,6 @@ var Files_PaperHive = {
 
 			failure(message);
 		});
-	},
-
-
-	/**
-	 * Send the new file data back to the server
-	 */
-	saveFile: function(data, path, success, failure) {
-		$.ajax({
-			type: 'PUT',
-			url: OC.generateUrl('/apps/files_paperhive/ajax/savefile'),
-			data: {
-				filecontents: data,
-				path: path
-			}
-		})
-			.done(success)
-			.fail(function(jqXHR) {
-				var message;
-
-				try{
-					message = JSON.parse(jqXHR.responseText).message;
-				}catch(e){
-				}
-
-				failure(message);
-			});
 	},
 
 	validatePaperHiveJSON: function (paperHiveObject) {
@@ -219,98 +188,57 @@ var Files_PaperHive = {
 	/**
 	 * Handles request for book contents to PaperHive API
 	 */
-	getPaperHiveBook: function(bookID, success, failure) {
-		var paperhiveUrl = OCA.Files_PaperHive.paperhive_base_url + OCA.Files_PaperHive.paperhive_api_url + bookID;
+	getPaperHiveBook: function(dir, bookID, success, failure) {
+		$.get(
+			OC.generateUrl('/apps/files_paperhive/ajax/getpaperhivedocument'),
+			{
+				dir: dir,
+				bookID: bookID
+			}
+		).done(function(paperHiveData) {
+			// Success - found valid Book at PaperHive
+			success(paperHiveData);
+		}).fail(function(jqXHR) {
+			var message;
 
-		// TODO: remember to implement AJAX request to paperHive, not only mimic the response
-		var paperHiveString =
-			'{' +
-			'"status": "404",' +
-			'"message": "document not found",' +
-			'}';
-		if (bookID === 'Ra5WnkxImoOE') {
-			paperHiveString =
-				'{' +
-				'"id": "Ra5WnkxImoOE",' +
-				'"revision": "M4HIAWe7NbAs",' +
-				'"remote": {' +
-				'"type": "oapen",' +
-				'"id": "605035"' +
-				'},' +
-				'"title": "Borderland City in New India",' +
-				'"authors": [' +
-				'{' +
-				'"name": "Duncan McDuie-Ra"' +
-				'}' +
-				'],' +
-				'"publishedAt": "2016-01-01T14:00:00.000Z",' +
-				'"abstract": "Borderland Cities in New India explores contemporary urban life in two cities in India’s Northeast borderland at a time of dramatic change. Social and economic transformation from India’s embrace of neoliberalism and globalisation, often referred to as ‘new’ India, has become a popular subject for academic analysis in the last decade. This is epitomised by focus on so-called ‘mega-cities’, reflecting a general trend in scholarship on other parts of Asia. However, far less attention has been afforded to borderland regions and to the provincial cities of ‘new’ India. Using ethnographic material, this book focuses on two cities in India’s Northeast borderland: Aizawl and Imphal. Both cities have been profoundly affected by armed conflict, militarism, displacement, and inter-ethnic tensions. Yet, both are also experiencing intensified flows of goods and people, rapid urban development, and expansion of Indian and foreign capital associated with the opening of the borderland west to the rest of India and east to the rest of Asia.",' +
-				'"isbn": "9789048525362",' +
-				'"tags": [],' +
-				'"publisher": "Amsterdam University Press",' +
-				'"distributor": "Knowledge Unlatched",' +
-				'"isOpenAccess": true,' +
-				'"file": {' +
-				'"url": "http://oapen.org/download?type=document&docid=605035",' +
-				'"hasCors": false' +
-				'}' +
-				'}';
-		}
-
-		// try {
-		// 	xhr = new XMLHttpRequest();
-		//
-		// 	xhr.onreadystatechange = function () {
-		// 		if (xhr.readyState === 4) {
-		// 			if (xhr.status === 200) { // Success
-		// 				OC.dialogs.alert('GET', t('files_paperhive', 'Got data'));
-		// 			} else { // Failure, fallback to regular notice
-		// 				OC.dialogs.alert('GET', t('files_paperhive', 'An error occurred!'));
-		// 			}
-		// 		}
-		// 	};
-		// 	xhr.open('GET', paperhiveUrl, true);
-		// 	xhr.send();
-		// } catch (e) {
-		// 	failure("PaperHive cannot connect to requested address: " + paperhiveUrl);
-		// 	return;
-		// }
-
-		try {
-			var paperHiveObject = JSON.parse(paperHiveString);
-		} catch (e) {
-			failure("PaperHive cannot be found at requested address: " + paperhiveUrl);
-			return;
-		}
-
-		if (bookID != 'Ra5WnkxImoOEe' && bookID != 'Ra5WnkxImoOE') {
-			failure("Failed requesting PaperHive at address: " + paperhiveUrl);
-		} else {
-			if (!OCA.Files_PaperHive.validatePaperHiveJSON(paperHiveObject)){
-				failure("Requested PaperHive document cannot be found at address: " + paperhiveUrl);
-				return;
+			try{
+				message = JSON.parse(jqXHR.responseText).message;
+			}catch(e){
 			}
 
-			// Success - found valid Book at PaperHive
-			//var filename = paperHiveObject.title + OCA.Files_PaperHive.$paperhive_file_extension;
-			var filename = paperHiveObject.title + OCA.Files_PaperHive.paperhive_file_extension;
-			success(filename, paperHiveString);
-		}
+			failure("Error occured while connecting to PaperHive: " + message);
+		});
 
 	},
 
-	_updatePaperHiveFileData: function($tr) {
-		if (OCA.Files_PaperHive.isPaperHive($tr.attr('data-file'))) {
-			$tr.find('.filename .thumbnail').css('background-image', 'url(' + OC.imagePath('files_paperhive', 'paperhive-icon') + ')');
-			var action = $tr.find('.fileactions .action[data-action="ShowPaper"]');
-			action.addClass('shared-style');
-			var icon = action.find('.icon');
+	setDiscussionCount: function($tr) {
+		OCA.Files_PaperHive.loadFile(
+			$tr.attr('data-path'),
+			$tr.attr('data-file'),
+			"true",
+			function(paperHiveData) {
+				var discussionsCount = paperHiveData.paperhive_discussion_count;
+				OCA.Files_PaperHive._updatePaperHiveFileData($tr, discussionsCount);
+			},
+			function(message){
+			}
+		);
 
-			var discussionCount = Math.floor(Math.random() * (20 - 0 + 1)) + 0;
+	},
 
+	_updatePaperHiveFileData: function($tr, discussionCount) {
+		$tr.find('.filename .thumbnail').css('background-image', 'url(' + OC.imagePath('files_paperhive', 'paperhive-icon') + ')');
+		var action = $tr.find('.fileactions .action[data-action="ShowPaper"]');
+
+		action.addClass('shared-style');
+		var icon = action.find('.icon');
+
+		if (discussionCount === -1) {
+			var message = t('files_paperhive', 'Discuss');
+		} else {
 			var message = t('files_paperhive', 'Discuss') + ' (' + discussionCount + ')';
-			action.html('<span> ' + message + '</span>').prepend(icon);
 		}
+		action.html('<span> ' + message + '</span>').prepend(icon);
 	},
 
 	/**
@@ -321,9 +249,10 @@ var Files_PaperHive = {
 		this.loadFile(
 			context.dir,
 			filename,
-			function(paperHiveString) {
+			"false",
+			function(paperHiveData) {
 				try {
-					var paperHiveObject = JSON.parse(paperHiveString);
+					var paperHiveObject = JSON.parse(paperHiveData.paperhive_document);
 				} catch (e) {
 					failure("Your [.paperhive] file is not a valid PaperHive document, please redownload document");
 					return;
@@ -334,23 +263,15 @@ var Files_PaperHive = {
 					return;
 				}
 
-				var paperhiveUrl = OCA.Files_PaperHive.paperhive_base_url + OCA.Files_PaperHive.paperhive_document_url + paperHiveObject.id;
-
-				// TODO: this should open new window, not redirect
-				// $.ajax({
-				// 	url:      paperhiveUrl,
-				// 	async:    false,
-				// 	dataType: "json",
-				// 	success:  function() {
-				// 		window.open(paperhiveUrl);
-				// 	}
-				// });
-				window.location = paperhiveUrl;
+				// Open new tab with paperhive
+				var paperhiveUrl = paperHiveData.paperhive_base_url + paperHiveData.paperhive_document_url + paperHiveObject.id;
+				window.open(paperhiveUrl, '_blank').location;
 			},
 			function(message){
 				// Oh dear
 				OC.dialogs.alert(message, t('files_paperhive', 'An error occurred!'));
-			});
+			}
+		);
 	},
 
 	/**
@@ -390,37 +311,26 @@ Files_PaperHive.NewFileMenuPlugin = {
 				OCA.Files_PaperHive.hideNotification();
 
 				// Get the file data from PaperHive API
+				var dir = fileList.getCurrentDirectory();
+				var $saveNot = OC.Notification.showHtml(t('files_paperhive', 'Saving..'));
 				OCA.Files_PaperHive.getPaperHiveBook(
+					dir,
 					bookID,
-					function(fileName, paperHiveString) {
-						var dir = fileList.getCurrentDirectory();
-
-						if (dir == '/') {
-							var path = dir + fileName;
-						} else {
-							var path = dir + '/' + fileName;
-						}
-						// Try to save
-						OCA.Files_PaperHive.saveFile(
-							paperHiveString,
-							path,
-							function (data) {
-								fileList.addAndFetchFileInfo(path, '', {scrollTo: true}).then(
-									function(status, data) {
-										var $tr = fileList.findFileEl(fileName);
-										OCA.Files_PaperHive._updatePaperHiveFileData($tr);
-									},
-									function() {
-										OCA.Files_PaperHive.failureNotification('Could not create file');
-									}
-								);
+					function(paperHiveData) {
+						fileList.addAndFetchFileInfo(paperHiveData.path, '', {scrollTo: true}).then(
+							function(status, data) {
+								var $tr = fileList.findFileEl(paperHiveData.filename);
+								OCA.Files_PaperHive._updatePaperHiveFileData($tr, paperHiveData.discussionCount);
+								OC.Notification.hide($saveNot);
 							},
-							function (message) {
-								OCA.Files_PaperHive.failureNotification(message);
+							function() {
+								OC.Notification.hide($saveNot);
+								OCA.Files_PaperHive.failureNotification('Could not create file');
 							}
 						);
 					},
 					function(message){
+						OC.Notification.hide($saveNot);
 						OCA.Files_PaperHive.failureNotification(message);
 					}
 				);
@@ -435,11 +345,24 @@ Files_PaperHive.FileMenuPlugin = {
 		// use delegate to catch the case with multiple file lists
 		fileList.$el.on('fileActionsReady', function(ev){
 			var $files = ev.$files;
+			var $phfiles = [];
 
 			_.each($files, function(file) {
 				var $tr = $(file);
-				OCA.Files_PaperHive._updatePaperHiveFileData($tr);
+
+				if (OCA.Files_PaperHive.isPaperHive($tr.attr('data-file'))) {
+					OCA.Files_PaperHive._updatePaperHiveFileData($tr, -1);
+					$phfiles.push(file);
+				}
 			});
+
+			setTimeout(function(){
+				_.each($phfiles, function(file) {
+					var $tr = $(file);
+					OCA.Files_PaperHive.setDiscussionCount($tr);
+				});
+			}, 20);
+
 		});
 	}
 };
