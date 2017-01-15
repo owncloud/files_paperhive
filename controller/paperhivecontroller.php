@@ -21,6 +21,7 @@
 
 namespace OCA\Files_PaperHive\Controller;
 
+use OCP\Http\Client\IClient;
 use OC\Files\View;
 use OC\HintException;
 use OCP\AppFramework\Controller;
@@ -43,6 +44,9 @@ class PaperHiveController extends Controller{
 	/** @var ILogger */
 	private $logger;
 
+	/** @var \OCP\Http\Client\IClient */
+	private $client;
+
 	/**
 	 * Paperhive base URL
 	 */
@@ -63,7 +67,6 @@ class PaperHiveController extends Controller{
 	 */
 	private $paperhive_discussion_api_endpoint = '/discussions';
 
-
 	/**
 	 * Paperhive file extension
 	 */
@@ -82,13 +85,15 @@ class PaperHiveController extends Controller{
 								IRequest $request,
 								IL10N $l10n,
 								View $view,
-								ILogger $logger) {
+								ILogger $logger,
+								IClient $client) {
 		parent::__construct($AppName, $request);
 		$this->l = $l10n;
 		$this->view = $view;
 		$this->logger = $logger;
+		$this->client = $client;
 	}
-
+	
 	/**
 	 * load text file
 	 *
@@ -122,8 +127,7 @@ class PaperHiveController extends Controller{
 						$paperHiveObject = json_decode($fileContents, true);
 
 						if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveObject['id'])) {
-							$client = \OC::$server->getHTTPClientService()->newClient();
-							$paperHiveString = $this->fetchDiscussions($client, $paperHiveObject['id']);
+							$paperHiveString = $this->fetchDiscussions($paperHiveObject['id']);
 							$paperHiveDiscussions = json_decode($paperHiveString, true);
 							if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
 								$disscussionCount = count($paperHiveDiscussions['discussions']);
@@ -170,10 +174,10 @@ class PaperHiveController extends Controller{
 	 * @param string $bookID
 	 * @return string
 	 */
-	private function fetchDiscussions($client, $bookID) {
+	private function fetchDiscussions($bookID) {
 		$urlDiscussions = $this->paperhive_base_url . $this->paperhive_api_url . $bookID . $this->paperhive_discussion_api_endpoint;
 		try {
-			$response = $client->get($urlDiscussions, []);
+			$response = $this->client->get($urlDiscussions, []);
 		} catch (RequestException $e) {
 			return false;
 		}
@@ -188,18 +192,14 @@ class PaperHiveController extends Controller{
 	 * @param string $bookID
 	 * @return string/boolean
 	 */
-	private function fetchDocument($client, $bookID) {
+	private function fetchDocument($bookID) {
 		$urlDocument = $this->paperhive_base_url . $this->paperhive_api_url . $bookID;
 		try {
-			$response = $client->get($urlDocument, []);
+			$response = $this->client->get($urlDocument, []);
 		} catch (RequestException $e) {
 			return false;
 		}
 		return $response->getBody();
-	}
-
-	private function fetchFile() {
-
 	}
 
 	/**
@@ -213,9 +213,8 @@ class PaperHiveController extends Controller{
 	 */
 	public function getPaperHiveDocument($dir, $bookID) {
 		// Send request to PaperHive
-		$client = \OC::$server->getHTTPClientService()->newClient();
 		
-		$paperHiveString = $this->fetchDiscussions($client, $bookID);
+		$paperHiveString = $this->fetchDiscussions($bookID);
 		if ($paperHiveString === false) {
 			$message = (string)$this->l->t('Problem connecting to PaperHive.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
@@ -226,7 +225,7 @@ class PaperHiveController extends Controller{
 			$discussionCount = count($paperHiveDiscussions['discussions']);
 		}
 		
-		$paperHiveString = $this->fetchDocument($client, $bookID);
+		$paperHiveString = $this->fetchDocument($bookID);
 		if ($paperHiveString === false) {
 			$message = (string)$this->l->t('Problem connecting to PaperHive.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
