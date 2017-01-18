@@ -263,9 +263,12 @@ var Files_PaperHive = {
 					return;
 				}
 
-				// Open new tab with paperhive
 				var paperhiveUrl = paperHiveData.paperhive_base_url + paperHiveData.paperhive_document_url + paperHiveObject.id;
-				window.open(paperhiveUrl, '_blank').location;
+				
+				var w = window.open(paperhiveUrl, '_blank');
+				if (!w) {
+					window.location.href = paperhiveUrl;
+				}
 			},
 			function(message){
 				// Oh dear
