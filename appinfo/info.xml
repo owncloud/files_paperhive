@@ -19,6 +19,6 @@
 	<repository type="git">https://github.com/mrow4a/files_paperhive.git</repository>
 	<ocsid>166000</ocsid>
 	<dependencies>
-		<owncloud min-version="8.2" max-version="9.2" />
+		<owncloud min-version="9.1" max-version="9.2" />
 	</dependencies>
 </info>
