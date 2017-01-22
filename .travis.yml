@@ -3,70 +3,44 @@ sudo: false
 php:
   - 5.6
   - 7
+  - 7.1
 
 env:
   global:
     - CORE_BRANCH=master
-    - OC_PASS=ampache
+    - APP=files_paperhive
   matrix:
-    - DB=mysql;CLOUD=owncloud
+    - DB=sqlite;
 
 matrix:
   include:
-    #- php: 5.6
-      #env: DB=mysql CLOUD=owncloud CORE_BRANCH=stable8.1
-    - php: 7
-      env: DB=mysql CLOUD=owncloud CORE_BRANCH=stable8.2
-    - php: 7
-      env: DB=mysql CLOUD=owncloud CORE_BRANCH=stable9
-    - php: 7
-      env: DB=mysql CLOUD=owncloud CORE_BRANCH=stable9.1
-    - php: 7
-      env: DB=mysql CLOUD=owncloud CORE_BRANCH=master
+    - php: 5.4
+      env: DB=sqlite CORE_BRANCH=stable9
+    - php: 5.4
+      env: DB=sqlite CORE_BRANCH=stable9.1
   fast_finish: true
 
 branches:
   only:
     - master
 
-cache:
-  directories:
-    - "/tmp/downloadedData"
-
 before_install:
-  - php --info
-  # Set up DB
-  - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s oc_autotest; fi
-  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e 'CREATE DATABASE oc_autotest;'; fi
-  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"; fi
-  - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "GRANT ALL ON oc_autotest.* TO 'oc_autotest'@'localhost';"; fi
-
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then curl -s -o $HOME/.phpenv/versions/5.4/bin/phpunit https://phar.phpunit.de/phpunit-4.8.9.phar; fi;"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then chmod +x $HOME/.phpenv/versions/5.4/bin/phpunit; fi;"
-  - composer self-update
-  - composer install
-  - cd ..
-  - sh -c "if [ '$CLOUD' = 'owncloud' ]; then git clone https://github.com/owncloud/core.git --recursive --depth 1 -b $CORE_BRANCH core; fi;"
-  - sh -c "if [ '$CLOUD' = 'owncloud' ] && [ $CORE_BRANCH = 'master' ]; then cd core && make; fi;"
-  - sh -c "if ([ '$CLOUD' = 'owncloud' ] && [ $CORE_BRANCH != 'master' ]) || [ '$CLOUD' = 'nextcloud' ]; then cd core && git submodule update --init; fi;"
-  - mv music core/apps/
+  - wget https://raw.githubusercontent.com/owncloud/administration/master/travis-ci/before_install.sh
+  - bash ./before_install.sh $APP $CORE_BRANCH $DB
+  - cd ../core
+  - php occ app:enable $APP
 
 before_script:
-  # setup ownCloud
-  - php -f core/occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
-  - php -f core/occ app:enable files_paperhive
-  - php -f core/occ user:add ampache --password-from-env
+  - cd apps/$APP
 
 script:
-  - phpunit --coverage-clover clover-unit.xml --configuration tests/php/unit/phpunit.xml tests/php/unit
-  - phpunit --coverage-clover clover-integration.xml --configuration tests/php/integration/phpunit.xml tests/php/integration
-  - cd tests && ../vendor/bin/behat
+  # Run phpunit tests
+  - cd tests
+  - phpunit --configuration phpunit.xml
 
   # Create coverage report
-  - bash -c "if [ '$TRAVIS_PHP_VERSION' == '7' ] && [ '$DB' == 'mysql' ] && [ '$CLOUD' = 'owncloud' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
-  - bash -c "if [ '$TRAVIS_PHP_VERSION' == '7' ] && [ '$DB' == 'mysql' ] && [ '$CLOUD' = 'owncloud' ]; then php ocular.phar code-coverage:upload --format=php-clover ../clover-unit.xml; fi"
-  - bash -c "if [ '$TRAVIS_PHP_VERSION' == '7' ] && [ '$DB' == 'mysql' ] && [ '$CLOUD' = 'owncloud' ]; then php ocular.phar code-coverage:upload --format=php-clover ../clover-integration.xml; fi"
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover clover.xml
 
-  # debug section to check what went wrong
-  - curl http://admin:admin@localhost:8888/index.php
-  - cat ../../../data/${CLOUD}.log
+matrix:
+  fast_finish: true

@@ -2,7 +2,7 @@
 /**
  * @author Piotr Mrowczynski <piotr.mrowczynski@yahoo.com>
  *
- * @copyright Copyright (c) 2017, ownCloud, Inc.
+ * @copyright Copyright (c) 2017, Piotr Mrowczynski.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -178,7 +178,7 @@ class PaperHiveController extends Controller{
 		$urlDiscussions = $this->paperhive_base_url . $this->paperhive_api_url . $bookID . $this->paperhive_discussion_api_endpoint;
 		try {
 			$response = $this->client->get($urlDiscussions, []);
-		} catch (RequestException $e) {
+		} catch (\Exception $e) {
 			return false;
 		}
 		return $response->getBody();
@@ -196,7 +196,7 @@ class PaperHiveController extends Controller{
 		$urlDocument = $this->paperhive_base_url . $this->paperhive_api_url . $bookID;
 		try {
 			$response = $this->client->get($urlDocument, []);
-		} catch (RequestException $e) {
+		} catch (\Exception $e) {
 			return false;
 		}
 		return $response->getBody();
@@ -259,7 +259,7 @@ class PaperHiveController extends Controller{
 				}
 				// Clear statcache
 				clearstatcache();
-				return new DataResponse(['path' => $path, 'filename' => $filename, 'discussionCount' => $discussionCount], Http::STATUS_OK);
+				return new DataResponse(['path' => $path, 'filename' => $paperHiveObject['title'], 'extension' => $this->paperhive_file_extension, 'discussionCount' => $discussionCount], Http::STATUS_OK);
 			} catch (HintException $e) {
 				$message = (string)$e->getHint();
 				return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
