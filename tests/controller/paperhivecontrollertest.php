@@ -2,7 +2,7 @@
 /**
  * @author Piotr Mrowczynski <piotr.mrowczynski@yahoo.com>
  *
- * @copyright Copyright (c) 2017, ownCloud, Inc.
+ * @copyright Copyright (c) 2017, Piotr Mrowczynski.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -18,8 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-
-//TODO: ->will($this->throwException(new Exception()));
 
 namespace OCA\Files_PaperHive\Tests\Controller;
 
