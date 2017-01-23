@@ -98,10 +98,10 @@ Files_PaperHive = {
         })
             .done(function (phdata) {
                 var containerString = '<div class="icon-paperhive"></div>' +
-                    '<div><p class="normal">Visit PaperHive at </p><p class="normal">' + phdata.paperhive_base_url + '</p><p class="normal"> and transform reading into a process of collaboration!</p></div>' +
+                    '<div><p class="normal">' + t('files_paperhive', 'Visit PaperHive at') + ' </p><p class="normal">' + phdata.paperhive_base_url + '</p><p class="normal"> ' + t('files_paperhive', 'and transform reading into a process of collaboration!') + '</p></div>' +
                     //'<div><span></span></div>' +
-                    '<div><p class="bold">Your Book ID </p><p class="normal">is the last fragment of PaperHive document URL.</p></div>' +
-                    '<div><p class="normal">Example: </p><p class="normal">' + phdata.paperhive_base_url + phdata.paperhive_document_url + '</p><p class="bold">Ra5WnkxImoOE</p></div>';
+                    '<div><p class="bold">' + t('files_paperhive', 'Your DocID') + ' </p><p class="normal">' + t('files_paperhive', 'is the last fragment of PaperHive document URL.') + '</p></div>' +
+                    '<div><p class="normal">' + t('files_paperhive', 'Exemplary URL') + ': </p><p class="bold">' + phdata.paperhive_base_url + phdata.paperhive_document_url + 'Ra5WnkxImoOE</p></div>';
 
                 self.container = $('<div class="notification_paperhive"></div>').html(
                     containerString
@@ -115,15 +115,8 @@ Files_PaperHive = {
                     self.containerOptions
                 );
             })
-            .fail(function (jqXHR) {
-                var message;
-
-                try {
-                    message = JSON.parse(jqXHR.responseText).message;
-                } catch (e) {
-                }
-
-                OC.dialogs.alert(message, t('files_paperhive', 'An error occurred!'));
+            .fail(function (message) {
+                OC.dialogs.alert(t('files_paperhive', 'An error occurred!'));
             });
     },
 
@@ -258,12 +251,12 @@ Files_PaperHive = {
                 try {
                     var paperHiveObject = JSON.parse(paperHiveData.paperhive_document);
                 } catch (e) {
-                    OC.dialogs.alert("Your [.paperhive] file is not a valid PaperHive document, please redownload document");
+                    OC.dialogs.alert(t('files_paperhive', 'Your [.paperhive] file is not a valid PaperHive document, please redownload document'));
                     return;
                 }
 
                 if (!OCA.Files_PaperHive.validatePaperHiveJSON(paperHiveObject)) {
-                    OC.dialogs.alert("Your [.paperhive] file is not a valid PaperHive document, please redownload document");
+                    OC.dialogs.alert(t('files_paperhive', 'Your [.paperhive] file is not a valid PaperHive document, please redownload document'));
                     return;
                 }
 
@@ -276,7 +269,7 @@ Files_PaperHive = {
             },
             function (message) {
                 // Oh dear
-                OC.dialogs.alert(message, t('files_paperhive', 'An error occurred!'));
+                OC.dialogs.alert(t('files_paperhive', 'An error occurred!'));
             }
         );
     },
@@ -309,13 +302,24 @@ Files_PaperHive.NewFileMenuPlugin = {
         // register the new menu entry
         menu.addMenuEntry({
             id: 'paperhive',
-            displayName: t('files_paperhive', 'PaperHive Book'),
-            templateName: t('files_paperhive', 'Your Book ID'),
+            displayName: t('files_paperhive', 'PaperHive Document'),
+            templateName: t('files_paperhive', 'URL or DocID'),
             iconClass: 'icon-filetype-paperhive',
             fileType: 'file',
-            actionHandler: function (bookID) {
+            actionHandler: function (bookURL) {
                 // Hide any remaining notification
                 OCA.Files_PaperHive.hideNotification();
+
+                var bookArray = bookURL.split( '/' );
+                var bookID = '';
+                if (bookArray.length === 1) {
+                    // User gave only ID
+                    bookID = bookArray[0];
+                } else if (bookArray.length > 0){
+                    // User gave URL
+                    bookID = bookArray[bookArray.length-1];
+                }
+
 
                 // Get the file data from PaperHive API
                 var dir = fileList.getCurrentDirectory();
@@ -344,7 +348,7 @@ Files_PaperHive.NewFileMenuPlugin = {
                     },
                     function (message) {
                         OC.Notification.hide($saveNot);
-                        OCA.Files_PaperHive.failureNotification(message);
+                        OCA.Files_PaperHive.failureNotification(t('files_paperhive', 'Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive', {id: bookID}));
                     }
                 );
             }
