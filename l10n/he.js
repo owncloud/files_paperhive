@@ -13,7 +13,6 @@ OC.L10N.register(
     "An error occurred!" : "אירעה שגיאה!",
     "Discuss" : "דיון",
     "PaperHive Book" : "ספר PaperHive",
-    "Your Book ID" : "מספר הזהות של הספר שלך",
-    "Saving.." : "שמירה…"
+    "Your Book ID" : "מספר הזהות של הספר שלך"
 },
 "nplurals=2; plural=(n != 1);");

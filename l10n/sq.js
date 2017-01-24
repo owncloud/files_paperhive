@@ -13,7 +13,6 @@ OC.L10N.register(
     "An error occurred!" : "Ndodhi një gabim!",
     "Discuss" : "Diskutoni",
     "PaperHive Book" : "Libër PaperHive",
-    "Your Book ID" : "ID-ja e Librit Tuaj",
-    "Saving.." : "Po ruhet…"
+    "Your Book ID" : "ID-ja e Librit Tuaj"
 },
 "nplurals=2; plural=(n != 1);");
