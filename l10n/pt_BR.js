@@ -13,6 +13,8 @@ OC.L10N.register(
     "An error occurred!" : "Ocorreu um erro!",
     "Discuss" : "Discutir",
     "PaperHive Book" : "Livro PaperHive",
-    "Your Book ID" : "Seu ID do Livro"
+    "Your Book ID" : "Seu ID do Livro",
+    "Saving..." : "Salvando...",
+    "Please reload the page, error occured" : "Por favor, recarregue a página, ocorreu um erro"
 },
 "nplurals=2; plural=(n > 1);");

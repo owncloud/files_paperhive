@@ -11,6 +11,7 @@
     "An error occurred!" : "เกิดข้อผิดพลาดบางประการ!",
     "Discuss" : "สนทนา",
     "PaperHive Book" : "หนังสือ PaperHive",
-    "Your Book ID" : "ID หนังสือของคุณ"
+    "Your Book ID" : "ID หนังสือของคุณ",
+    "Saving..." : "กำลังบันทึกข้อมูล..."
 },"pluralForm" :"nplurals=1; plural=0;"
 }

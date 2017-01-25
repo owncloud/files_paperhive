@@ -11,6 +11,8 @@
     "An error occurred!" : "Ein Fehler ist aufgetreten!",
     "Discuss" : "Diskutieren",
     "PaperHive Book" : "PaperHive-Buch",
-    "Your Book ID" : "Ihre Buch-ID"
+    "Your Book ID" : "Ihre Buch-ID",
+    "Saving..." : "Speichervorgang…",
+    "Please reload the page, error occured" : "Bitte Seite neuladen, ein Fehler ist aufgetreten"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
