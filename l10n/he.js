@@ -14,6 +14,7 @@ OC.L10N.register(
     "Discuss" : "דיון",
     "PaperHive Book" : "ספר PaperHive",
     "Your Book ID" : "מספר הזהות של הספר שלך",
-    "Saving..." : "שמירה…"
+    "Saving..." : "שמירה…",
+    "Please reload the page, error occured" : "אירעה שגיאה, יש לטעון את הדף שנית."
 },
 "nplurals=2; plural=(n != 1);");
