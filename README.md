@@ -1,3 +1,11 @@
+[![Build Status](https://travis-ci.org/owncloud/files_paperhive.svg?branch=master)](https://travis-ci.org/owncloud/files_paperhive)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/owncloud/files_paperhive/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/owncloud/files_paperhive/?branch=master)
+
+- [x] Support for 9.0
+- [x] Support for 9.1
+- [x] Support for 9.2-10.0
+
+
 # About ownCloud, PaperHive and Collabora
 
 Collabora and ownCloud announced a partnership and released Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. LibreOffice Online is what the name suggests – an online version of the well known LibreOffice suite of productivity apps: word processor Writer, spreadsheet Calc and presentation tool Impress.
@@ -24,21 +32,21 @@ Transform your lectures, research and engineering work into process of collabora
 
 # Add PaperHive book to ownCloud
 
-PaperHive plugin is shipped with new file menu button "PaperHive Book", which allows adding the documents found on the PaperHive website at `https://paperhive.org`. These are no other files as your `.doc` or `.jpg` and will behave the same as any other files in ownCloud user interface.
+PaperHive plugin is shipped with new file menu button "PaperHive Document", which allows adding the documents found on the PaperHive website at `https://paperhive.org`. These are no other files as your `.doc` or `.jpg` and will behave the same as any other files in ownCloud user interface.
 
-Click on the "PaperHive Book" button will ask you for a Book ID, displaying proper announcement in the yellow popup on top of your file list.
+Click on the "PaperHive Document" button will ask you for a PaperHive URL or DocID, displaying proper announcement in the yellow popup on top of your file list. You are free to choose submitting just DocID or whole URL!
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_1.png)
 
-Book ID is an unique book identifier, which can be found in the URL of the book at `https://paperhive.org`, as shown in the example below, where URL is `https://paperhive.org/documents/0tsHJq1-yyVZ` and unique Book ID is `0tsHJq1-yyVZ`.
+DocID is an unique book identifier, which can be found in the URL of the document at `https://paperhive.org`, as shown in the example below, where URL is `https://paperhive.org/documents/0tsHJq1-yyVZ` and unique DocID is `0tsHJq1-yyVZ`.
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_2.png)
 
-Found Book ID has to be inserted into the field below and confirmed pressing ENTER.
+Desired URL or DocID has to be inserted into the field below and confirmed pressing ENTER.
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_3.png)
 
-Your PaperHive Book is now in your synchronisation folder!
+Your PaperHive Document is now in your synchronisation folder!
 
 
 
