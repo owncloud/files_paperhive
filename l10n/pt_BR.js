@@ -10,11 +10,18 @@ OC.L10N.register(
     "The file already exists." : "O arquivo já existe.",
     "Received wrong response from PaperHive." : "Resposta incorreta recebida do PaperHive.",
     "Show Paper" : "Mostrar Papel",
+    "Visit PaperHive at" : "Visite PaperHive em",
+    "and transform reading into a process of collaboration!" : "e transformar a leitura em um processo de colaboração!",
+    "Your DocID" : "Sua DocID",
+    "is the last fragment of PaperHive document URL." : "é o último fragmento do URL do documento do PaperHive.",
+    "Exemplary URL" : "URL exemplar",
     "An error occurred!" : "Ocorreu um erro!",
     "Discuss" : "Discutir",
-    "PaperHive Book" : "Livro PaperHive",
-    "Your Book ID" : "Seu ID do Livro",
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Seu arquivo [.paperhive] não é um documento válido do PaperHive, por favor baixe novamente o documento",
+    "PaperHive Document" : "Documento PaperHive ",
+    "URL or DocID" : "URL ou DocID",
     "Saving..." : "Salvando...",
-    "Please reload the page, error occured" : "Por favor, recarregue a página, ocorreu um erro"
+    "Please reload the page, error occured" : "Por favor, recarregue a página, ocorreu um erro",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Não é possível adicionar o documento PaperHive de ID {id}. O arquivo já existe ou  ocorreu um erro ao se conectar ao PaperHive"
 },
 "nplurals=2; plural=(n > 1);");

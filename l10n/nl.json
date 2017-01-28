@@ -8,10 +8,18 @@
     "The file already exists." : "Het bestand bestaat al.",
     "Received wrong response from PaperHive." : "Ontving onjuist antwoord van PaperHive.",
     "Show Paper" : "Toon Paper",
+    "Visit PaperHive at" : "Bezoek PaperHive op",
+    "and transform reading into a process of collaboration!" : "en verander lezen in een proces van samenwerking!",
+    "Your DocID" : "Je DocID",
+    "is the last fragment of PaperHive document URL." : "is het laatste fragment van PaperHive document URL.",
+    "Exemplary URL" : "Voorbeeld URL",
     "An error occurred!" : "Er is iets fout gegaan!",
     "Discuss" : "Bespreken",
-    "PaperHive Book" : "PaperHive Boek",
-    "Your Book ID" : "Je Boek ID",
-    "Saving..." : "Opslaan"
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Uw [.paperhive] bestand is geen geldig PaperHive document, graag opnieuw downloaden",
+    "PaperHive Document" : "PaperHive Document",
+    "URL or DocID" : "URL of DocID",
+    "Saving..." : "Opslaan",
+    "Please reload the page, error occured" : "Herlaad deze pagina, er trad een fout op",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Kan uw PaperHive document van ID {id} niet toevoegen. Het bestand bestaat al of er is een fout bij het verbinden met PaperHive"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -8,11 +8,18 @@
     "The file already exists." : "El archivo ya existe.",
     "Received wrong response from PaperHive." : "Se ha recivido una respuesta erronea de PaperHive.",
     "Show Paper" : "Mostrar Paper",
+    "Visit PaperHive at" : "Visite PaperHive en",
+    "and transform reading into a process of collaboration!" : "y transforme el proceso de lectura en un proceso calaborativo!",
+    "Your DocID" : "Si ID de Documento",
+    "is the last fragment of PaperHive document URL." : "Es el ultimo fragmento de la URL de PaperHive ",
+    "Exemplary URL" : "URL de ejemplo",
     "An error occurred!" : "¡Ocurrió un error!",
     "Discuss" : "Discutir",
-    "PaperHive Book" : "Libro de PaperHive",
-    "Your Book ID" : "Su ID del libro",
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Su archivo [.paperhive] no es un documento PaperHive válido. Por favor vuelva a descargar el documento",
+    "PaperHive Document" : "Documento PaperHive ",
+    "URL or DocID" : "URL o ID del Doc.",
     "Saving..." : "Guardando...",
-    "Please reload the page, error occured" : "Por favor recargue/actualice la página, ha ocurrido un error."
+    "Please reload the page, error occured" : "Por favor recargue/actualice la página, ha ocurrido un error.",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "No puedo añadir el documento PaperHive o su ID {id}. El archivo ya existe o hay un error conectando a PaperHive ."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
