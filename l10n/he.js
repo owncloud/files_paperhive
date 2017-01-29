@@ -10,11 +10,18 @@ OC.L10N.register(
     "The file already exists." : "הקובץ כבר קיים.",
     "Received wrong response from PaperHive." : "התקבלה תגובה שגוייה מ- PaperHive.",
     "Show Paper" : "הראה נייר",
+    "Visit PaperHive at" : "ניתן לבקר את PaperHive ב-",
+    "and transform reading into a process of collaboration!" : "ולהמיר קריאה לתהליך של שיתוף פעולה!",
+    "Your DocID" : "ה- DocID שלך",
+    "is the last fragment of PaperHive document URL." : "הנו החלקיק האחרון של נתיב מסמך ה- PaperHive.",
+    "Exemplary URL" : "נתיב דוגמא",
     "An error occurred!" : "אירעה שגיאה!",
     "Discuss" : "דיון",
-    "PaperHive Book" : "ספר PaperHive",
-    "Your Book ID" : "מספר הזהות של הספר שלך",
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "קובץ [.paperhive] שלך אינו מסמך PaperHive תקף, יש להוריד מחדש את המסמך",
+    "PaperHive Document" : "מסמך PaperHive",
+    "URL or DocID" : "נתיב או DocID",
     "Saving..." : "שמירה…",
-    "Please reload the page, error occured" : "אירעה שגיאה, יש לטעון את הדף שנית."
+    "Please reload the page, error occured" : "אירעה שגיאה, יש לטעון את הדף שנית.",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "לא ניתן להוסיף את מסמך PaperHive שלך עם זיהוי {id}. קובץ קיים או שגיאה בחיבור ל- PaperHive"
 },
 "nplurals=2; plural=(n != 1);");
