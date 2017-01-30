@@ -21,7 +21,14 @@ Researchers, students, medicine and engineering specialists collaborating on res
 
 Researchers read 12-25 hours a week depending on their discipline. Yet, understanding research articles and books – some of the most complex documents in the world – is hard and inefficient in isolation. Students and inexperienced researchers waste time trying to decipher these texts alone, senior researchers dig through folders of articles irrelevant for their own work, and all at some point might repeat unknowingly others’ mistakes or include these as a citation in their own paper.
 
-PaperHive looks at how the web platform could transform reading into a more social and active process of collaboration. It is a cross-publisher layer of interaction on top of research documents that enables contextual and structured discussions in real time.
+PaperHive looks at how the web platform could transform reading into a more social and active process of collaboration. It is a cross-publisher layer of interaction on top of published research documents that enables contextual and structured discussions in real time. PaperHive's main benefits for users:
+* annotate and discuss published academic articles, books and textbooks
+* ask and answer questions, help and benefit from the knowledge, opinions and results of your colleagues and the broad research community
+* keep up-to-date with the newest developments around a specific research topic
+* improve research texts by discovering and correcting mistakes publicly, make complex concepts more accessible
+* share your thoughts and discoveries with the research community and increase your visibility as a researcher
+* give structured feedback to your colleagues
+* if you are a teacher, you can make lectures and seminars much more engaging for students
 
 Close to 1.2 million academic articles and books can currently be read and discussed with PaperHive.
 
