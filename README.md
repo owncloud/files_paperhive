@@ -37,6 +37,8 @@ Close to 14 million academic articles and books can currently be read and discus
 
 One of the greatest ownCloud features is sharing. Folders or files can be shared with groups, individual users or using password protected or public links.
 
+![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_1.png)
+
 The PaperHive documents in this shared folder allow copyright-compliant sharing of research publications with groups of users. By using the `Discuss` button in the file list a user is quickly redirected to the PaperHive page. The `Discuss` button also shows the current number of discussions online. 
 The user can now easily keep up-to-date with new developments around publications of interest and start public or private discussions to better understand or improve academic texts.
 
