@@ -14,10 +14,11 @@ Remember about the correct permissions for the www folder after cloning the repo
 It is highly recommended, to place in each user root directory a default introduction PaperHive document, ```https://paperhive.org/documents/0tsHJq1-yyVZ``` which will help the user orient in the new functionality!
 
 # About ownCloud, PaperHive and Collabora
+Researchers, students, medicine and engineering specialists are among the core ownCloud users and ownCloud's team is committed to support them in the management and creation of research data and texts. A recent partnership with Collabora was ownCloud's response to users' need to write collaboratively online. It resulted in the release of the Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. 
+To help users read, reference and discuss already published academic texts, ownCloud now starts a cooperation with PaperHive, a web platform for collaborative reading.
 
-Collabora and ownCloud announced a partnership and released Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. LibreOffice Online is what the name suggests – an online version of the well known LibreOffice suite of productivity apps: word processor Writer, spreadsheet Calc and presentation tool Impress.
-
-Researchers, students, medicine and engineering specialists writing together new academic texts using documents in LibreOffice Online, are very frequently referencing research papers.
+<!--- Collabora and ownCloud announced a partnership and released Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. LibreOffice Online is what the name suggests – an online version of the well known LibreOffice suite of productivity apps: word processor Writer, spreadsheet Calc and presentation tool Impress.
+Researchers, students, medicine and engineering specialists writing together new academic texts using documents in LibreOffice Online, are very frequently referencing research papers.--->
 
 Researchers read 12-25 hours a week depending on their discipline. Yet, understanding research articles and books – some of the most complex documents in the world – is hard and inefficient in isolation. Students and inexperienced researchers waste time trying to decipher these texts alone, senior researchers dig through folders of articles irrelevant for their own work, and all at some point might repeat unknowingly others’ mistakes or include these as a citation in their own paper.
 
@@ -36,15 +37,14 @@ Close to 14 million academic articles and books can currently be read and discus
 
 One of the greatest ownCloud features is sharing. Folders or files can be shared with groups, individual users or using password protected or public links.
 
-![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_1.png)
-
-The PaperHive documents in this shared folder allow copyright-compliant sharing of research publications with groups of users. By using the `Discuss` button in the file list a users is quickly redirected to the PaperHive page. The `Discuss` button also shows the current number of discussions online.
+The PaperHive documents in this shared folder allow copyright-compliant sharing of research publications with groups of users. By using the `Discuss` button in the file list a user is quickly redirected to the PaperHive page. The `Discuss` button also shows the current number of discussions online. 
+The user can now easily keep up-to-date with new developments around publications of interest and start public or private discussions to better understand or improve academic texts.
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_2.png)
 
 Transform your lectures, research and engineering work into a process of collaboration with ownCloud, PaperHive and Collabora!
 
-# Add PaperHive book to ownCloud
+# Add PaperHive document to ownCloud
 
 The PaperHive plugin is shipped with the new file menu button "PaperHive Document", which allows adding the documents found on the PaperHive website at `https://paperhive.org`. These are no different to your regular `.doc` or `.jpg` files and will behave the same as any other files in the ownCloud user interface.
 
