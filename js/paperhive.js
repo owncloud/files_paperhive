@@ -302,7 +302,7 @@ Files_PaperHive.NewFileMenuPlugin = {
         // register the new menu entry
         menu.addMenuEntry({
             id: 'paperhive',
-            displayName: t('files_paperhive', 'PaperHive Document'),
+            displayName: t('files_paperhive', 'PaperHive'),
             templateName: t('files_paperhive', 'URL or DocID'),
             iconClass: 'icon-filetype-paperhive',
             fileType: 'file',
