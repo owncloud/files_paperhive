@@ -13,13 +13,13 @@ It is highly recommended, to place in each user root directory a default introdu
 
 Collabora and ownCloud announced a partnership and released Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. LibreOffice Online is what the name suggests – an online version of the well known LibreOffice suite of productivity apps: word processor Writer, spreadsheet Calc and presentation tool Impress.
 
-Researchers, students, medicine and engineering specialists collaborating on research using documents in LibreOffice Online, are very frequently referencing professional texts.
+Researchers, students, medicine and engineering specialists writing together new academic texts using documents in LibreOffice Online, are very frequently referencing research papers.
 
 Researchers read 12-25 hours a week depending on their discipline. Yet, understanding research articles and books – some of the most complex documents in the world – is hard and inefficient in isolation. Students and inexperienced researchers waste time trying to decipher these texts alone, senior researchers dig through folders of articles irrelevant for their own work, and all at some point might repeat unknowingly others’ mistakes or include these as a citation in their own paper.
 
 PaperHive looks at how the web platform could transform reading into a more social and active process of collaboration. It is a cross-publisher layer of interaction on top of research documents that enables contextual and structured discussions in real time.
 
-Close to 1.2 million academic articles and books can currently be read and discussed with PaperHive.
+Close to 14 million academic articles and books can currently be read and discussed with PaperHive.
 
 # Transforming Reading Into a Process of Collaboration
 
@@ -27,7 +27,7 @@ One of the greatest ownCloud features is sharing. Folders or files can be shared
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_1.png)
 
-The PaperHive documents in this shared folder allow legal sharing of the research intellectual property with a group or groups of users, giving an option to quickly redirect to the PaperHive page using the `Discuss` button in the file list, which additionally shows the current number of discussions online.
+The PaperHive documents in this shared folder allow copyright-compliant sharing of research publications with groups of users. By using the `Discuss` button in the file list a users is quickly redirected to the PaperHive page. The `Discuss` button also shows the current number of discussions online.
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_2.png)
 
