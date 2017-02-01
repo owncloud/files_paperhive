@@ -18,6 +18,7 @@ OC.L10N.register(
     "An error occurred!" : "Prišlo je do napake!",
     "Discuss" : "Dodaj odziv",
     "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Datoteka [.paperhive] ni veljaven dokument PaperHive. Datoteko bo treba znova prejeti iz oblaka.",
+    "PaperHive" : "PaperHive",
     "URL or DocID" : "Naslov URL ali DocID",
     "Saving..." : "Poteka shranjevanje ...",
     "Please reload the page, error occured" : "Prišlo je do napake, zato je treba stran ponovno naložiti.",

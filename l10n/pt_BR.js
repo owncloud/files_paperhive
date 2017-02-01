@@ -18,6 +18,7 @@ OC.L10N.register(
     "An error occurred!" : "Ocorreu um erro!",
     "Discuss" : "Discutir",
     "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Seu arquivo [.paperhive] não é um documento válido do PaperHive, por favor baixe novamente o documento",
+    "PaperHive" : "PaperHive",
     "URL or DocID" : "URL ou DocID",
     "Saving..." : "Salvando...",
     "Please reload the page, error occured" : "Por favor, recarregue a página, ocorreu um erro",
