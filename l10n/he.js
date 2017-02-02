@@ -18,6 +18,7 @@ OC.L10N.register(
     "An error occurred!" : "אירעה שגיאה!",
     "Discuss" : "דיון",
     "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "קובץ [.paperhive] שלך אינו מסמך PaperHive תקף, יש להוריד מחדש את המסמך",
+    "PaperHive" : "PaperHive",
     "URL or DocID" : "נתיב או DocID",
     "Saving..." : "שמירה…",
     "Please reload the page, error occured" : "אירעה שגיאה, יש לטעון את הדף שנית.",
