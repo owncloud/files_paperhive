@@ -10,10 +10,18 @@ OC.L10N.register(
     "The file already exists." : "มีไฟล์นี้อยู่แล้ว",
     "Received wrong response from PaperHive." : "ได้รับการตอบสนองที่ไม่ถูกต้องจาก PaperHive",
     "Show Paper" : "แสดงกระดาษ",
+    "Visit PaperHive at" : "เยียมชม PaperHive ได้ที่",
+    "and transform reading into a process of collaboration!" : "และเปลี่ยนแปลงการอ่านเข้าสู่กระบวนการของการทำงานร่วมกัน!",
+    "Your DocID" : "DocID ของคุณ",
+    "is the last fragment of PaperHive document URL." : "เป็นส่วนสุดท้ายของเอกสาร PaperHive URL ",
+    "Exemplary URL" : "ตัวอย่าง URL",
     "An error occurred!" : "เกิดข้อผิดพลาดบางประการ!",
     "Discuss" : "สนทนา",
-    "PaperHive Book" : "หนังสือ PaperHive",
-    "Your Book ID" : "ID หนังสือของคุณ",
-    "Saving..." : "กำลังบันทึกข้อมูล..."
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "ไฟล์ [.paperhive] ของคุณเป็นเอกสาร PaperHive ที่ไม่ถูกต้อง กรุณาดาวน์โหลดใหม่อีกครั้ง",
+    "PaperHive" : "PaperHive",
+    "URL or DocID" : "URL หรือ DocID",
+    "Saving..." : "กำลังบันทึกข้อมูล...",
+    "Please reload the page, error occured" : "ตรวจพบข้อผิดพลาด กรุณาโหลดหน้าเว็บใหม่",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "ไม่สามารถเพิ่มเอกสาร PaperHive ของคุณที่มีรหัส {id} ไฟล์ที่มีอยู่หรือเกิดข้อผิดพลาดในการเชื่อมต่อกับ PaperHive"
 },
 "nplurals=1; plural=0;");
