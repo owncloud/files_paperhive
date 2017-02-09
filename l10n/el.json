@@ -10,11 +10,13 @@
     "Show Paper" : "Προβολή φύλλου",
     "Visit PaperHive at" : "Επίσκεψη PaperHive στο",
     "and transform reading into a process of collaboration!" : "και να μετατρέψει την ανάγνωση σε μια διαδικασία συνεργασίας!",
+    "Your DocID" : "Το DocID σου",
     "is the last fragment of PaperHive document URL." : "είναι το τελευταίο τμήμα από το URL εγγράφου του PaperHive",
     "Exemplary URL" : "Υποδειγματικό URL",
     "An error occurred!" : "Παρουσιάστηκε σφάλμα!",
     "Discuss" : "Συζήτησε",
     "PaperHive" : "PaperHive",
-    "Saving..." : "Γίνεται αποθήκευση..."
+    "Saving..." : "Γίνεται αποθήκευση...",
+    "Please reload the page, error occured" : "Επαναλάβετε τη φόρτωση της σελίδας, εμφανίστηκε σφάλμα"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
