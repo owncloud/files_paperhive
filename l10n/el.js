@@ -18,6 +18,7 @@ OC.L10N.register(
     "An error occurred!" : "Παρουσιάστηκε σφάλμα!",
     "Discuss" : "Συζήτησε",
     "PaperHive" : "PaperHive",
+    "URL or DocID" : "URL ή DocID",
     "Saving..." : "Γίνεται αποθήκευση...",
     "Please reload the page, error occured" : "Επαναλάβετε τη φόρτωση της σελίδας, εμφανίστηκε σφάλμα"
 },
