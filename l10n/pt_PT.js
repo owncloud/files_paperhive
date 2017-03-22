@@ -6,7 +6,9 @@ OC.L10N.register(
     "Invalid file path supplied." : "O caminho de ficheiro indicado é inválido.",
     "The file is locked." : "O ficheiro está bloqueado.",
     "An internal server error occurred." : "Ocorreu um erro interno no servidor.",
+    "Problem connecting to PaperHive." : "Problema ao conectar-se com PaperHive",
     "The file already exists." : "O ficheiro já existe",
+    "Received wrong response from PaperHive." : "Resposta errada recebida de PaperHive;",
     "Show Paper" : "Mostrar Papel",
     "Visit PaperHive at" : "Visitar PaperHive em",
     "and transform reading into a process of collaboration!" : "e transformar a leitura em um processo de colaboração!",
@@ -19,6 +21,7 @@ OC.L10N.register(
     "PaperHive" : "PaperHive",
     "URL or DocID" : "Endereço ou DocID",
     "Saving..." : "A guardar...",
-    "Please reload the page, error occured" : "Por favor recarregue a página, ocorreu um erro"
+    "Please reload the page, error occured" : "Por favor recarregue a página, ocorreu um erro",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Falha ao adicionar o seu documento PaperHive com o ID {id}. Ficheiro já existente ou erro de conexão ao PaperHive"
 },
 "nplurals=2; plural=(n != 1);");
