@@ -36,7 +36,7 @@ before_script:
 script:
   # Run phpunit tests
   - cd tests
-  - phpunit --configuration phpunit.xml
+  - ../../../lib/composer/bin/phpunit --configuration phpunit.xml
 
   # Create coverage report
   - wget https://scrutinizer-ci.com/ocular.phar
