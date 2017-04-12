@@ -10,7 +10,7 @@ OC.L10N.register(
     "The file already exists." : "Το αρχείο υπάρχει ήδη.",
     "Received wrong response from PaperHive." : "Ελήφθη λανθασμένη απάντηση από PaperHive.",
     "Show Paper" : "Προβολή φύλλου",
-    "Visit PaperHive at" : "Επίσκεψη PaperHive στο",
+    "Visit PaperHive at" : "Επισκεφθείτε το PaperHive στο",
     "and transform reading into a process of collaboration!" : "και να μετατρέψει την ανάγνωση σε μια διαδικασία συνεργασίας!",
     "Your DocID" : "Το DocID σου",
     "is the last fragment of PaperHive document URL." : "είναι το τελευταίο τμήμα από το URL εγγράφου του PaperHive",
@@ -20,6 +20,6 @@ OC.L10N.register(
     "PaperHive" : "PaperHive",
     "URL or DocID" : "URL ή DocID",
     "Saving..." : "Γίνεται αποθήκευση...",
-    "Please reload the page, error occured" : "Επαναλάβετε τη φόρτωση της σελίδας, εμφανίστηκε σφάλμα"
+    "Please reload the page, error occured" : "Επαναλάβετε τη φόρτωση της σελίδας, παρουσιά τηκε σφάλμα"
 },
 "nplurals=2; plural=(n != 1);");
