@@ -17,9 +17,11 @@ OC.L10N.register(
     "Exemplary URL" : "Υποδειγματικό URL",
     "An error occurred!" : "Παρουσιάστηκε σφάλμα!",
     "Discuss" : "Συζήτησε",
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Το αρχείο σας [.paperhive] δεν είναι έγκυρο έγγραφο PaperHive, παρακαλούμε ξαναφορτώστε το έγγραφο",
     "PaperHive" : "PaperHive",
     "URL or DocID" : "URL ή DocID",
     "Saving..." : "Γίνεται αποθήκευση...",
-    "Please reload the page, error occured" : "Επαναλάβετε τη φόρτωση της σελίδας, παρουσιά τηκε σφάλμα"
+    "Please reload the page, error occured" : "Επαναλάβετε τη φόρτωση της σελίδας, παρουσιά τηκε σφάλμα",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Δεν είναι δυνατή η προσθήκη του εγγράφου PaperHive του αναγνωριστικού {id}. Υπάρχει αρχείο ή σφάλμα σύνδεσης με το PaperHive"
 },
 "nplurals=2; plural=(n != 1);");
