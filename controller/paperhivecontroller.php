@@ -71,31 +71,79 @@ class PaperHiveController extends Controller{
 	 * Paperhive file extension
 	 */
 	private $paperhive_file_extension = '.paperhive';
+
+	/**
+	 * Paperhive revision extension
+	 */
+	private $paperhive_rev_extension = '.rev';
 	
 	/**
 	 * @NoAdminRequired
 	 *
-	 * @param string $AppName
+	 * @param string $appName
 	 * @param IRequest $request
 	 * @param IL10N $l10n
 	 * @param View $view
 	 * @param ILogger $logger
 	 */
-	public function __construct($AppName,
+	public function __construct($appName,
 								IRequest $request,
 								IL10N $l10n,
 								View $view,
 								ILogger $logger,
 								IClient $client) {
-		parent::__construct($AppName, $request);
+		parent::__construct($appName, $request);
 		$this->l = $l10n;
 		$this->view = $view;
 		$this->logger = $logger;
 		$this->client = $client;
 	}
-	
+
 	/**
-	 * load text file
+	 * Adjust paperhive extension for correct one
+	 *
+	 * @param string $path
+	 * @param string $revision
+	 * @return boolean - returns true if success or false in case of error
+	 */
+	private function adjustPaperHiveExtensions($path, $revision) {
+		$pathWithoutPHExtension = str_replace($this->paperhive_file_extension, '', $path);
+		$newPath = $pathWithoutPHExtension . $this->paperhive_rev_extension . $revision . $this->paperhive_file_extension;
+		if ($this->view->rename($path, $newPath) !== false) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Load paperhive metadata from file, 
+	 * adjust filename if wrong and return PaperHive ID
+	 *	 *
+	 * @param string $dir
+	 * @param string $filename
+	 * @return string/boolean - returns PaperHive ID or false in case of error
+	 */
+	private function loadPaperHiveIdFromFile($dir, $filename) {
+		$path = $dir . '/' . $filename;
+		if (!$this->view->file_exists($path)){
+			return false;
+		}
+		
+		$fileContents = $this->view->file_get_contents($path);
+		if ($fileContents !== false) {
+			$paperHiveObject = json_decode($fileContents, true);
+			if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveObject['id'])) {
+				$paperHiveId = $paperHiveObject['id'];
+				if($this->adjustPaperHiveExtensions($path, $paperHiveId)){
+					return $paperHiveId;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * load paperhive metadata and if needed, discussion count
 	 *
 	 * @NoAdminRequired
 	 *
@@ -104,50 +152,43 @@ class PaperHiveController extends Controller{
 	 * @param boolean $fetchDiscussions
 	 * @return DataResponse
 	 */
-	public function load($dir, $filename, $fetchDiscussions) {
+	public function loadMetadata($dir, $filename, $fetchDiscussions) {
 		try {
-			if (!empty($filename)) {
-				$path = $dir . '/' . $filename;
-				// default of 4MB
-				$maxSize = 4194304;
-				if ($this->view->filesize($path) > $maxSize) {
-					return new DataResponse(['message' => (string)$this->l->t('This file is too big to be opened. Please download the file instead.')], Http::STATUS_BAD_REQUEST);
-				}
-				$fileContents = $this->view->file_get_contents($path);
-				if ($fileContents !== false) {
-					$encoding = mb_detect_encoding($fileContents . "a", "UTF-8, WINDOWS-1252, ISO-8859-15, ISO-8859-1, ASCII", true);
-					if ($encoding == "") {
-						// set default encoding if it couldn't be detected
-						$encoding = 'ISO-8859-15';
+			$filenameParts = explode('.', $filename);
+			if (sizeof($filenameParts) > 1) {
+				// Correct, file needs filename and extension
+				if (sizeof($filenameParts) === 2 || (sizeof($filenameParts) > 2 &&
+						strpos('.'.$filenameParts[sizeof($filenameParts)-2],$this->paperhive_rev_extension) === false)){
+					// File needs correction, since been renamed or is obsolete
+					$revision = $this->loadPaperHiveIdFromFile($dir, $filename);
+					if ($revision === false){
+						return new DataResponse(['message' => (string)$this->l->t('File is obsolete, incorrectly renamed or cannot be read.')], Http::STATUS_BAD_REQUEST);
 					}
-					$fileContents = iconv($encoding, "UTF-8", $fileContents);
-
-					$disscussionCount = -1;
-					if ($fetchDiscussions == "true") {
-						$paperHiveObject = json_decode($fileContents, true);
-
-						if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveObject['id'])) {
-							$paperHiveString = $this->fetchDiscussions($paperHiveObject['id']);
-							$paperHiveDiscussions = json_decode($paperHiveString, true);
-							if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
-								$disscussionCount = count($paperHiveDiscussions['discussions']);
-							}
-
-						}
-					}
-
-					return new DataResponse([
-						'paperhive_document' => $fileContents,
-						'paperhive_base_url' => $this->paperhive_base_url,
-						'paperhive_api_url' => $this->paperhive_api_url,
-						'paperhive_document_url' => $this->paperhive_document_url,
-						'paperhive_discussion_api_endpoint' => $this->paperhive_discussion_api_endpoint,
-						'paperhive_extension' => $this->paperhive_file_extension,
-						'paperhive_discussion_count' => $disscussionCount
-					], Http::STATUS_OK);
 				} else {
-					return new DataResponse(['message' => (string)$this->l->t('Cannot read the file.')], Http::STATUS_BAD_REQUEST);
+					// File has correct format, and revision is the second extension
+					// Add extension dot since explode removed it and replace rev extension with empty string
+					$revisionString = '.'.$filenameParts[sizeof($filenameParts)-2];
+					$revision = str_replace($this->paperhive_rev_extension, '', $revisionString);
 				}
+
+				$disscussionCount = -1;
+				if ($fetchDiscussions == "true") {
+					$paperHiveString = $this->fetchDiscussions($revision);
+					$paperHiveDiscussions = json_decode($paperHiveString, true);
+					if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
+						$disscussionCount = count($paperHiveDiscussions['discussions']);
+					}
+				}
+
+				return new DataResponse([
+					'paperhive_base_url' => $this->paperhive_base_url,
+					'paperhive_api_url' => $this->paperhive_api_url,
+					'paperhive_document_url' => $this->paperhive_document_url,
+					'paperhive_document_id' => $revision,
+					'paperhive_discussion_api_endpoint' => $this->paperhive_discussion_api_endpoint,
+					'paperhive_extension' => $this->paperhive_file_extension,
+					'paperhive_discussion_count' => $disscussionCount
+				], Http::STATUS_OK);
 			} else {
 				return new DataResponse(['message' => (string)$this->l->t('Invalid file path supplied.')], Http::STATUS_BAD_REQUEST);
 			}
@@ -157,9 +198,6 @@ class PaperHiveController extends Controller{
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		} catch (ForbiddenException $e) {
 			return new DataResponse(['message' => $e->getMessage()], Http::STATUS_BAD_REQUEST);
-		} catch (HintException $e) {
-			$message = (string)$e->getHint();
-			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		} catch (\Exception $e) {
 			$message = (string)$this->l->t('An internal server error occurred.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
@@ -203,7 +241,7 @@ class PaperHiveController extends Controller{
 	}
 
 	/**
-	 * Gets the informations about the book for specific BookID and saves as a file
+	 * Gets the information about the book for specific BookID and saves as a file in requested directory
 	 *
 	 * @NoAdminRequired
 	 *
@@ -211,9 +249,8 @@ class PaperHiveController extends Controller{
 	 * @param string $bookID
 	 * @return DataResponse
 	 */
-	public function getPaperHiveDocument($dir, $bookID) {
+	public function generatePaperHiveDocument($dir, $bookID) {
 		// Send request to PaperHive
-		
 		$paperHiveString = $this->fetchDiscussions($bookID);
 		if ($paperHiveString === false) {
 			$message = (string)$this->l->t('Problem connecting to PaperHive.');
@@ -234,7 +271,8 @@ class PaperHiveController extends Controller{
 		
 
 		if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveObject['title'])) {
-			$filename = $paperHiveObject['title'] . $this->paperhive_file_extension;
+			$extension = $this->paperhive_rev_extension . $bookID . $this->paperhive_file_extension;
+			$filename = $paperHiveObject['title'] . $extension;
 
 			if($dir == '/') {
 				$path = $dir . $filename;
@@ -259,7 +297,7 @@ class PaperHiveController extends Controller{
 				}
 				// Clear statcache
 				clearstatcache();
-				return new DataResponse(['path' => $path, 'filename' => $paperHiveObject['title'], 'extension' => $this->paperhive_file_extension, 'discussionCount' => $discussionCount], Http::STATUS_OK);
+				return new DataResponse(['path' => $path, 'filename' => $paperHiveObject['title'], 'extension' => $extension, 'discussionCount' => $discussionCount], Http::STATUS_OK);
 			} catch (HintException $e) {
 				$message = (string)$e->getHint();
 				return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);

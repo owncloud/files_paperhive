@@ -3,7 +3,14 @@
 
 - [x] Support for 9.0
 - [x] Support for 9.1
-- [x] Support for 9.2-10.0
+- [x] Support for 10.0
+
+Release 1.1:
+
+ - Improved performance of loading discussions by adding hidden revision number in the paperhive file extension
+ - Add confirmation window if to open in new window or in the same window
+ - Fix application icon color
+ - Few more code polishing fixes
 
 # Installation
 

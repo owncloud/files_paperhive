@@ -3,10 +3,20 @@
 	<id>files_paperhive</id>
 	<name>PaperHive</name>
 	<description>
+		PaperHive looks at how the web platform could transform reading into a more social
+		and active process of collaboration.
+		It is a cross-publisher layer of interaction on top of published research documents
+		that enables contextual and structured discussions in real time.
+
+		The PaperHive plugin is shipped with the new file menu button "PaperHive Document",
+		which allows adding the documents found on the PaperHive website at https://paperhive.org.
+		These are no different to your regular .doc or .jpg files and will behave the same as
+		any other files in the ownCloud user interface.
+
 	</description>
 	<licence>AGPL</licence>
 	<author>Piotr Mrowczynski</author>
-	<version>1.0</version>
+	<version>1.1</version>
 	<shipped>false</shipped>
 	<default_enable/>
 	<documentation>

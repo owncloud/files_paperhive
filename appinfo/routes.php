@@ -26,8 +26,8 @@ $app = new Application();
 $app->registerRoutes($this, array('routes' => array(
 
 	[
-		'name' => 'PaperHive#load',
-		'url' => '/ajax/loadfile',
+		'name' => 'PaperHive#loadMetadata',
+		'url' => '/ajax/loadmetadata',
 		'verb' => 'GET'
 	],
 	[
@@ -36,8 +36,8 @@ $app->registerRoutes($this, array('routes' => array(
 		'verb' => 'GET'
 	],
 	[
-		'name' => 'PaperHive#getPaperHiveDocument',
-		'url' => '/ajax/getpaperhivedocument',
+		'name' => 'PaperHive#generatePaperHiveDocument',
+		'url' => '/ajax/generatePaperHiveDocument',
 		'verb' => 'GET'
 	]
 )));
