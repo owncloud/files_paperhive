@@ -19,9 +19,9 @@ OC.L10N.register(
     "Discuss" : "Discutir",
     "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "O seu ficheiro [.paperhive] não é um documento PaperHive, por favor, volte a transferir o documento",
     "PaperHive" : "PaperHive",
-    "URL or DocID" : "Endereço ou DocID",
+    "URL or DocID" : "URL ou DocID",
     "Saving..." : "A guardar...",
-    "Please reload the page, error occured" : "Por favor recarregue a página, ocorreu um erro",
+    "Please reload the page, error occured" : "Por favor, recarregue a página, ocorreu um erro",
     "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Falha ao adicionar o seu documento PaperHive com o ID {id}. Ficheiro já existente ou erro de conexão ao PaperHive"
 },
 "nplurals=2; plural=(n != 1);");
