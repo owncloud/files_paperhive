@@ -1,0 +1,27 @@
+OC.L10N.register(
+    "files_paperhive",
+    {
+    "This file is too big to be opened. Please download the file instead." : "FIlen er for stor til at kunne åbnes direkte. Vær venlig at downloade filen i stedet",
+    "Cannot read the file." : "Kan ikke læse filen.",
+    "Invalid file path supplied." : "Der blev angivet en ugyldig filsti.",
+    "The file is locked." : "Filen er låst",
+    "An internal server error occurred." : "Der er opstået en intern serverfejl.",
+    "Problem connecting to PaperHive." : "Problem med at tilslutte til PaperHive.",
+    "The file already exists." : "Filen eksisterer allerede.",
+    "Received wrong response from PaperHive." : "Modtog forkert svar fra PaperHive.",
+    "Show Paper" : "Vis papir",
+    "Visit PaperHive at" : "Besøg PaperHive hos",
+    "and transform reading into a process of collaboration!" : "og omdan læsning til en samarbejdsprocess!",
+    "Your DocID" : "Dit DocID",
+    "is the last fragment of PaperHive document URL." : "er den sidste del af PaperHive-dokument-URL.",
+    "Exemplary URL" : "Exempel på URL",
+    "An error occurred!" : "Der opstod en fejl!",
+    "Discuss" : "Diskuter",
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Din [.paperhive]-fil er ikke et gyldigt PaperHive-document, download venligst dokumentet igen.",
+    "PaperHive" : "PaperHive",
+    "URL or DocID" : "URL eller DocID",
+    "Saving..." : "Gemmer...",
+    "Please reload the page, error occured" : "Genindlæs venligst side, en fejl opstod",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Kan ikke tilføje dit PaperHive-dokument med ID {id}. Filen eksisterer allerede eller fejl ved forbindelse til PaperHive"
+},
+"nplurals=2; plural=(n != 1);");
