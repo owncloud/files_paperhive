@@ -1,0 +1,27 @@
+OC.L10N.register(
+    "files_paperhive",
+    {
+    "This file is too big to be opened. Please download the file instead." : "Dei lêer is te groot om te open. Laai dit liewer af.",
+    "Cannot read the file." : "Kan nie die lêer lees nie.",
+    "Invalid file path supplied." : "Ongeldige lêerpad verskaf.",
+    "The file is locked." : "Die lêer is gesluit.",
+    "An internal server error occurred." : "’n Interne bedienerfout het voorgekom.",
+    "Problem connecting to PaperHive." : "Kan nie aan PaperHive koppel nie.",
+    "The file already exists." : "Die lêer bestaan reeds.",
+    "Received wrong response from PaperHive." : "Verkeerde reaksie van PaperHive ontvang.",
+    "Show Paper" : "Toon Paper",
+    "Visit PaperHive at" : "Besoek PaperHive by",
+    "and transform reading into a process of collaboration!" : "en verander lees in ’n samewerkingsproses!",
+    "Your DocID" : "U DocID",
+    "is the last fragment of PaperHive document URL." : "is die laaste fragment van PaperHive-dokumentbronadres.",
+    "Exemplary URL" : "Voorbeeldbronadres",
+    "An error occurred!" : "’n Fout het voorgekom!",
+    "Discuss" : "Bespreek",
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "U [.paperhive]-lêer is nie ’n geldige PaperHive-dokument nie, laai die dokument weer af",
+    "PaperHive" : "PaperHive",
+    "URL or DocID" : "Bronadres of DocID",
+    "Saving..." : "Bewaar tans…",
+    "Please reload the page, error occured" : "Fout het voorgekom, herlaai asb. die blad",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Kan nie u PaperHive-dokument of ID {id} toevoeg nie. Lêer bestaan of PaperHive-verbindingsprobleem"
+},
+"nplurals=2; plural=(n != 1);");
