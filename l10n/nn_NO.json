@@ -1,17 +1,25 @@
 { "translations": {
     "This file is too big to be opened. Please download the file instead." : "Fila er for stor for å opnast. Ver venleg å laste ned fila i staden for.",
     "Cannot read the file." : "Kan ikkje lesa fila.",
-    "Invalid file path supplied." : "Ugyldig bane for fil er oppgjett.",
+    "Invalid file path supplied." : "Ugyldig område for fil er oppgjett.",
     "The file is locked." : "Fila er låst.",
-    "An internal server error occurred." : "Ein intern feil oppstod!",
+    "An internal server error occurred." : "Intern feil oppstod!",
     "Problem connecting to PaperHive." : "Problem ved tilkopling til PaperHive.",
     "The file already exists." : "Fila finst alt.",
     "Received wrong response from PaperHive." : "Mottok feil svar frå PaperHive.",
-    "Show Paper" : "Vis papir.",
+    "Show Paper" : "Vis papir",
+    "Visit PaperHive at" : "Besøk PaperHive på",
+    "and transform reading into a process of collaboration!" : "og forvandle lesing til ein prosess for samarbeid!",
+    "Your DocID" : "Din DocID",
+    "is the last fragment of PaperHive document URL." : "er den side delen av PaperHive dokument URL",
+    "Exemplary URL" : "Eksemplarisk URL",
     "An error occurred!" : "Ein feil oppstod!",
     "Discuss" : "Diskuter",
-    "PaperHive Book" : "PaperHive bok",
-    "Your Book ID" : "Din bok ID",
-    "Saving..." : "Lagrar …"
+    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Di [.paperhive]  fil er ikkje gyldig PaperHive dokument, ver venleg å laste ned dokument på ny",
+    "PaperHive" : "PaperHive",
+    "URL or DocID" : "URL enn DocID",
+    "Saving..." : "Lagrar …",
+    "Please reload the page, error occured" : "Ein feil oppstod, ver venleg å last inn sida på ny.",
+    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Kan ikkje legje til PaperHive dokument med id {id}. Fila finst enn feil i oppkobling til PaperHive"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
