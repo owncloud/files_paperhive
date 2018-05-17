@@ -21,5 +21,5 @@
     "Saving..." : "Ukládám...",
     "Please reload the page, error occured" : "Vyskytla se chyba. Načtěte stránku znovu, prosím.",
     "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Nelze přidat dokument PaperHive s ID {id}. Soubor buď existuje, nebo nastala chyba při připojování k PaperHive"
-},"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
+},"pluralForm" :"nplurals=4; plural=(n < 10 && n % 1 == 0) ? 1 : (n < 9999 && n >= 10 && n % 1 == 0) ? 3 : (n % 1 != 0) : 4;"
 }
