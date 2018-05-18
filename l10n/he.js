@@ -24,4 +24,4 @@ OC.L10N.register(
     "Please reload the page, error occured" : "אירעה שגיאה, יש לטעון את הדף שנית.",
     "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "לא ניתן להוסיף את מסמך PaperHive שלך עם זיהוי {id}. קובץ קיים או שגיאה בחיבור ל- PaperHive"
 },
-"nplurals=4; plural=(n==1 ? 1: n == 2 ? 2 : (n % 10 == 0 and n > 10) ? 4);");
+"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;");
