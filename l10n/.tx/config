@@ -7,3 +7,4 @@ file_filter = <lang>/files_paperhive.po
 source_file = templates/files_paperhive.pot
 source_lang = en
 type = PO
+
