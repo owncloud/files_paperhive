@@ -90,16 +90,6 @@ class PaperHiveControllerTest extends TestCase {
 			$this->clientMock);
 	}
 
-	private function fakeDiscussions() {
-		$this->responseMock->expects($this->any())
-			->method('getBody')
-			->willReturn('{' . '"discussions" : [ "blabla", "blabla" ]' .'}');
-
-		$this->clientMock->expects($this->any())
-			->method('get')
-			->willReturn($this->responseMock);
-	}
-
 	private function fakeAll($bookID, $title) {
 		$contentsDoc = '{' . '"id" : "'.$bookID .'", "title" : "'. $title .'" }';
 		$contentsDis = '{' . '"discussions" : [ "blabla", "blabla" ]' .'}';
@@ -133,53 +123,10 @@ class PaperHiveControllerTest extends TestCase {
 		$this->assertSame($data['paperhive_extension'], '.paperhive');
 	}
 
-	/**
-	 * @dataProvider dataTestLoad
-	 *
-	 * @param string $filename
-	 * @param string|boolean $fileContent
-	 * @param integer $expectedStatus
-	 * @param string $expectedMessage
-	 */
-	public function testLoad($filename, $fileContent, $expectedStatus, $expectedMessage, $discussionCount) {
-		$this->viewMock->expects($this->any())
-			->method('file_get_contents')
-			->willReturn($fileContent);
-
-		if ($discussionCount != -1) {
-			$this->fakeDiscussions();
-		}
-
-		$result = $this->controller->load('/', $filename, "true");
-		$data = $result->getData();
-		$status = $result->getStatus();
-		$this->assertSame($status, $expectedStatus);
-		if ($status === 200) {
-			$this->assertArrayHasKey('paperhive_document', $data);
-			$this->assertArrayHasKey('paperhive_discussion_count', $data);
-			$this->assertSame($data['paperhive_discussion_count'], $discussionCount);
-			$this->assertSame($data['paperhive_document'], $fileContent);
-		} else {
-			$this->assertArrayHasKey('message', $data);
-			$this->assertSame($expectedMessage, $data['message']);
-		}
-	}
-
-	public function dataTestLoad() {
-		return array(
-			array('test.txt', 'file content', 200, '', -1),
-			array('test.txt', '{' . '"id" : "Ra5WnkxImoOE"' .'}', 200, '', 2),
-			array('test.txt', '', 200, '', -1),
-			array('test.txt', '0', 200, '', -1),
-			array('', 'file content', 400, 'Invalid file path supplied.', -1),
-			array('test.txt', false, 400, 'Cannot read the file.', -1),
-		);
-	}
 
 	public function dataExceptionWithException() {
 		return [
 			[new \Exception(), 'An internal server error occurred.'],
-			[new HintException('error message', 'test exception'), 'test exception'],
 			[new ForbiddenException('firewall', false), 'firewall'],
 			[new LockedException('secret/path/https://github.com/owncloud/files_texteditor/pull/96'), 'The file is locked.'],
 		];
@@ -190,7 +137,16 @@ class PaperHiveControllerTest extends TestCase {
 	 * @param \Exception $exception
 	 * @param string $expectedMessage
 	 */
-	public function testLoadExceptionWithException(\Exception $exception, $expectedMessage) {
+	public function testLoadMetadataForRenamedDocumentExceptions(\Exception $exception, $expectedMessage) {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.renamed.paperhive';
+		$contents = $this->fakeAll($bookID, $title);
+
+		$this->viewMock->expects($this->once())
+			->method('file_exists')
+			->willReturn(true);
 
 		$this->viewMock->expects($this->any())
 			->method('file_get_contents')
@@ -198,7 +154,11 @@ class PaperHiveControllerTest extends TestCase {
 				throw $exception;
 			});
 
-		$result = $this->controller->load('/', 'test.txt', "true");
+		$this->viewMock->expects($this->any())
+			->method('rename')
+			->willReturn(false);
+
+		$result = $this->controller->loadMetadata('/', $path, "true");
 		$data = $result->getData();
 
 		$this->assertSame(400, $result->getStatus());
@@ -206,17 +166,173 @@ class PaperHiveControllerTest extends TestCase {
 		$this->assertSame($expectedMessage, $data['message']);
 	}
 
-	public function testFileTooBig() {
-		$this->viewMock->expects($this->any())
-			->method('filesize')
-			->willReturn(4194304 + 1);
+	public function testLoadMetadataForRenamedDocumentNoExtension() {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title;
+		$contents = $this->fakeAll($bookID, $title);
 
-		$result = $this->controller->load('/', 'foo.bar', "true");
+		$result = $this->controller->loadMetadata('/', $path, "true");
 		$data = $result->getData();
-		$status = $result->getStatus();
-		$this->assertSame(400, $status);
+
+		$this->assertSame(400, $result->getStatus());
 		$this->assertArrayHasKey('message', $data);
-		$this->assertSame('This file is too big to be opened. Please download the file instead.', $data['message']);
+		$this->assertSame('Invalid file path supplied.', $data['message']);
+	}
+
+	public function testLoadMetadataForRenamedDocumentNotExisting() {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.renamed.paperhive';
+		$contents = $this->fakeAll($bookID, $title);
+
+		$this->viewMock->expects($this->once())
+			->method('file_exists')
+			->willReturn(false);
+
+		$result = $this->controller->loadMetadata('/', $path, "true");
+		$data = $result->getData();
+
+		$this->assertSame(400, $result->getStatus());
+		$this->assertArrayHasKey('message', $data);
+		$this->assertSame('File is obsolete, incorrectly renamed or cannot be read.', $data['message']);
+	}
+
+	public function testLoadMetadataForRenamedDocumentWrongContent() {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.renamed.paperhive';
+		$contents = $this->fakeAll($bookID, $title);
+
+		$this->viewMock->expects($this->once())
+			->method('file_exists')
+			->willReturn(true);
+
+		$this->viewMock->expects($this->once())
+			->method('file_get_contents')
+			->willReturn('wrong content');
+
+		$result = $this->controller->loadMetadata('/', $path, "true");
+		$data = $result->getData();
+
+		$this->assertSame(400, $result->getStatus());
+		$this->assertArrayHasKey('message', $data);
+		$this->assertSame('File is obsolete, incorrectly renamed or cannot be read.', $data['message']);
+	}
+
+	public function testLoadMetadataForRenamedDocumentFailRename() {
+	$dir = '';
+	$bookID = 'Ra5WnkxImoOE';
+	$title = "Borderland City in New India";
+	$path = $dir . '/'. $title. '.renamed.paperhive';
+	$contents = $this->fakeAll($bookID, $title);
+
+	$this->viewMock->expects($this->once())
+		->method('file_exists')
+		->willReturn(true);
+
+	$this->viewMock->expects($this->once())
+		->method('file_get_contents')
+		->willReturn($contents);
+
+		$this->viewMock->expects($this->once())
+			->method('rename')
+			->willReturn(false);
+
+	$result = $this->controller->loadMetadata('/', $path, "true");
+	$data = $result->getData();
+
+	$this->assertSame(400, $result->getStatus());
+	$this->assertArrayHasKey('message', $data);
+	$this->assertSame('File is obsolete, incorrectly renamed or cannot be read.', $data['message']);
+}
+
+	public function testLoadMetadataForRenamedDocument() {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.renamed.paperhive';
+		$contents = $this->fakeAll($bookID, $title);
+
+		$this->viewMock->expects($this->once())
+			->method('file_exists')
+			->willReturn(true);
+
+		$this->viewMock->expects($this->once())
+			->method('file_get_contents')
+			->willReturn($contents);
+
+		$this->viewMock->expects($this->once())
+			->method('rename')
+			->willReturn(true);
+
+		$result = $this->controller->loadMetadata('/', $path, "true");
+		$data = $result->getData();
+
+		$this->assertSame(200, $result->getStatus());
+		$this->assertArrayHasKey('paperhive_base_url', $data);
+		$this->assertArrayHasKey('paperhive_api_url', $data);
+		$this->assertArrayHasKey('paperhive_document_url', $data);
+		$this->assertArrayHasKey('paperhive_document_id', $data);
+		$this->assertArrayHasKey('paperhive_discussion_api_endpoint', $data);
+		$this->assertArrayHasKey('paperhive_extension', $data);
+		$this->assertArrayHasKey('paperhive_discussion_count', $data);
+		$this->assertSame($bookID, $data['paperhive_document_id']);
+		$this->assertSame(2, $data['paperhive_discussion_count']);
+	}
+
+	public function testLoadMetadataWithoutDiscussions() {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.rev'.$bookID.'.paperhive';
+
+		$result = $this->controller->loadMetadata('/', $path, "false");
+		$data = $result->getData();
+
+		$this->assertSame(200, $result->getStatus());
+		$this->assertArrayHasKey('paperhive_base_url', $data);
+		$this->assertArrayHasKey('paperhive_api_url', $data);
+		$this->assertArrayHasKey('paperhive_document_url', $data);
+		$this->assertArrayHasKey('paperhive_document_id', $data);
+		$this->assertArrayHasKey('paperhive_discussion_api_endpoint', $data);
+		$this->assertArrayHasKey('paperhive_extension', $data);
+		$this->assertArrayHasKey('paperhive_discussion_count', $data);
+		$this->assertSame($bookID, $data['paperhive_document_id']);
+		$this->assertSame(-1, $data['paperhive_discussion_count']);
+	}
+
+	public function testLoadMetadata() {
+		$dir = '';
+		$bookID = 'Ra5WnkxImoOE';
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.rev'.$bookID.'.paperhive';
+		$contents = $this->fakeAll($bookID, $title);
+
+		$result = $this->controller->loadMetadata('/', $path, "true");
+		$data = $result->getData();
+
+		$this->assertSame(200, $result->getStatus());
+		$this->assertArrayHasKey('paperhive_base_url', $data);
+		$this->assertArrayHasKey('paperhive_api_url', $data);
+		$this->assertArrayHasKey('paperhive_document_url', $data);
+		$this->assertArrayHasKey('paperhive_document_id', $data);
+		$this->assertArrayHasKey('paperhive_discussion_api_endpoint', $data);
+		$this->assertArrayHasKey('paperhive_extension', $data);
+		$this->assertArrayHasKey('paperhive_discussion_count', $data);
+		$this->assertSame($bookID, $data['paperhive_document_id']);
+		$this->assertSame(2, $data['paperhive_discussion_count']);
+	}
+
+	public function dataTestSave() {
+		return array (
+			array('', 'Ra5WnkxImoOE', true, true, 200, ''),
+			array('/test', 'Ra5WnkxImoOE', true, true, 200, ''),
+			array('', 'Ra5WnkxImoOE', true, true, 400, 'The file already exists.')
+		);
 	}
 
 	/**
@@ -230,22 +346,32 @@ class PaperHiveControllerTest extends TestCase {
 	 * @param $expectedMessage
 	 */
 	public function testGetPaperHiveDocument($dir, $bookID, $correctDiscussions, $correctDocument, $expectedStatus, $expectedMessage) {
+		$title = "Borderland City in New India";
+		$path = $dir . '/'. $title. '.rev'.$bookID.'.paperhive';
+		$contents = $this->fakeAll($bookID, $title);
+
 		if ($expectedStatus === 200) {
-			$title = "Borderland City in New India";
-			$path = $dir . $title. '.paperhive';
-			$contents = $this->fakeAll($bookID, $title);
 			$this->viewMock->expects($this->once())
 				->method('file_put_contents')->with($path, $contents);
 		} else {
+			$this->viewMock->expects($this->once())
+				->method('file_exists')->with($path)
+				->willReturn(true);
 			$this->viewMock->expects($this->never())->method(('file_put_contents'));
 		}
 
-		$result = $this->controller->getPaperHiveDocument($dir, $bookID);
+		$result = $this->controller->generatePaperHiveDocument($dir, $bookID);
 		$status = $result->getStatus();
 		$data = $result->getData();
 
 		$this->assertSame($expectedStatus, $status);
 		if ($status === 200) {
+			$this->assertArrayHasKey('path', $data);
+			$this->assertArrayHasKey('filename', $data);
+			$this->assertArrayHasKey('extension', $data);
+			$this->assertArrayHasKey('discussionCount', $data);
+			$this->assertSame(2, $data['discussionCount']);
+			$this->assertSame('.rev'.$bookID.'.paperhive', $data['extension']);
 		} else {
 			$this->assertArrayHasKey('message', $data);
 			$this->assertSame($expectedMessage, $data['message']);
@@ -268,17 +394,11 @@ class PaperHiveControllerTest extends TestCase {
 				throw $exception;
 			});
 
-		$result = $this->controller->getPaperHiveDocument($dir, $bookID);
+		$result = $this->controller->generatePaperHiveDocument($dir, $bookID);
 		$data = $result->getData();
 
 		$this->assertSame(400, $result->getStatus());
 		$this->assertArrayHasKey('message', $data);
 		$this->assertSame($expectedMessage, $data['message']);
-	}
-
-	public function dataTestSave() {
-		return array (
-			array('/', 'Ra5WnkxImoOE', true, true, 200, '')
-		);
 	}
 }
