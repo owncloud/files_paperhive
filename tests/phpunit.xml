@@ -4,18 +4,15 @@
 		 timeoutForSmallTests="900"
 		 timeoutForMediumTests="900"
 		 timeoutForLargeTests="900"
-		>
+>
 	<testsuite name='unit-tests'>
-		<directory suffix='test.php'>.</directory>
+		<directory suffix='Test.php'>.</directory>
 	</testsuite>
 	<!-- filters for code coverage -->
 	<filter>
 		<whitelist>
-			<directory suffix=".php">../../files_paperhive</directory>
-			<exclude>
-				<directory suffix=".php">../../files_paperhive/l10n</directory>
-				<directory suffix=".php">../../files_paperhive/tests</directory>
-			</exclude>
+			<directory suffix=".php">../../files_paperhive/appinfo</directory>
+			<directory suffix=".php">../../files_paperhive/lib</directory>
 		</whitelist>
 	</filter>
 	<logging>
@@ -23,4 +20,3 @@
 		<log type="coverage-clover" target="./clover.xml"/>
 	</logging>
 </phpunit>
-

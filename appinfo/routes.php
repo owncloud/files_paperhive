@@ -19,25 +19,32 @@
  *
  */
 
-namespace OCA\Files_PaperHive\AppInfo;
+$app = new \OCA\Files_PaperHive\AppInfo\Application();
 
-$app = new Application();
-
-$app->registerRoutes($this, array('routes' => array(
-
+$app->registerRoutes(
+	$this,
 	[
-		'name' => 'PaperHive#load',
-		'url' => '/ajax/loadfile',
-		'verb' => 'GET'
-	],
-	[
-		'name' => 'PaperHive#getPaperHiveDetails',
-		'url' => '/ajax/getpaperhivedetails',
-		'verb' => 'GET'
-	],
-	[
-		'name' => 'PaperHive#getPaperHiveDocument',
-		'url' => '/ajax/getpaperhivedocument',
-		'verb' => 'GET'
+		'routes' => [
+			[
+				'name' => 'PaperHive#getPaperHiveDetails',
+				'url' => '/getpaperhivedetails',
+				'verb' => 'GET'
+			],
+			[
+				'name' => 'PaperHive#getPaperHiveBookURL',
+				'url' => '/getpaperhivebookurl',
+				'verb' => 'GET'
+			],
+			[
+				'name' => 'PaperHive#getPaperHiveBookDiscussionCount',
+				'url' => '/getpaperhivebookdiscussioncount',
+				'verb' => 'GET'
+			],
+			[
+				'name' => 'PaperHive#generatePaperHiveDocument',
+				'url' => '/generatepaperhivedocument',
+				'verb' => 'GET'
+			]
+		]
 	]
-)));
+);

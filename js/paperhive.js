@@ -94,14 +94,14 @@ Files_PaperHive = {
         var self = this;
         $.ajax({
             type: 'GET',
-            url: OC.generateUrl('/apps/files_paperhive/ajax/getpaperhivedetails')
+            url: OC.generateUrl('/apps/files_paperhive/getpaperhivedetails')
         })
             .done(function (phdata) {
                 var containerString = '<div class="icon-paperhive"></div>' +
                     '<div><p class="normal">' + t('files_paperhive', 'Visit PaperHive at') + ' </p><p class="normal">' + phdata.paperhive_base_url + '</p><p class="normal"> ' + t('files_paperhive', 'and transform reading into a process of collaboration!') + '</p></div>' +
                     //'<div><span></span></div>' +
                     '<div><p class="bold">' + t('files_paperhive', 'Your DocID') + ' </p><p class="normal">' + t('files_paperhive', 'is the last fragment of PaperHive document URL.') + '</p></div>' +
-                    '<div><p class="normal">' + t('files_paperhive', 'Exemplary URL') + ': </p><p class="bold">' + phdata.paperhive_base_url + phdata.paperhive_base_document_url + phdata.paperhive_bookid_example + '</p></div>';
+                    '<div><p class="normal">' + t('files_paperhive', 'Exemplary URL') + ': ' + phdata.paperhive_base_url + phdata.paperhive_base_document_url + '</p><p class="bold">' + phdata.paperhive_bookid_example + '</p></div>';
 
                 self.container = $('<div class="notification_paperhive"></div>').html(
                     containerString
@@ -137,93 +137,42 @@ Files_PaperHive = {
         OC.dialogs.alert(message, t('files_paperhive', 'An error occurred!'));
     },
 
-    /**
-     * Loads the data through AJAX
-     */
-    loadFile: function (dir, filename, fetchDiscussions, success, failure) {
-        $.get(
-            OC.generateUrl('/apps/files_paperhive/ajax/loadfile'),
-            {
-                filename: filename,
-                dir: dir,
-                fetchDiscussions: fetchDiscussions
-            }
-        ).done(function (fileContents) {
-            // Call success callback
-            success(fileContents);
-        }).fail(function (jqXHR) {
-            var message;
-
-            try {
-                message = JSON.parse(jqXHR.responseText).message;
-            } catch (e) {
-            }
-
-            failure(message);
-        });
-    },
-
-    validatePaperHiveJSON: function (paperHiveObject) {
-        //validate request
-        var successResponseMetaTags = ['authors', 'title'];
-		var successResponseTags = ['id','metadata'];
-        var errorResponseTags = ['status', 'message'];
-
-        for (var responseErrorTagId in errorResponseTags) {
-            if (paperHiveObject.hasOwnProperty(errorResponseTags[responseErrorTagId])) {
-                return false;
-            }
-        }
-
-		for (var responseSuccessTagId in successResponseTags) {
-			if (!paperHiveObject.hasOwnProperty(successResponseTags[responseSuccessTagId])) {
-				return false;
+	requestData: function (api_url, dir, filename, success, failure) {
+		$.get(
+			OC.generateUrl(api_url),
+			{
+				filename: filename,
+				dir: dir
 			}
-		}
+		).done(function (paperHiveData) {
+			// Call success callback
+			success(paperHiveData);
+		}).fail(function (jqXHR) {
+			var message;
 
-		for (var successResponseMetaTagId in successResponseMetaTags) {
-			if (!paperHiveObject.metadata.hasOwnProperty(successResponseMetaTags[successResponseMetaTagId])) {
-				return false;
+			try {
+				message = JSON.parse(jqXHR.responseText).message;
+			} catch (e) {
 			}
-		}
 
-        return true;
-    },
+			failure(message);
+		});
+	},
 
-    /**
-     * Handles request for book contents to PaperHive API
-     */
-    getPaperHiveBook: function (dir, bookID, success, failure) {
-        $.get(
-            OC.generateUrl('/apps/files_paperhive/ajax/getpaperhivedocument'),
-            {
-                dir: dir,
-                bookID: bookID
-            }
-        ).done(function (paperHiveData) {
-            // Success - found valid Book at PaperHive
-            success(paperHiveData);
-        }).fail(function (jqXHR) {
-            var message;
+	getPaperHiveBookURL: function (dir, filename, success, failure) {
+		OCA.Files_PaperHive.requestData('/apps/files_paperhive/getpaperhivebookurl', dir, filename, success, failure);
+	},
 
-            try {
-                message = JSON.parse(jqXHR.responseText).message;
-            } catch (e) {
-            }
-
-            failure("Error occured while connecting to PaperHive: " + message);
-        });
-
-    },
+	getPaperHiveDiscussionCount: function (dir, filename, success, failure) {
+		OCA.Files_PaperHive.requestData('/apps/files_paperhive/getpaperhivebookdiscussioncount', dir, filename, success, failure);
+	},
 
     setDiscussionCount: function ($tr) {
-        OCA.Files_PaperHive.loadFile(
+        OCA.Files_PaperHive.getPaperHiveDiscussionCount(
             $tr.attr('data-path'),
             $tr.attr('data-file'),
-            "true",
-            function (paperHiveData) {
-                var discussionsCount = paperHiveData.paperhive_discussion_count;
-                OCA.Files_PaperHive._updatePaperHiveFileData($tr, discussionsCount);
+            function (paperHiveDiscussionCount) {
+                OCA.Files_PaperHive._updatePaperHiveFileData($tr, paperHiveDiscussionCount);
             },
             function (message) {
             }
@@ -251,28 +200,13 @@ Files_PaperHive = {
      */
     _onPaperHiveTrigger: function (filename, context) {
         // Get the file data
-        this.loadFile(
+        this.getPaperHiveBookURL(
             context.dir,
             filename,
-            "false",
-            function (paperHiveData) {
-                try {
-                    var paperHiveObject = JSON.parse(paperHiveData.paperhive_document);
-                } catch (e) {
-                    OC.dialogs.alert(t('files_paperhive', 'Your [.paperhive] file is not a valid PaperHive document, please redownload document'));
-                    return;
-                }
-
-                if (!OCA.Files_PaperHive.validatePaperHiveJSON(paperHiveObject)) {
-                    OC.dialogs.alert(t('files_paperhive', 'Your [.paperhive] file is not a valid PaperHive document, please redownload document'));
-                    return;
-                }
-
-                var paperhiveUrl = paperHiveData.paperhive_base_url + paperHiveData.paperhive_base_document_url + paperHiveObject.id;
-
-                var w = window.open(paperhiveUrl, '_blank');
+            function (paperHiveBookURL) {
+                var w = window.open(paperHiveBookURL, '_blank');
                 if (!w) {
-                    window.location.href = paperhiveUrl;
+                    window.location.href = paperHiveBookURL;
                 }
             },
             function (message) {
@@ -328,37 +262,47 @@ Files_PaperHive.NewFileMenuPlugin = {
                     bookID = bookArray[bookArray.length-1];
                 }
 
-
                 // Get the file data from PaperHive API
                 var dir = fileList.getCurrentDirectory();
                 var $saveNot = OC.Notification.showHtml(t('files_paperhive', 'Saving...'));
-                OCA.Files_PaperHive.getPaperHiveBook(
-                    dir,
-                    bookID,
-                    function (paperHiveData) {
-                        var filename = paperHiveData.filename+paperHiveData.extension;
 
-                        fileList.filesClient.getFileInfo(
-                            paperHiveData.path,
-                            {
-                                properties: fileList._getWebdavProperties()
-                            })
-                            .then(function(status, data) {
-                                fileList.add(data, {scrollTo: true});
-                                var $tr = fileList.findFileEl(filename);
-                                OCA.Files_PaperHive._updatePaperHiveFileData($tr, paperHiveData.paperhive_discussion_count);
-                                OC.Notification.hide($saveNot);
-                            })
-                            .fail(function(status) {
-                                OC.Notification.hide($saveNot);
-                                OCA.Files_PaperHive.failureNotification(t('files_paperhive', 'Please reload the page, error occured'));
-                            });
-                    },
-                    function (message) {
-                        OC.Notification.hide($saveNot);
-                        OCA.Files_PaperHive.failureNotification(t('files_paperhive', 'Cannot add your PaperHive document with BookID {id}. {message}', {id: bookID, message: message}));
-                    }
-                );
+
+				$.get(
+					OC.generateUrl('/apps/files_paperhive/generatepaperhivedocument'),
+					{
+						dir: dir,
+						bookID: bookID
+					}
+				).done(function (paperHiveData) {
+					// Success - found valid Book at PaperHive
+					var filename = paperHiveData.filename+paperHiveData.extension;
+
+					fileList.filesClient.getFileInfo(
+						paperHiveData.path,
+						{
+							properties: fileList._getWebdavProperties()
+						})
+						.then(function(status, data) {
+							fileList.add(data, {scrollTo: true});
+							var $tr = fileList.findFileEl(filename);
+							OCA.Files_PaperHive._updatePaperHiveFileData($tr, paperHiveData.paperhive_discussion_count);
+							OC.Notification.hide($saveNot);
+						})
+						.fail(function(status) {
+							OC.Notification.hide($saveNot);
+							OCA.Files_PaperHive.failureNotification(t('files_paperhive', 'Please reload the page, error occured'));
+						});
+				}).fail(function (jqXHR) {
+					var message;
+
+					try {
+						message = JSON.parse(jqXHR.responseText).message;
+					} catch (e) {
+					}
+
+					OC.Notification.hide($saveNot);
+					OCA.Files_PaperHive.failureNotification(t('files_paperhive', 'Cannot add your PaperHive document with BookID {id}. {message}', {id: bookID, message: message}));
+				});
             }
         });
     }

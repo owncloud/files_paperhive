@@ -2,7 +2,7 @@
 /**
  * @author Piotr Mrowczynski <piotr.mrowczynski@yahoo.com>
  *
- * @copyright Copyright (c) 2017, Piotr Mrowczynski.
+ * @copyright Copyright (c) 2018, Piotr Mrowczynski.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -21,9 +21,9 @@
 
 namespace OCA\Files_PaperHive\Controller;
 
+use OCA\Files_PaperHive\PaperHiveMetadata;
 use OCP\Http\Client\IClient;
 use OC\Files\View;
-use OC\HintException;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
@@ -33,7 +33,7 @@ use OCP\ILogger;
 use OCP\IRequest;
 use OCP\Lock\LockedException;
 
-class PaperHiveController extends Controller{
+class PaperHiveController extends Controller {
 
 	/** @var IL10N */
 	private $l;
@@ -46,6 +46,9 @@ class PaperHiveController extends Controller{
 
 	/** @var \OCP\Http\Client\IClient */
 	private $client;
+
+	/** @var PaperHiveMetadata */
+	private $paperHiveMetadata;
 
 	/**
 	 * Paperhive base URL
@@ -85,85 +88,77 @@ class PaperHiveController extends Controller{
 	 * @param IL10N $l10n
 	 * @param View $view
 	 * @param ILogger $logger
+	 * @param IClient $client
+	 * @param PaperHiveMetadata $paperHiveMetadata
 	 */
 	public function __construct($AppName,
 								IRequest $request,
 								IL10N $l10n,
 								View $view,
 								ILogger $logger,
-								IClient $client) {
+								IClient $client,
+								PaperHiveMetadata $paperHiveMetadata) {
 		parent::__construct($AppName, $request);
 		$this->l = $l10n;
 		$this->view = $view;
 		$this->logger = $logger;
 		$this->client = $client;
+		$this->paperHiveMetadata = $paperHiveMetadata;
 	}
-	
+
 	/**
-	 * load text file
+	 * Get URL to PaperHive book url
 	 *
 	 * @NoAdminRequired
 	 *
 	 * @param string $dir
 	 * @param string $filename
-	 * @param boolean $fetchDiscussions
 	 * @return DataResponse
 	 */
-	public function load($dir, $filename, $fetchDiscussions) {
-		try {
-			if (!empty($filename)) {
-				$path = $dir . '/' . $filename;
-				$fileContents = $this->view->file_get_contents($path);
-				if ($fileContents !== false) {
-					$encoding = mb_detect_encoding($fileContents . "a", "UTF-8, WINDOWS-1252, ISO-8859-15, ISO-8859-1, ASCII", true);
-					if ($encoding == "") {
-						// set default encoding if it couldn't be detected
-						$encoding = 'ISO-8859-15';
-					}
-					$fileContents = iconv($encoding, "UTF-8", $fileContents);
-
-					$disscussionCount = -1;
-					if ($fetchDiscussions == "true") {
-						$paperHiveObject = json_decode($fileContents, true);
-
-						if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveObject['id'])) {
-							$paperHiveString = $this->fetchDiscussions($paperHiveObject['id']);
-							$paperHiveDiscussions = json_decode($paperHiveString, true);
-							if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
-								$disscussionCount = count($paperHiveDiscussions['discussions']);
-							}
-
-						}
-					}
-
-					return new DataResponse([
-						'paperhive_document' => $fileContents,
-						'paperhive_base_url' => $this->paperhive_base_url,
-						'paperhive_base_document_url' => $this->paperhive_base_document_url,
-						'paperhive_api_documents' => $this->paperhive_api_documents,
-						'paperhive_api_discussions' => $this->paperhive_api_discussions,
-						'paperhive_extension' => $this->paperhive_file_extension,
-						'paperhive_discussion_count' => $disscussionCount
-					], Http::STATUS_OK);
-				} else {
-					return new DataResponse(['message' => (string)$this->l->t('Cannot read the file.')], Http::STATUS_BAD_REQUEST);
-				}
-			} else {
-				return new DataResponse(['message' => (string)$this->l->t('Invalid file path supplied.')], Http::STATUS_BAD_REQUEST);
-			}
-
-		} catch (LockedException $e) {
-			$message = (string) $this->l->t('The file is locked.');
-			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
-		} catch (ForbiddenException $e) {
-			return new DataResponse(['message' => $e->getMessage()], Http::STATUS_BAD_REQUEST);
-		} catch (HintException $e) {
-			$message = (string)$e->getHint();
-			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
-		} catch (\Exception $e) {
-			$message = (string)$this->l->t('An internal server error occurred.');
+	public function getPaperHiveBookURL($dir, $filename) {
+		$bookId = $this->getBookIdforPath($dir, $filename);
+		if (!$bookId) {
+			$message = (string)$this->l->t('No such document found in database.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
+		return new DataResponse($this->paperhive_base_url . $this->paperhive_base_document_url . $bookId, Http::STATUS_OK);
+	}
+
+	/**
+	 * Get URL to PaperHive book discussion count
+	 *
+	 * @NoAdminRequired
+	 *
+	 * @param string $dir
+	 * @param string $filename
+	 * @return DataResponse
+	 */
+	public function getPaperHiveBookDiscussionCount($dir, $filename) {
+		$bookId = $this->getBookIdforPath($dir, $filename);
+		$paperHiveString = $this->fetchDiscussions($bookId);
+		$paperHiveDiscussions = json_decode($paperHiveString, true);
+		$disscussionCount = -1;
+		if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
+			// Silently ignore discussions as this might indicate temporary unavailability
+			$disscussionCount = count($paperHiveDiscussions['discussions']);
+		}
+		return new DataResponse($disscussionCount, Http::STATUS_OK);
+	}
+
+	private function getBookIdforPath($dir, $filename){
+		if (!empty($filename)) {
+			if($dir == '/') {
+				$path = $dir . $filename;
+			} else {
+				$path = $dir . '/' . $filename;
+			}
+
+			$fileInfo = $this->view->getFileInfo($path);
+			if($fileInfo && $bookId = $this->paperHiveMetadata->getBookID($fileInfo['fileid'])) {
+				return $bookId;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -211,7 +206,7 @@ class PaperHiveController extends Controller{
 	 * @param string $bookID
 	 * @return DataResponse
 	 */
-	public function getPaperHiveDocument($dir, $bookID) {
+	public function generatePaperHiveDocument($dir, $bookID) {
 		// Try to get the document
 		$paperHiveObjectString = $this->fetchDocument($bookID);
 		if ($paperHiveObjectString === false) {
@@ -234,11 +229,11 @@ class PaperHiveController extends Controller{
 
 		// Try fetching discussions
 		$paperHiveDiscussionsString = $this->fetchDiscussions($bookID);
-		if ($paperHiveDiscussionsString === false) {
-			$message = (string)$this->l->t('Problem connecting to PaperHive.');
+		$paperHiveDiscussions = json_decode($paperHiveDiscussionsString, true);
+		if ($paperHiveDiscussionsString === false || json_last_error() != JSON_ERROR_NONE) {
+			$message = (string)$this->l->t('Problem connecting to PaperHive to fetch discussions.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
-		$paperHiveDiscussions = json_decode($paperHiveDiscussionsString, true);
 		$discussionCount = -1;
 		if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
 			$discussionCount = count($paperHiveDiscussions['discussions']);
@@ -253,40 +248,44 @@ class PaperHiveController extends Controller{
 			$path = $dir . '/' . $filename;
 		}
 
+		$exists = $this->view->file_exists($path);
+		if ($exists) {
+			$message = (string) $this->l->t('The file already exists.');
+			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
+		}
+
 		try {
-			$exists = $this->view->file_exists($path);
-			if ($exists) {
-				$message = (string) $this->l->t('The file already exists.');
+			$created = $this->view->touch($path);
+			if(!$created) {
+				$message = (string) $this->l->t('Could not save document.');
 				return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 			}
 
-			$filecontents = iconv(mb_detect_encoding($paperHiveObjectString), "UTF-8", $paperHiveObjectString);
-			try {
-				$this->view->file_put_contents($path, $filecontents);
-			} catch (LockedException $e) {
-				$message = (string) $this->l->t('The file is locked.');
+			$fileInfo = $this->view->getFileInfo($path);
+			$inserted = $this->paperHiveMetadata->insertBookID($fileInfo['fileid'], $bookID);
+			if(!$inserted) {
+				$this->view->unlink($path);
+				$message = (string) $this->l->t('Could not save document metadata.');
 				return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
-			} catch (ForbiddenException $e) {
-				return new DataResponse(['message' => $e->getMessage()], Http::STATUS_BAD_REQUEST);
 			}
-			// Clear statcache
-			clearstatcache();
-			return new DataResponse(['path' => $path, 'filename' => $paperHiveObject['title'], 'extension' => $this->paperhive_file_extension, 'discussionCount' => $discussionCount], Http::STATUS_OK);
-		} catch (HintException $e) {
-			$message = (string)$e->getHint();
+		} catch (LockedException $e) {
+			$message = (string) $this->l->t('The file is locked.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
+		} catch (ForbiddenException $e) {
+			return new DataResponse(['message' => $e->getMessage()], Http::STATUS_BAD_REQUEST);
 		} catch (\Exception $e) {
 			$message = (string)$this->l->t('An internal server error occurred.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
+
+		return new DataResponse(['path' => $path, 'filename' => $title, 'extension' => $this->paperhive_file_extension, 'discussionCount' => $discussionCount], Http::STATUS_OK);
 	}
-	
+
 	/**
 	 * Returns all required PaperHive setting
 	 *
 	 * @NoAdminRequired
 	 *
-	 * @param string $bookID
 	 * @return DataResponse
 	 */
 	public function getPaperHiveDetails() {
