@@ -27,17 +27,17 @@ $app->registerRoutes(
 		'routes' => [
 			[
 				'name' => 'PaperHive#getPaperHiveDetails',
-				'url' => '/getpaperhivedetails',
+				'url' => '/paperhivedetails',
 				'verb' => 'GET'
 			],
 			[
 				'name' => 'PaperHive#getPaperHiveBookURL',
-				'url' => '/getpaperhivebookurl',
+				'url' => '/paperhivebookurl',
 				'verb' => 'GET'
 			],
 			[
 				'name' => 'PaperHive#getPaperHiveBookDiscussionCount',
-				'url' => '/getpaperhivebookdiscussioncount',
+				'url' => '/paperhivebookdiscussioncount',
 				'verb' => 'GET'
 			],
 			[

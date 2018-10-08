@@ -103,7 +103,7 @@ Files_PaperHive = {
         var self = this;
         $.ajax({
             type: 'GET',
-            url: OC.generateUrl('/apps/files_paperhive/getpaperhivedetails')
+            url: OC.generateUrl('/apps/files_paperhive/paperhivedetails')
         })
             .done(function (phdata) {
                 var containerString = '<div class="icon-paperhive"></div>' +
@@ -169,11 +169,11 @@ Files_PaperHive = {
 	},
 
 	getPaperHiveBookURL: function (dir, filename, success, failure) {
-		OCA.Files_PaperHive.requestData('/apps/files_paperhive/getpaperhivebookurl', dir, filename, success, failure);
+		OCA.Files_PaperHive.requestData('/apps/files_paperhive/paperhivebookurl', dir, filename, success, failure);
 	},
 
 	getPaperHiveDiscussionCount: function (dir, filename, success, failure) {
-		OCA.Files_PaperHive.requestData('/apps/files_paperhive/getpaperhivebookdiscussioncount', dir, filename, success, failure);
+		OCA.Files_PaperHive.requestData('/apps/files_paperhive/paperhivebookdiscussioncount', dir, filename, success, failure);
 	},
 
     setDiscussionCount: function ($tr) {
