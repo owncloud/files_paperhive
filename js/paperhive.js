@@ -42,18 +42,27 @@ Files_PaperHive = {
      */
     containerOptions: null,
 
+	/**
+	 * Extracts extension from paperhive file
+	 */
+	splitPaperHiveFilename: function (fileName) {
+		var parts = fileName.split('.');
+		var extension = "";
+		var title = "";
+		if (parts.length > 1) {
+			extension = parts.pop();
+			title = parts.join('');
+		}
+
+		return { "title": title, "extension" : extension };
+	},
+
     /**
      * Gets if is paperhive file
      */
     isPaperHive: function (fileName) {
-        var parts = fileName.split('.');
-        var extension = "";
-        if (parts.length > 1) {
-            extension = parts.pop();
-        }
-
-        return (extension === 'paperhive');
-
+		var file = OCA.Files_PaperHive.splitPaperHiveFilename(fileName);
+        return (file.extension === 'paperhive');
     },
 
     /**
@@ -204,10 +213,22 @@ Files_PaperHive = {
             context.dir,
             filename,
             function (paperHiveBookURL) {
-                var w = window.open(paperHiveBookURL, '_blank');
-                if (!w) {
-                    window.location.href = paperHiveBookURL;
-                }
+				var file = OCA.Files_PaperHive.splitPaperHiveFilename(filename);
+				OC.dialogs.confirm(
+					file.title,
+					t('files_paperhive', 'Would you like to open in new window?'),
+					function(confirmation) {
+						if (confirmation) {
+							var w = window.open(paperHiveBookURL, '_blank');
+							if (!w) {
+								window.location.href = paperHiveBookURL;
+							}
+						} else {
+							window.location.href = paperHiveBookURL;
+						}
+					},
+					true
+				);
             },
             function (message) {
                 // Oh dear
