@@ -16,6 +16,7 @@
 	<licence>AGPL</licence>
 	<author>Piotr Mrowczynski</author>
 	<version>1.1</version>
+	<category>office</category>
 	<namespace>Files_PaperHive</namespace>
 	<default_enable/>
 	<documentation>
