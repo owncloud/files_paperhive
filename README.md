@@ -1,15 +1,13 @@
 [![Build Status](https://travis-ci.org/owncloud/files_paperhive.svg?branch=master)](https://travis-ci.org/owncloud/files_paperhive)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/owncloud/files_paperhive/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/owncloud/files_paperhive/?branch=master)
 
-- [x] Support for 9.0
-- [x] Support for 9.1
-- [x] Support for 9.2-10.0
+- [x] Support for 10.0
 
 # Installation
 
-To install, go to ```/apps``` in your ownCloud installation directory and ````git clone https://github.com/owncloud/files_paperhive```. In the apps admin panel enable PaperHive app.
+To install, go to ```/apps``` in your ownCloud installation directory and ```git clone https://github.com/owncloud/files_paperhive```. In the apps admin panel enable PaperHive app.
 
-Remember about the correct permissions for the www folder after cloning the repository, otherwise app might not work correctly! https://doc.owncloud.org/server/9.0/admin_manual/installation/installation_wizard.html#strong-perms-label
+Remember about the correct permissions for the www folder after cloning the repository, otherwise app might not work correctly! `https://doc.owncloud.org/server/10.0/admin_manual/installation/installation_wizard.html#strong-perms-label`
 
 It is highly recommended, to place in each user root directory a default introduction PaperHive document, ```https://paperhive.org/documents/0tsHJq1-yyVZ``` which will help the user orient in the new functionality!
 
@@ -64,5 +62,7 @@ Desired URL or DocID has to be inserted into the field below and confirmed press
 
 Your PaperHive Document is now in your synchronisation folder!
 
+# Used PaperHive API
 
-
+- [Document Items API v1.1.3 (/api/document-items/[ItemID])](https://github.com/paperhive/frontend/blob/v1.1.3/app/services/document-items-api.ts)
+- [Discussion API v1.1.3 (/api/discussions?documentItem=[ItemID])](https://github.com/paperhive/frontend/blob/v1.1.3/app/components/document-item.ts)

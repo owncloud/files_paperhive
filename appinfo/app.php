@@ -19,12 +19,15 @@
  *
  */
 
-// only load text editor if the user is logged in
-if (\OCP\User::isLoggedIn()) {
+$application = new \OCA\Files_PaperHive\AppInfo\Application();
+
+$session = \OC::$server->getUserSession();
+if ($session && $session->getUser()) {
 	$eventDispatcher = \OC::$server->getEventDispatcher();
 	$eventDispatcher->addListener('OCA\Files::loadAdditionalScripts', function() {
-		OCP\Util::addStyle('files_paperhive', 'style');
-		OCP\Util::addscript('files_paperhive', 'paperhive');
+		\OCP\Util::addStyle('files_paperhive', 'style');
+		\OCP\Util::addScript('files_paperhive', 'paperhive');
 	});
+
 }
 

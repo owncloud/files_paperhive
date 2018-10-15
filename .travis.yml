@@ -8,18 +8,11 @@ php:
 
 env:
   global:
-    - CORE_BRANCH=master
+    - CORE_BRANCH=stable10
     - APP=files_paperhive
   matrix:
     - DB=sqlite;
-
-matrix:
-  include:
-    - php: 5.4
-      env: DB=sqlite CORE_BRANCH=stable9
-    - php: 5.4
-      env: DB=sqlite CORE_BRANCH=stable9.1
-  fast_finish: true
+    - DB=mysql;
 
 branches:
   only:
@@ -38,6 +31,9 @@ script:
   # Run phpunit tests
   - cd tests
   - ../../../lib/composer/bin/phpunit --configuration phpunit.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
   # Create coverage report
   - wget https://scrutinizer-ci.com/ocular.phar

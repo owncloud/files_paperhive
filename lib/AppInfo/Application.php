@@ -1,8 +1,8 @@
 <?php
 /**
- * @author Piotr Mrowczynski <piotr.mrowczynski@yahoo.com>
+ * @author Piotr Mrowczynski <piotr@owncloud.com>
  *
- * @copyright Copyright (c) 2017, ownCloud, Inc.
+ * @copyright Copyright (c) 2017, ownCloud GmbH
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -22,10 +22,10 @@
 namespace OCA\Files_PaperHive\AppInfo;
 
 use OC\Files\View;
-use OCA\Files_PaperHive\Controller\PaperHiveController;
+use OCA\Files_PaperHive\PaperHiveMetadata;
 use OCP\AppFramework\App;
+use OCA\Files_PaperHive\Controller\PaperHiveController;
 use OCP\AppFramework\IAppContainer;
-use Punic\Exception;
 
 class Application extends App {
 
@@ -34,7 +34,11 @@ class Application extends App {
 	 */
 	public function __construct(array $urlParams = array()) {
 		parent::__construct('files_paperhive', $urlParams);
+		$this->registerServices();
+		$this->registerHooks();
+	}
 
+	private function registerServices() {
 		$container = $this->getContainer();
 		$server = $container->getServer();
 
@@ -51,8 +55,16 @@ class Application extends App {
 				$server->getL10N($c->getAppName()),
 				new View('/' . $uid . '/files'),
 				$server->getLogger(),
-				\OC::$server->getHTTPClientService()->newClient()
+				\OC::$server->getHTTPClientService()->newClient(),
+				new PaperHiveMetadata(
+					\OC::$server->getDatabaseConnection(),
+					\OC::$server->getLogger()
+				)
 			);
 		});
+	}
+
+	private function registerHooks() {
+		\OCP\Util::connectHook('OC_Filesystem', 'delete', 'OCA\Files_PaperHive\Hooks', 'delete_metadata_hook');
 	}
 }
