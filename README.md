@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/owncloud/files_paperhive.svg?branch=master)](https://travis-ci.org/owncloud/files_paperhive)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/owncloud/files_paperhive/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/owncloud/files_paperhive/?branch=master)
 
 - [x] Support for 10.0
 
