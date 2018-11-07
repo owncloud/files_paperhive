@@ -32,7 +32,7 @@ occ=$(CURDIR)/../../occ
 private_key=$(HOME)/.owncloud/certificates/$(app_name).key
 certificate=$(HOME)/.owncloud/certificates/$(app_name).crt
 sign=$(occ) integrity:sign-app --privateKey="$(private_key)" --certificate="$(certificate)"
-sign_skip_msg="Skipping signing, either no key and certificate found in $(private_key) and $(certificate) or occ can not be found at $(occ)"
+sign_skip_msg="Skipping signing, either no key (.key) and certificate (.crt) found in $(private_key) and $(certificate) or occ can not be found at $(occ)"
 ifneq (,$(wildcard $(private_key)))
 ifneq (,$(wildcard $(certificate)))
 ifneq (,$(wildcard $(occ)))

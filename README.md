@@ -8,14 +8,10 @@ To install, go to ```/apps``` in your ownCloud installation directory and ```git
 
 Remember about the correct permissions for the www folder after cloning the repository, otherwise app might not work correctly! `https://doc.owncloud.org/server/10.0/admin_manual/installation/installation_wizard.html#strong-perms-label`
 
-It is highly recommended, to place in each user root directory a default introduction PaperHive document, ```https://paperhive.org/documents/0tsHJq1-yyVZ``` which will help the user orient in the new functionality!
+It is highly recommended, to place in each user root directory a default introduction PaperHive document, `https://paperhive.org/documents/items/ZYY0r21rJbqr` which will help the user orient in the new functionality!
 
-# About ownCloud, PaperHive and Collabora
-Researchers, students, medicine and engineering specialists are among the core ownCloud users and ownCloud's team is committed to support them in the management and creation of research data and texts. A recent partnership with Collabora was ownCloud's response to users' need to write collaboratively online. It resulted in the release of the Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. 
-To help users read, reference and discuss already published academic texts, ownCloud now starts a cooperation with PaperHive, a web platform for collaborative reading.
-
-<!--- Collabora and ownCloud announced a partnership and released Collabora Online Development Edition, a VM containing LibreOffice Online and ownCloud Server. LibreOffice Online is what the name suggests – an online version of the well known LibreOffice suite of productivity apps: word processor Writer, spreadsheet Calc and presentation tool Impress.
-Researchers, students, medicine and engineering specialists writing together new academic texts using documents in LibreOffice Online, are very frequently referencing research papers.--->
+# About ownCloud and PaperHive
+Researchers, students, medicine and engineering specialists are among the core ownCloud users and ownCloud's team is committed to support them in the management and creation of research data and texts. To help users read, reference and discuss already published academic texts, ownCloud now integrates with PaperHive, a web platform for collaborative reading.
 
 Researchers read 12-25 hours a week depending on their discipline. Yet, understanding research articles and books – some of the most complex documents in the world – is hard and inefficient in isolation. Students and inexperienced researchers waste time trying to decipher these texts alone, senior researchers dig through folders of articles irrelevant for their own work, and all at some point might repeat unknowingly others’ mistakes or include these as a citation in their own paper.
 
@@ -41,7 +37,7 @@ The user can now easily keep up-to-date with new developments around publication
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_2.png)
 
-Transform your lectures, research and engineering work into a process of collaboration with ownCloud, PaperHive and Collabora!
+Transform your lectures, research and engineering work into a process of collaboration with ownCloud and PaperHive!
 
 # Add PaperHive document to ownCloud
 
@@ -51,7 +47,7 @@ Clicking on the "PaperHive Document" button will ask you for a PaperHive URL or 
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_1.png)
 
-DocID is an unique book identifier, which can be found in the URL of the document at `https://paperhive.org`, as shown in the example below, where URL is `https://paperhive.org/documents/0tsHJq1-yyVZ` and unique DocID is `0tsHJq1-yyVZ`.
+DocID is an unique book identifier, which can be found in the URL of the document at `https://paperhive.org`, as shown in the example below, where URL is `https://paperhive.org/documents/items/ZYY0r21rJbqr` and unique DocID is `ZYY0r21rJbqr`.
 
 ![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_2.png)
 
