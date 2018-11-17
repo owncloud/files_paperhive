@@ -1,14 +1,6 @@
 OC.L10N.register(
     "files_paperhive",
     {
-    "This file is too big to be opened. Please download the file instead." : "Diese Datei ist zu groß. Bitte lade die Datei stattdessen herunter.",
-    "Cannot read the file." : "Datei kann nicht gelesen werden",
-    "Invalid file path supplied." : "Ungültiger Dateipfad angegeben.",
-    "The file is locked." : "Die Datei ist gesperrt.",
-    "An internal server error occurred." : "Es ist ein interner Fehler aufgetreten.",
-    "Problem connecting to PaperHive." : "Problem beim Verbinden zu PaperHive",
-    "The file already exists." : "Die Datei existiert bereits.",
-    "Received wrong response from PaperHive." : "Falsche Rückmeldung von PaperHive erhalten.",
     "Show Paper" : "Papier anzeigen",
     "Visit PaperHive at" : "PaperHive besuchen auf",
     "and transform reading into a process of collaboration!" : "und ändern Sie das Lesen in einen Prozess der Zusammenarbeit!",
@@ -17,11 +9,17 @@ OC.L10N.register(
     "Exemplary URL" : "Exemplarische URL",
     "An error occurred!" : "Es ist ein Fehler aufgetreten!",
     "Discuss" : "Diskutieren",
-    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Deine [.paperhive] Datei ist kein gültiges PaperHive-Dokument, bitte lade das Dokument erneut herunter",
+    "Would you like to open in new window?" : "Möchtest du ein neues Fenster öffnen?",
     "PaperHive" : "PaperHive",
-    "URL or DocID" : "URL oder DocID",
     "Saving..." : "Speichervorgang…",
     "Please reload the page, error occured" : "Bitte Seite neuladen, ein Fehler ist aufgetreten",
-    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Dein PaperHive-Dokument mit der ID {id} konnte nicht hinzugefügt werden. Datei existiert bereits oder ein Fehler beim Verbinden mit PaperHive."
+    "No such document found in database." : "Kein solches Dokument in der Datenbank gefunden.",
+    "Problem connecting to PaperHive." : "Problem beim Verbinden zu PaperHive",
+    "Received wrong response from PaperHive." : "Falsche Rückmeldung von PaperHive erhalten.",
+    "The file already exists." : "Die Datei existiert bereits.",
+    "Could not save document." : "Dokument konnte nicht gespeichert werden.",
+    "Could not save document metadata." : "Metadaten des Dokumentes konnten nicht gespeichert werden.",
+    "The file is locked." : "Die Datei ist gesperrt.",
+    "An internal server error occurred." : "Es ist ein interner Fehler aufgetreten."
 },
 "nplurals=2; plural=(n != 1);");
