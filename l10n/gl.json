@@ -1,0 +1,27 @@
+{ "translations": {
+    "Show Paper" : "Amosar Paper",
+    "Visit PaperHive at" : "Visite PaperHive en ",
+    "and transform reading into a process of collaboration!" : "e transforme o proceso de lectura nun proceso calaborativo! ",
+    "Your DocID" : "O seu ID do Documento ",
+    "is the last fragment of PaperHive document URL." : "é o último fragmento do URL de PaperHive.",
+    "Exemplary URL" : "URL de exemplo",
+    "An error occurred!" : "Produciuse un erro!",
+    "Discuss" : "Debate",
+    "Would you like to open in new window?" : "Gustaríalle abrilo nunha nova xanela?",
+    "PaperHive" : "PaperHive",
+    "DocID" : "DocID",
+    "Saving..." : "Gardando...",
+    "Please reload the page, error occured" : "Produciuse un erro, volva cargar a páxina.",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "Non é posíbel engadir o seu documento PaperHive co BookID {id}. {message} ",
+    "No such document found in database." : "Non se atopou tal documento na base de datos. ",
+    "Problem connecting to PaperHive." : "Houbo un problema ao conectar co PaperHive.",
+    "Received wrong response from PaperHive." : "Recibiuse unha resposta incorrecta do PaperHive.",
+    "Document with this BookID cannot be found" : "Non foi posíbel atopar o documento con este BookID",
+    "Problem connecting to PaperHive to fetch discussions." : "Houbo un problema ao conectar co PaperHive para recuperar debates.",
+    "The file already exists." : "O ficheiro xa existe",
+    "Could not save document." : "Non foi posíbel gardar o documento.",
+    "Could not save document metadata." : "Non foi posíbel gardar os metadatos do documento.",
+    "The file is locked." : "O ficheiro está bloqueado.",
+    "An internal server error occurred." : "Produciuse un erro interno no servidor."
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
