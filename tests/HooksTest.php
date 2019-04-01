@@ -38,12 +38,12 @@ use Test\TestCase;
 class HooksTest extends TestCase {
 
 	/**
-	 * @var PaperHiveMetadata | \PHPUnit_Framework_MockObject_MockObject
+	 * @var PaperHiveMetadata | \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private $metadata;
 
 	/**
-	 * @var View | \PHPUnit_Framework_MockObject_MockObject
+	 * @var View | \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private $view;
 
