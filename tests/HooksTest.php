@@ -61,14 +61,14 @@ class HooksTest extends TestCase {
 		$this->hooks = new Hooks($this->view, $this->metadata);
 	}
 
-	public function testData() {
+	public function deleteMetadataProvider() {
 		return array (
 			array([ "fileid" => "abcd" ], true),
 			array(null, false),
 		);
 	}
 	/**
-	 * @dataProvider testData
+	 * @dataProvider deleteMetadataProvider
 	 * @param array $fileInfo
 	 * @param bool $deleteExpected
 	 */
