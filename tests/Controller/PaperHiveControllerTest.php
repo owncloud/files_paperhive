@@ -42,25 +42,25 @@ class PaperHiveControllerTest extends TestCase {
 	/** @var string */
 	protected $appName;
 
-	/** @var \OCP\IRequest | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var \OCP\IRequest | \PHPUnit\Framework\MockObject\MockObject */
 	protected $requestMock;
 
-	/** @var \OCP\Http\Client\IResponse | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var \OCP\Http\Client\IResponse | \PHPUnit\Framework\MockObject\MockObject */
 	protected $responseMock;
 
-	/** @var \OCP\IL10N | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var \OCP\IL10N | \PHPUnit\Framework\MockObject\MockObject */
 	private $l10nMock;
 
-	/** @var \OCP\ILogger | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var \OCP\ILogger | \PHPUnit\Framework\MockObject\MockObject */
 	private $loggerMock;
 
-	/** @var \OC\Files\View | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var \OC\Files\View | \PHPUnit\Framework\MockObject\MockObject */
 	private $viewMock;
 
-	/** @var \OCP\Http\Client\IClient | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var \OCP\Http\Client\IClient | \PHPUnit\Framework\MockObject\MockObject */
 	private $clientMock;
 
-	/** @var PaperHiveMetadata | \PHPUnit_Framework_MockObject_MockObject */
+	/** @var PaperHiveMetadata | \PHPUnit\Framework\MockObject\MockObject */
 	private $metaMock;
 	
 	public function setUp() {

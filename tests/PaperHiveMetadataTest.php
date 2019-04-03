@@ -41,12 +41,12 @@ class PaperHiveMetadataTest extends TestCase {
 	private $metadata;
 
 	/**
-	 * @var IDBConnection | \PHPUnit_Framework_MockObject_MockObject
+	 * @var IDBConnection | \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private $connection;
 
 	/**
-	 * @var ILogger | \PHPUnit_Framework_MockObject_MockObject
+	 * @var ILogger | \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private $logger;
 

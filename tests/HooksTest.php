@@ -38,12 +38,12 @@ use Test\TestCase;
 class HooksTest extends TestCase {
 
 	/**
-	 * @var PaperHiveMetadata | \PHPUnit_Framework_MockObject_MockObject
+	 * @var PaperHiveMetadata | \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private $metadata;
 
 	/**
-	 * @var View | \PHPUnit_Framework_MockObject_MockObject
+	 * @var View | \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private $view;
 
@@ -61,14 +61,14 @@ class HooksTest extends TestCase {
 		$this->hooks = new Hooks($this->view, $this->metadata);
 	}
 
-	public function testData() {
+	public function deleteMetadataProvider() {
 		return array (
 			array([ "fileid" => "abcd" ], true),
 			array(null, false),
 		);
 	}
 	/**
-	 * @dataProvider testData
+	 * @dataProvider deleteMetadataProvider
 	 * @param array $fileInfo
 	 * @param bool $deleteExpected
 	 */
