@@ -18,8 +18,11 @@ OC.L10N.register(
     "No such document found in database." : "Dokument nicht in Datenbank gefunden.",
     "Problem connecting to PaperHive." : "Problem beim Verbinden zu PaperHive",
     "Received wrong response from PaperHive." : "Falsche Rückmeldung von PaperHive erhalten.",
+    "Document with this BookID cannot be found" : "Dokument mit dieser BookID kann nicht gefunden werden",
     "Problem connecting to PaperHive to fetch discussions." : "Problem beim Verbinden zu PaperHive, um Diskussion zu laden.",
     "The file already exists." : "Die Datei existiert bereits.",
+    "Could not save document." : "Dokument konnte nicht gespeichert werden.",
+    "Could not save document metadata." : "Metadaten des Dokuments konnten nicht gespeichert werden.",
     "The file is locked." : "Die Datei ist gesperrt.",
     "An internal server error occurred." : "Ein interner Serverfehler ist aufgetreten."
 },

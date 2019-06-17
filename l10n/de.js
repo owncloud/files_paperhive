@@ -22,7 +22,7 @@ OC.L10N.register(
     "Problem connecting to PaperHive to fetch discussions." : "Problem beim Verbinden zu PaperHive, um Diskussion abzuholen.",
     "The file already exists." : "Die Datei existiert bereits.",
     "Could not save document." : "Dokument konnte nicht gespeichert werden.",
-    "Could not save document metadata." : "Metadaten des Dokumentes konnten nicht gespeichert werden.",
+    "Could not save document metadata." : "Metadaten des Dokuments konnten nicht gespeichert werden.",
     "The file is locked." : "Die Datei ist gesperrt.",
     "An internal server error occurred." : "Es ist ein interner Fehler aufgetreten."
 },
