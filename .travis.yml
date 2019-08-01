@@ -7,7 +7,7 @@ php:
 
 env:
   global:
-    - CORE_BRANCH=stable10
+    - CORE_BRANCH=master
     - APP=files_paperhive
   matrix:
     - DB=sqlite;
