@@ -10,6 +10,8 @@ Remember about the correct permissions for the www folder after cloning the repo
 
 It is highly recommended, to place in each user root directory a default introduction PaperHive document, `https://paperhive.org/documents/items/ZYY0r21rJbqr` which will help the user orient in the new functionality!
 
+Trigger CI
+
 # About ownCloud and PaperHive
 Researchers, students, medicine and engineering specialists are among the core ownCloud users and ownCloud's team is committed to support them in the management and creation of research data and texts. To help users read, reference and discuss already published academic texts, ownCloud now integrates with PaperHive, a web platform for collaborative reading.
 
