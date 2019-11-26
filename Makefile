@@ -1,5 +1,10 @@
 SHELL := /bin/bash
 
+COMPOSER_BIN := $(shell command -v composer 2> /dev/null)
+ifndef COMPOSER_BIN
+    $(error composer is not available on your system, please install composer)
+endif
+
 #
 # Define NPM and check if it is available on the system.
 #
@@ -20,10 +25,9 @@ src_dirs=appinfo css img js l10n lib screenshots
 all_src=$(src_dirs) $(doc_files)
 build_dir=$(CURDIR)/build
 dist_dir=$(build_dir)/dist
-COMPOSER_BIN=$(build_dir)/composer.phar
 
 # dependency folders (leave empty if not required)
-composer_deps=
+composer_deps=vendor
 composer_dev_deps=
 nodejs_deps=
 bower_deps=
@@ -41,40 +45,18 @@ endif
 endif
 endif
 
-#
-# Catch-all rules
-#
-.PHONY: all
-all: $(composer_dev_deps) $(bower_deps)
+# bin file definitions
+PHPUNIT=php -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
+PHPUNITDBG=phpdbg -qrr -d memory_limit=4096M -d zend.enable_gc=0 "$(PWD)/../../lib/composer/bin/phpunit"
+PHP_CS_FIXER=php -d zend.enable_gc=0 vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer
+PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
+PHPSTAN=php -d zend.enable_gc=0 vendor-bin/phpstan/vendor/bin/phpstan
 
-.PHONY: clean
-clean: clean-deps clean-dist clean-build
+.DEFAULT_GOAL := help
 
-#
-# Basic required tools
-#
-$(COMPOSER_BIN):
-	mkdir -p $(build_dir)
-	cd $(build_dir) && curl -sS https://getcomposer.org/installer | php
-
-#
-# PHP dependencies
-#
-$(composer_deps): $(COMPOSER_BIN) composer.json composer.lock
-	php $(COMPOSER_BIN) install --no-dev
-
-$(composer_dev_deps): $(COMPOSER_BIN) composer.json composer.lock
-	php $(COMPOSER_BIN) install --dev
-
-.PHONY: clean-composer-deps
-clean-composer-deps:
-	rm -f $(COMPOSER_BIN)
-	rm -Rf $(composer_deps) $(composer_dev_deps)
-
-.PHONY: update-composer
-update-composer: $(COMPOSER_BIN)
-	rm -f composer.lock
-	php $(COMPOSER_BIN) install --prefer-dist
+# start with displaying help
+help:
+	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//' | sed -e 's/  */ /' | column -t -s :
 
 #
 ## Node dependencies
@@ -114,6 +96,79 @@ clean-dist:
 clean-build:
 	rm -Rf $(build_dir)
 
+.PHONY: clean-composer-deps
+clean-composer-deps:
+	rm -Rf $(composer_deps) $(composer_dev_deps)
+
 .PHONY: clean-deps
 clean-deps: clean-composer-deps
 	rm -Rf $(nodejs_deps) $(bower_deps)
+	rm -Rf vendor-bin/**/vendor vendor-bin/**/composer.lock
+
+.PHONY: clean
+clean: clean-deps clean-dist clean-build
+
+##---------------------
+## Tests
+##---------------------
+
+.PHONY: test-php-unit
+test-php-unit: ## Run php unit tests
+test-php-unit:
+	$(PHPUNIT) --configuration ./phpunit.xml --testsuite unit
+
+.PHONY: test-php-unit-dbg
+test-php-unit-dbg: ## Run php unit tests using phpdbg
+test-php-unit-dbg:
+	$(PHPUNITDBG) --configuration ./phpunit.xml --testsuite unit
+
+.PHONY: test-php-style
+test-php-style: ## Run php-cs-fixer and check owncloud code-style
+test-php-style: vendor-bin/owncloud-codestyle/vendor
+	$(PHP_CS_FIXER) fix -v --diff --diff-format udiff --allow-risky yes --dry-run
+
+.PHONY: test-php-style-fix
+test-php-style-fix: ## Run php-cs-fixer and fix code style issues
+test-php-style-fix: vendor-bin/owncloud-codestyle/vendor
+	$(PHP_CS_FIXER) fix -v --diff --diff-format udiff --allow-risky yes
+
+.PHONY: test-php-phan
+test-php-phan: ## Run phan
+test-php-phan: vendor-bin/phan/vendor
+	$(PHAN) --config-file .phan/config.php --require-config-exists
+
+.PHONY: test-php-phpstan
+test-php-phpstan: ## Run phpstan
+test-php-phpstan: vendor-bin/phpstan/vendor
+	$(PHPSTAN) analyse --memory-limit=4G --configuration=./phpstan.neon --no-progress --level=5 appinfo lib
+
+#
+# Dependency management
+#--------------------------------------
+
+composer.lock: composer.json
+	@echo composer.lock is not up to date.
+
+vendor: composer.lock
+	composer install --no-dev
+
+vendor/bamarni/composer-bin-plugin: composer.lock
+	composer install
+
+vendor-bin/owncloud-codestyle/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/owncloud-codestyle/composer.lock
+	composer bin owncloud-codestyle install --no-progress
+
+vendor-bin/owncloud-codestyle/composer.lock: vendor-bin/owncloud-codestyle/composer.json
+	@echo owncloud-codestyle composer.lock is not up to date.
+
+vendor-bin/phan/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/phan/composer.lock
+	composer bin phan install --no-progress
+
+vendor-bin/phan/composer.lock: vendor-bin/phan/composer.json
+	@echo phan composer.lock is not up to date.
+
+vendor-bin/phpstan/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/phpstan/composer.lock
+	composer bin phpstan install --no-progress
+
+vendor-bin/phpstan/composer.lock: vendor-bin/phpstan/composer.json
+	@echo phpstan composer.lock is not up to date.
