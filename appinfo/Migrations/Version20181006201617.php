@@ -25,7 +25,6 @@ use Doctrine\DBAL\Schema\Schema;
 use OCP\Migration\ISchemaMigration;
 
 class Version20181006201617 implements ISchemaMigration {
-
 	public function changeSchema(Schema $schema, array $options) {
 		$prefix = $options['tablePrefix'];
 		if (!$schema->hasTable("{$prefix}paperhive")) {

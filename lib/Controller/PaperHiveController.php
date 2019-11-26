@@ -136,25 +136,25 @@ class PaperHiveController extends Controller {
 	public function getPaperHiveBookDiscussionCount($dir, $filename) {
 		$bookId = $this->getBookIdforPath($dir, $filename);
 		$paperHiveString = $this->fetchDiscussions($bookId);
-		$paperHiveDiscussions = json_decode($paperHiveString, true);
+		$paperHiveDiscussions = \json_decode($paperHiveString, true);
 		$disscussionCount = -1;
-		if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
+		if (\json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
 			// Silently ignore discussions as this might indicate temporary unavailability
-			$disscussionCount = count($paperHiveDiscussions['discussions']);
+			$disscussionCount = \count($paperHiveDiscussions['discussions']);
 		}
 		return new DataResponse($disscussionCount, Http::STATUS_OK);
 	}
 
-	private function getBookIdforPath($dir, $filename){
+	private function getBookIdforPath($dir, $filename) {
 		if (!empty($filename)) {
-			if($dir == '/') {
+			if ($dir == '/') {
 				$path = $dir . $filename;
 			} else {
 				$path = $dir . '/' . $filename;
 			}
 
 			$fileInfo = $this->view->getFileInfo($path);
-			if($fileInfo && $bookId = $this->paperHiveMetadata->getBookID($fileInfo['fileid'])) {
+			if ($fileInfo && $bookId = $this->paperHiveMetadata->getBookID($fileInfo['fileid'])) {
 				return $bookId;
 			}
 		}
@@ -213,36 +213,36 @@ class PaperHiveController extends Controller {
 			$message = (string)$this->l->t('Problem connecting to PaperHive.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
-		$paperHiveObject = json_decode($paperHiveObjectString, true);
+		$paperHiveObject = \json_decode($paperHiveObjectString, true);
 
 		// Check if correct response has been returned
-		if (json_last_error() != JSON_ERROR_NONE) {
+		if (\json_last_error() != JSON_ERROR_NONE) {
 			$message = (string)$this->l->t('Received wrong response from PaperHive.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
 
 		// Check if document is found
-		if (!(isset($paperHiveObject['metadata']) && isset($paperHiveObject['metadata']['title']))) {
+		if (!(isset($paperHiveObject['metadata'], $paperHiveObject['metadata']['title']))) {
 			$message = (string)$this->l->t('Document with this BookID cannot be found');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
 
 		// Try fetching discussions
 		$paperHiveDiscussionsString = $this->fetchDiscussions($bookID);
-		$paperHiveDiscussions = json_decode($paperHiveDiscussionsString, true);
-		if ($paperHiveDiscussionsString === false || json_last_error() != JSON_ERROR_NONE) {
+		$paperHiveDiscussions = \json_decode($paperHiveDiscussionsString, true);
+		if ($paperHiveDiscussionsString === false || \json_last_error() != JSON_ERROR_NONE) {
 			$message = (string)$this->l->t('Problem connecting to PaperHive to fetch discussions.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
 		$discussionCount = -1;
-		if (json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
-			$discussionCount = count($paperHiveDiscussions['discussions']);
+		if (\json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
+			$discussionCount = \count($paperHiveDiscussions['discussions']);
 		}
 
 		// Save the file
 		$title = $paperHiveObject['metadata']['title'];
 		$filename = $title . $this->paperhive_file_extension;
-		if($dir == '/') {
+		if ($dir == '/') {
 			$path = $dir . $filename;
 		} else {
 			$path = $dir . '/' . $filename;
@@ -256,14 +256,14 @@ class PaperHiveController extends Controller {
 
 		try {
 			$created = $this->view->touch($path);
-			if(!$created) {
+			if (!$created) {
 				$message = (string) $this->l->t('Could not save document.');
 				return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 			}
 
 			$fileInfo = $this->view->getFileInfo($path);
 			$inserted = $this->paperHiveMetadata->insertBookID($fileInfo['fileid'], $bookID);
-			if(!$inserted) {
+			if (!$inserted) {
 				$this->view->unlink($path);
 				$message = (string) $this->l->t('Could not save document metadata.');
 				return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
