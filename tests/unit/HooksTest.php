@@ -62,10 +62,10 @@ class HooksTest extends TestCase {
 	}
 
 	public function deleteMetadataProvider() {
-		return array (
-			array([ "fileid" => "abcd" ], true),
-			array(null, false),
-		);
+		return [
+			[[ "fileid" => "abcd" ], true],
+			[null, false],
+		];
 	}
 	/**
 	 * @dataProvider deleteMetadataProvider

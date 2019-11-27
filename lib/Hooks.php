@@ -98,5 +98,4 @@ class Hooks {
 		}
 		return self::$instance;
 	}
-
 }

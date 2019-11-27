@@ -24,10 +24,8 @@ $application = new \OCA\Files_PaperHive\AppInfo\Application();
 $session = \OC::$server->getUserSession();
 if ($session && $session->getUser()) {
 	$eventDispatcher = \OC::$server->getEventDispatcher();
-	$eventDispatcher->addListener('OCA\Files::loadAdditionalScripts', function() {
+	$eventDispatcher->addListener('OCA\Files::loadAdditionalScripts', function () {
 		\OCP\Util::addStyle('files_paperhive', 'style');
 		\OCP\Util::addScript('files_paperhive', 'paperhive');
 	});
-
 }
-

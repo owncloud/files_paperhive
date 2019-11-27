@@ -89,7 +89,7 @@ class PaperHiveControllerTest extends TestCase {
 			->getMock();
 		
 		$this->l10nMock->expects($this->any())->method('t')->willReturnCallback(
-			function($message) {
+			function ($message) {
 				return $message;
 			}
 		);
@@ -127,8 +127,8 @@ class PaperHiveControllerTest extends TestCase {
 	}
 
 	public function dataTestSave() {
-		return array (
-			array(
+		return [
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				false,
@@ -138,8 +138,8 @@ class PaperHiveControllerTest extends TestCase {
 				'{' . '"discussions" : [ "blabla", "blabla" ]' .'}',
 				200,
 				null
-			),
-			array(
+			],
+			[
 				'/test/path', '
 				Ra5WnkxImoOE',
 				false,
@@ -149,8 +149,8 @@ class PaperHiveControllerTest extends TestCase {
 				'{' . '"discussions" : [ "blabla", "blabla" ]' .'}',
 				200,
 				null
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				true,
@@ -160,8 +160,8 @@ class PaperHiveControllerTest extends TestCase {
 				'{' . '"discussions" : [ "blabla", "blabla" ]' .'}',
 				400,
 				'The file already exists.'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				false,
@@ -171,8 +171,8 @@ class PaperHiveControllerTest extends TestCase {
 				'{' . '"discussions" : [ "blabla", "blabla" ]' .'}',
 				400,
 				'Could not save document.'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				false,
@@ -182,8 +182,8 @@ class PaperHiveControllerTest extends TestCase {
 				'{' . '"discussions" : [ "blabla", "blabla" ]' .'}',
 				400,
 				'Could not save document metadata.'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				null,
@@ -193,8 +193,8 @@ class PaperHiveControllerTest extends TestCase {
 				null,
 				400,
 				'Problem connecting to PaperHive.'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				null,
@@ -204,8 +204,8 @@ class PaperHiveControllerTest extends TestCase {
 				null,
 				400,
 				'Received wrong response from PaperHive.'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				null,
@@ -215,8 +215,8 @@ class PaperHiveControllerTest extends TestCase {
 				null,
 				400,
 				'Document with this BookID cannot be found'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				null,
@@ -226,8 +226,8 @@ class PaperHiveControllerTest extends TestCase {
 				false,
 				400,
 				'Problem connecting to PaperHive to fetch discussions.'
-			),
-			array(
+			],
+			[
 				'/', '
 				Ra5WnkxImoOE',
 				null,
@@ -237,8 +237,8 @@ class PaperHiveControllerTest extends TestCase {
 				'{ ',
 				400,
 				'Problem connecting to PaperHive to fetch discussions.'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -297,7 +297,6 @@ class PaperHiveControllerTest extends TestCase {
 		}
 	}
 
-
 	public function dataGetBook() {
 		return [
 			['/', [ "fileid" => 1 ], 200],
@@ -316,7 +315,7 @@ class PaperHiveControllerTest extends TestCase {
 	public function testGetPaperHiveBook($dir, $fileInfo, $expectedStatus) {
 		$title = "some title";
 
-		if($dir == '/') {
+		if ($dir == '/') {
 			$path = $dir . $title;
 		} else {
 			$path = $dir . '/' . $title;
@@ -331,13 +330,12 @@ class PaperHiveControllerTest extends TestCase {
 		$this->assertSame($status, $expectedStatus);
 	}
 
-
 	public function dataGetDiscussions() {
 		return [
 			[null, '{' . '"discussions" : [ "blabla", "blabla" ]' .'}', 200, 2],
-			[null, '{ ', 200, -1], // silenty ignore
-			[null, '{ }', 200, -1], // silenty ignore
-			[new \Exception, null, 200, -1], // silenty ignore
+			[null, '{ ', 200, -1], // silently ignore
+			[null, '{ }', 200, -1], // silently ignore
+			[new \Exception, null, 200, -1], // silently ignore
 		];
 	}
 
@@ -359,7 +357,8 @@ class PaperHiveControllerTest extends TestCase {
 			$this->clientMock->expects($this->any())
 				->method('get')
 				->willThrowException($clientException);
-		} else {;
+		} else {
+			;
 			$this->responseMock->expects($this->any())
 				->method('getBody')
 				->willReturn($discussions);
