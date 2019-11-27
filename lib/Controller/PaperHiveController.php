@@ -162,7 +162,7 @@ class PaperHiveController extends Controller {
 	}
 
 	/**
-	 * Does the call to PaperHive Discussions API and returns disussions for specific it for specific BookID
+	 * Does the call to PaperHive Discussions API and returns discussions for specific it for specific BookID
 	 *
 	 * @NoAdminRequired
 	 *
@@ -198,7 +198,7 @@ class PaperHiveController extends Controller {
 	}
 
 	/**
-	 * Gets the informations about the book for specific BookID and saves as a file
+	 * Gets the information about the book for a specific BookID and saves as a file
 	 *
 	 * @NoAdminRequired
 	 *

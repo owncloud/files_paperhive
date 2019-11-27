@@ -333,9 +333,9 @@ class PaperHiveControllerTest extends TestCase {
 	public function dataGetDiscussions() {
 		return [
 			[null, '{' . '"discussions" : [ "blabla", "blabla" ]' .'}', 200, 2],
-			[null, '{ ', 200, -1], // silenty ignore
-			[null, '{ }', 200, -1], // silenty ignore
-			[new \Exception, null, 200, -1], // silenty ignore
+			[null, '{ ', 200, -1], // silently ignore
+			[null, '{ }', 200, -1], // silently ignore
+			[new \Exception, null, 200, -1], // silently ignore
 		];
 	}
 
