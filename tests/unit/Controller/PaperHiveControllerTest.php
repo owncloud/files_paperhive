@@ -63,7 +63,7 @@ class PaperHiveControllerTest extends TestCase {
 	/** @var PaperHiveMetadata | \PHPUnit\Framework\MockObject\MockObject */
 	private $metaMock;
 	
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->appName = 'files_paperhive';
 		$this->requestMock = $this->getMockBuilder(IRequest::class)
