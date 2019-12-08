@@ -52,7 +52,7 @@ class HooksTest extends TestCase {
 	 */
 	private $hooks;
 
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->metadata = $this->createMock(PaperHiveMetadata::class);

@@ -50,7 +50,7 @@ class PaperHiveMetadataTest extends TestCase {
 	 */
 	private $logger;
 
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->connection = $this->createMock(IDBConnection::class);
