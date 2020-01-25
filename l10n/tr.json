@@ -1,0 +1,27 @@
+{ "translations": {
+    "Show Paper" : "Belgeyi Göster",
+    "Visit PaperHive at" : "PaperHive bağlantısı",
+    "and transform reading into a process of collaboration!" : "ve okumayı bir işbirliği sürecine dönüştürün!",
+    "Your DocID" : "DocID kimliği",
+    "is the last fragment of PaperHive document URL." : "PaperHive belge bağlantısının son parçasıdır",
+    "Exemplary URL" : "Açıklayıcı bağlantı",
+    "An error occurred!" : "Bır hata oluştu!",
+    "Discuss" : "Tartış",
+    "Would you like to open in new window?" : "Yeni pencerede açmak ister misiniz?",
+    "PaperHive" : "PaperHive",
+    "DocID" : "DocID",
+    "Saving..." : "Kaydediliyor...",
+    "Please reload the page, error occured" : "Lütfen sayfayı tekrar yükleyin, hata oluştu",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "BookID ile PaperHive belgesi eklenemedi {id}. {message}",
+    "No such document found in database." : "Veritabanında böyle bir belge bulunamadı.",
+    "Problem connecting to PaperHive." : "PaperHive ile bağlantıda problem.",
+    "Received wrong response from PaperHive." : "PaperHive'dan yanlış cevap alındı.",
+    "Document with this BookID cannot be found" : "BookID belirtilen belge bulunamadı",
+    "Problem connecting to PaperHive to fetch discussions." : "PaperHive tartışmaları yüklerken bağlantı hatası alındı",
+    "The file already exists." : "Dosya zaten var.",
+    "Could not save document." : "Belge kaydedilemedi",
+    "Could not save document metadata." : "Belge üstverileri kaydedilemedi.",
+    "The file is locked." : "Dosya kilitli.",
+    "An internal server error occurred." : "Bir iç sunucu hatası oluştu."
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}
