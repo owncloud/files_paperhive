@@ -1,12 +1,4 @@
 { "translations": {
-    "This file is too big to be opened. Please download the file instead." : "Този файл е твърде голям, за да се отвори. Моля, изтеглете файла.",
-    "Cannot read the file." : "файлът неможе да бъде прочетен.",
-    "Invalid file path supplied." : "Предоставен е невалиден път до файл.",
-    "The file is locked." : "Файлът е заключен.",
-    "An internal server error occurred." : "Възникна вътрешна грешка на сървъра.",
-    "Problem connecting to PaperHive." : "Проблем при свързването с PaperHive.",
-    "The file already exists." : "Файлът вече съществува.",
-    "Received wrong response from PaperHive." : "Получи се грешен отговор от PaperHive.",
     "Show Paper" : "Показване на документа",
     "Visit PaperHive at" : "Посетете PaperHive на",
     "and transform reading into a process of collaboration!" : "и трансформирайте четенето в процес на сътрудничество!",
@@ -15,11 +7,21 @@
     "Exemplary URL" : "Примерен URL",
     "An error occurred!" : "Възникна грешка!",
     "Discuss" : "Дискусиране",
-    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "Вашият [.paperhive] файл не е валиден PaperHive документ, моля изтеглете го пак",
+    "Would you like to open in new window?" : "Искате ли да се отвори в нов прозорец?",
     "PaperHive" : "PaperHive",
-    "URL or DocID" : "URL или DocID",
+    "DocID" : "DocID",
     "Saving..." : "Запазване...",
     "Please reload the page, error occured" : "Моля, презаредете, настъпи грешка",
-    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Не може да бъде добавен PaperHive документ с ID {id}. Файлът не съществува или има грешка при свързването с PaperHive"
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "Не можете да добавите вашия PaperHive документ с BookID {id}. {message}",
+    "No such document found in database." : "В базата данни няма такъв документ.",
+    "Problem connecting to PaperHive." : "Проблем при свързването с PaperHive.",
+    "Received wrong response from PaperHive." : "Получи се грешен отговор от PaperHive.",
+    "Document with this BookID cannot be found" : "Документ с този BookID не може да бъде намерен",
+    "Problem connecting to PaperHive to fetch discussions." : "Проблем със свързването на PaperHive за получаване на дискусии.",
+    "The file already exists." : "Файлът вече съществува.",
+    "Could not save document." : "Документът не можа да бъде запазен.",
+    "Could not save document metadata." : "Метаданните на документа не можаха да се запазят.",
+    "The file is locked." : "Файлът е заключен.",
+    "An internal server error occurred." : "Възникна вътрешна грешка на сървъра."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
