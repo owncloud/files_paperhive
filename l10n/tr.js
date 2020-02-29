@@ -18,7 +18,7 @@ OC.L10N.register(
     "No such document found in database." : "Veritabanında böyle bir belge bulunamadı.",
     "Problem connecting to PaperHive." : "PaperHive ile bağlantıda problem.",
     "Received wrong response from PaperHive." : "PaperHive'dan yanlış cevap alındı.",
-    "Document with this BookID cannot be found" : "BookID belirtilen belge bulunamadı",
+    "Document with this BookID cannot be found" : "BookID ile belirtilen belge bulunamadı",
     "Problem connecting to PaperHive to fetch discussions." : "PaperHive tartışmaları yüklerken bağlantı hatası alındı",
     "The file already exists." : "Dosya zaten var.",
     "Could not save document." : "Belge kaydedilemedi",
