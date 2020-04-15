@@ -56,8 +56,8 @@ class PaperHiveMetadata {
 	}
 
 	/**
-	 * @param $fileId
-	 * @param $docId
+	 * @param mixed $fileId
+	 * @param mixed $docId
 	 * @return bool
 	 */
 	public function insertBookID($fileId, $docId) {
@@ -79,7 +79,7 @@ class PaperHiveMetadata {
 	}
 
 	/**
-	 * @param $fileId
+	 * @param mixed $fileId
 	 * @return string|null
 	 */
 	public function getBookID($fileId) {
@@ -98,7 +98,7 @@ class PaperHiveMetadata {
 	}
 
 	/**
-	 * @param $fileId
+	 * @param mixed $fileId
 	 * @return bool
 	 */
 	public function deleteBookID($fileId) {

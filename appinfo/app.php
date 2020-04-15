@@ -22,7 +22,7 @@
 $application = new \OCA\Files_PaperHive\AppInfo\Application();
 
 $session = \OC::$server->getUserSession();
-if ($session && $session->getUser()) {
+if ($session !== null && $session->getUser()) {
 	$eventDispatcher = \OC::$server->getEventDispatcher();
 	$eventDispatcher->addListener('OCA\Files::loadAdditionalScripts', function () {
 		\OCP\Util::addStyle('files_paperhive', 'style');
