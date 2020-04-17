@@ -58,12 +58,16 @@ class Hooks {
 
 	/**
 	 * Hook to remove metadata from file before deleting
+	 *
 	 * @param array $params
+	 *
+	 * @throws \Exception
 	 */
-	public static function delete_metadata_hook($params) {
+	public function delete_metadata_hook($params) {
 		$path = $params[\OC\Files\Filesystem::signal_param_path];
 		if ($path<>'') {
-			$hook = self::createForStaticLegacyCode();
+			/** @phan-suppress-next-line PhanDeprecatedFunction */
+			$hook = $this->createForStaticLegacyCode();
 			$hook->deleteBookMetadata($path);
 		}
 	}
@@ -74,8 +78,9 @@ class Hooks {
 	private static $instance;
 
 	/**
-	 * @deprecated use DI
 	 * @return Hooks
+	 * @throws \Exception
+	 * @deprecated use DI
 	 */
 	public static function createForStaticLegacyCode() {
 		if (!self::$instance) {

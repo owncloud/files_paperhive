@@ -121,6 +121,7 @@ class PaperHiveController extends Controller {
 			$message = (string)$this->l->t('No such document found in database.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
+		/** @phan-suppress-next-line PhanTypeMismatchArgument */
 		return new DataResponse($this->paperhive_base_url . $this->paperhive_base_document_url . $bookId, Http::STATUS_OK);
 	}
 
@@ -142,6 +143,7 @@ class PaperHiveController extends Controller {
 			// Silently ignore discussions as this might indicate temporary unavailability
 			$disscussionCount = \count($paperHiveDiscussions['discussions']);
 		}
+		/** @phan-suppress-next-line PhanTypeMismatchArgument */
 		return new DataResponse($disscussionCount, Http::STATUS_OK);
 	}
 
@@ -167,7 +169,7 @@ class PaperHiveController extends Controller {
 	 * @NoAdminRequired
 	 *
 	 * @param string $bookID
-	 * @return string
+	 * @return string|boolean
 	 */
 	private function fetchDiscussions($bookID) {
 		$urlDiscussions = $this->paperhive_base_url . $this->paperhive_api_discussions . $bookID;
@@ -185,7 +187,7 @@ class PaperHiveController extends Controller {
 	 * @NoAdminRequired
 	 *
 	 * @param string $bookID
-	 * @return string/boolean
+	 * @return string|boolean
 	 */
 	private function fetchDocument($bookID) {
 		$urlDocument = $this->paperhive_base_url . $this->paperhive_api_documents . $bookID;
