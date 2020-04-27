@@ -11,6 +11,7 @@ vendor-bin/**/composer.lock
 .DS_Store
 
 # Tests - auto-generated files
+.phpunit.result.cache
 /tests/acceptance/output*
 /tests/output
 

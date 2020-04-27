@@ -48,7 +48,7 @@ class Hooks {
 	/**
 	 * Delete book metadata from file
 	 *
-	 * @param $path
+	 * @param string $path
 	 */
 	public function deleteBookMetadata($path) {
 		if ($fileInfo = $this->view->getFileInfo($path)) {
@@ -83,7 +83,7 @@ class Hooks {
 	 * @deprecated use DI
 	 */
 	public static function createForStaticLegacyCode() {
-		if (!self::$instance) {
+		if (!isset(self::$instance)) {
 			$user = \OC::$server->getUserSession()->getUser();
 			if ($user) {
 				$uid = $user->getUID();

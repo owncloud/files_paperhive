@@ -375,7 +375,7 @@ class PaperHiveControllerTest extends TestCase {
 		$status = $result->getStatus();
 		$data = $result->getData();
 		$this->assertSame($status, $expectedStatus);
-		$this->assertSame($data, $expectedData);
+		$this->assertSame($data, [$expectedData]);
 	}
 
 	public function dataExceptionWithException() {

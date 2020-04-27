@@ -121,8 +121,7 @@ class PaperHiveController extends Controller {
 			$message = (string)$this->l->t('No such document found in database.');
 			return new DataResponse(['message' => $message], Http::STATUS_BAD_REQUEST);
 		}
-		/** @phan-suppress-next-line PhanTypeMismatchArgument */
-		return new DataResponse($this->paperhive_base_url . $this->paperhive_base_document_url . $bookId, Http::STATUS_OK);
+		return new DataResponse([$this->paperhive_base_url . $this->paperhive_base_document_url . $bookId], Http::STATUS_OK);
 	}
 
 	/**
@@ -138,13 +137,12 @@ class PaperHiveController extends Controller {
 		$bookId = $this->getBookIdforPath($dir, $filename);
 		$paperHiveString = $this->fetchDiscussions($bookId);
 		$paperHiveDiscussions = \json_decode($paperHiveString, true);
-		$disscussionCount = -1;
+		$discussionCount = -1;
 		if (\json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
 			// Silently ignore discussions as this might indicate temporary unavailability
-			$disscussionCount = \count($paperHiveDiscussions['discussions']);
+			$discussionCount = \count($paperHiveDiscussions['discussions']);
 		}
-		/** @phan-suppress-next-line PhanTypeMismatchArgument */
-		return new DataResponse($disscussionCount, Http::STATUS_OK);
+		return new DataResponse([$discussionCount], Http::STATUS_OK);
 	}
 
 	private function getBookIdforPath($dir, $filename) {
