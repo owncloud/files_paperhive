@@ -137,12 +137,12 @@ class PaperHiveController extends Controller {
 		$bookId = $this->getBookIdforPath($dir, $filename);
 		$paperHiveString = $this->fetchDiscussions($bookId);
 		$paperHiveDiscussions = \json_decode($paperHiveString, true);
-		$disscussionCount = -1;
+		$discussionCount = -1;
 		if (\json_last_error() === JSON_ERROR_NONE && isset($paperHiveDiscussions['discussions'])) {
 			// Silently ignore discussions as this might indicate temporary unavailability
-			$disscussionCount = \count($paperHiveDiscussions['discussions']);
+			$discussionCount = \count($paperHiveDiscussions['discussions']);
 		}
-		return new DataResponse([$disscussionCount], Http::STATUS_OK);
+		return new DataResponse([$discussionCount], Http::STATUS_OK);
 	}
 
 	private function getBookIdforPath($dir, $filename) {
