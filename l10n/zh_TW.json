@@ -1,6 +1,7 @@
 { "translations": {
     "Show Paper" : "顯示紙",
     "Visit PaperHive at" : "前往PaperHive，網址為",
+    "and transform reading into a process of collaboration!" : "並將閱讀變成處理的過程！",
     "Your DocID" : "您的DocID",
     "is the last fragment of PaperHive document URL." : "是PaperHive文檔超連結的最後一個片段。",
     "Exemplary URL" : "示範超連結",
@@ -13,6 +14,8 @@
     "Please reload the page, error occured" : "請重新加載頁面，發生錯誤",
     "Cannot add your PaperHive document with BookID {id}. {message}" : "無法添加BookID為{id}與PaperHive文檔。{訊息}",
     "No such document found in database." : "資料庫找不到這樣的文件",
+    "Problem connecting to PaperHive." : "連接到PaperHive時出現問題。",
+    "Received wrong response from PaperHive." : "收到來自PaperHive的錯誤回复。",
     "Document with this BookID cannot be found" : "找不到具有與BookID的文檔",
     "Problem connecting to PaperHive to fetch discussions." : "連接到PaperHive以獲取討論時出現問題。",
     "The file already exists." : "此檔案已存在",
