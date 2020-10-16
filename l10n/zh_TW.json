@@ -12,7 +12,7 @@
     "DocID" : "文件ID",
     "Saving..." : "儲存中...",
     "Please reload the page, error occured" : "請重新加載頁面，發生錯誤",
-    "Cannot add your PaperHive document with BookID {id}. {message}" : "無法添加BookID為{id}與PaperHive文檔。{訊息}",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "無法添加BookID為{id}與PaperHive文檔。{message}",
     "No such document found in database." : "資料庫找不到這樣的文件",
     "Problem connecting to PaperHive." : "連接到PaperHive時出現問題。",
     "Received wrong response from PaperHive." : "收到來自PaperHive的錯誤回复。",
