@@ -89,9 +89,11 @@ class PaperHiveMetadata {
 			->where($qb->expr()->eq('fileid', $qb->createNamedParameter($fileId)))
 			->execute();
 
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		while ($row = $cursor->fetch()) {
 			return $row['bookid'];
 		}
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		$cursor->closeCursor();
 
 		return null;
