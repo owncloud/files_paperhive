@@ -101,7 +101,8 @@ class PaperHiveControllerTest extends TestCase {
 			$this->viewMock,
 			$this->loggerMock,
 			$this->clientMock,
-			$this->metaMock);
+			$this->metaMock
+		);
 	}
 
 	/**

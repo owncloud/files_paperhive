@@ -91,13 +91,15 @@ class PaperHiveController extends Controller {
 	 * @param IClient $client
 	 * @param PaperHiveMetadata $paperHiveMetadata
 	 */
-	public function __construct($AppName,
-								IRequest $request,
-								IL10N $l10n,
-								View $view,
-								ILogger $logger,
-								IClient $client,
-								PaperHiveMetadata $paperHiveMetadata) {
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		IL10N $l10n,
+		View $view,
+		ILogger $logger,
+		IClient $client,
+		PaperHiveMetadata $paperHiveMetadata
+	) {
 		parent::__construct($AppName, $request);
 		$this->l = $l10n;
 		$this->view = $view;
