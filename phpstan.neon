@@ -2,8 +2,14 @@ parameters:
   inferPrivatePropertyTypeFromConstructor: true
   bootstrapFiles:
     - %currentWorkingDirectory%/../../lib/base.php
-  excludes_analyse:
+  excludePaths:
     - %currentWorkingDirectory%/appinfo/Migrations/*.php
     - %currentWorkingDirectory%/appinfo/routes.php
   ignoreErrors:
+    -
+      message: '#Property OCA\\Files_PaperHive\\Controller\\PaperHiveController::\$logger is never read, only written.#'
+      path: lib/Controller/PaperHiveController.php
+    -
+      message: '#Static property OCA\\Files_PaperHive\\Hooks::\$instance \(OCA\\Files_PaperHive\\Hooks\) in isset\(\) is not nullable#'
+      path: lib/Hooks.php
 
