@@ -1,0 +1,28 @@
+OC.L10N.register(
+    "files_paperhive",
+    {
+    "Show Paper" : "Visa papper",
+    "Visit PaperHive at" : "Besök PaperHive på",
+    "Your DocID" : "Ditt DocID",
+    "is the last fragment of PaperHive document URL." : "är det sista fragmentet av PaperHive dokumentets URL",
+    "Exemplary URL" : "Exempel URL",
+    "An error occurred!" : "Ett fel uppstod!",
+    "Discuss" : "Diskutera",
+    "Would you like to open in new window?" : "Vill du öppna det i ett nytt fönster?",
+    "PaperHive" : "PaperHive",
+    "DocID" : "DocID",
+    "Saving..." : "Sparar...",
+    "Please reload the page, error occured" : "Ladda om sidan, fel har inträffat",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "Kan inte lägga till ditt PaperHive dokument med BokID {id}. {meddelande}",
+    "No such document found in database." : "Inget sådant dokument hittades i databasen.",
+    "Problem connecting to PaperHive." : "Problem med att ansluta till PaperHive.",
+    "Received wrong response from PaperHive." : "Fick gel svar ifrån PaperHive.",
+    "Document with this BookID cannot be found" : "Dokument med detta BokID kan inte hittas",
+    "Problem connecting to PaperHive to fetch discussions." : "Problem med att ansluta till PaperHive för att hämta diskussioner.",
+    "The file already exists." : "Filen existerar redan.",
+    "Could not save document." : "Kunde inte spara dokumentet.",
+    "Could not save document metadata." : "Kunde inte spara dokumentets metadata.",
+    "The file is locked." : "Denna filen är låst.",
+    "An internal server error occurred." : "Ett server-fel har inträffat."
+},
+"nplurals=2; plural=(n != 1);");
