@@ -23,5 +23,5 @@
     "Could not save document metadata." : "Impossible de sauvegarder les métadonnées.",
     "The file is locked." : "Le fichier est verrouillé.",
     "An internal server error occurred." : "Une erreur interne au serveur est survenue."
-},"pluralForm" :"nplurals=3; plural=(n==0 || n==1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
