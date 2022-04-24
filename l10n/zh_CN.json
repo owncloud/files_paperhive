@@ -1,0 +1,27 @@
+{ "translations": {
+    "Show Paper" : "显示论文",
+    "Visit PaperHive at" : "访问 PaperHive",
+    "and transform reading into a process of collaboration!" : "并将阅读转化为协作的过程！",
+    "Your DocID" : "你的 DocID",
+    "is the last fragment of PaperHive document URL." : "是 PaperHive 文档 URL 的最后一个片段。",
+    "Exemplary URL" : "示例网址",
+    "An error occurred!" : "发生错误！",
+    "Discuss" : "讨论",
+    "Would you like to open in new window?" : "是否要在新窗口中打开？",
+    "PaperHive" : "PaperHive",
+    "DocID" : "DocID",
+    "Saving..." : "保存中...",
+    "Please reload the page, error occured" : "发生错误，请刷新页面",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "无法使用 BookID {id} 添加您的 PaperHive 文档。 {信息}",
+    "No such document found in database." : "未在数据库找到该文档。",
+    "Problem connecting to PaperHive." : "连接到 PaperHive 遇到问题。",
+    "Received wrong response from PaperHive." : "收到 PaperHive 的错误回复。",
+    "Document with this BookID cannot be found" : "找不到具有此 BookID 的文档",
+    "Problem connecting to PaperHive to fetch discussions." : "连接到 PaperHive 以获取讨论时出现问题。",
+    "The file already exists." : "该文件已存在。",
+    "Could not save document." : "无法保存文档。",
+    "Could not save document metadata." : "无法保存文档元数据。",
+    "The file is locked." : "文件已被锁定",
+    "An internal server error occurred." : "内部服务器错误"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
