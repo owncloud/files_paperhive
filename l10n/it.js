@@ -26,4 +26,4 @@ OC.L10N.register(
     "The file is locked." : "il file è bloccato.",
     "An internal server error occurred." : "Si è verificato un errore interno."
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
