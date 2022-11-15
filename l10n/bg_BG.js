@@ -21,7 +21,7 @@ OC.L10N.register(
     "Document with this BookID cannot be found" : "Документ с този BookID не може да бъде намерен",
     "Problem connecting to PaperHive to fetch discussions." : "Проблем при свързването с PaperHive за извличането на дискусии.",
     "The file already exists." : "Файлът вече съществува.",
-    "Could not save document." : "Документът не можа да бъде запазен.",
+    "Could not save document." : "Запазването на документа е неуспешно.",
     "Could not save document metadata." : "Метаданните на документа не можаха да се запазят.",
     "The file is locked." : "Файлът е заключен.",
     "An internal server error occurred." : "Възникна вътрешна грешка на сървъра."
