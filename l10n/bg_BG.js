@@ -1,7 +1,7 @@
 OC.L10N.register(
     "files_paperhive",
     {
-    "Show Paper" : "Показване на документа",
+    "Show Paper" : "Показване на Paper",
     "Visit PaperHive at" : "Посетете PaperHive на",
     "and transform reading into a process of collaboration!" : "и превърнете четенето в процес на сътрудничество!",
     "Your DocID" : "Вашият DocID",
