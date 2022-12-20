@@ -2,7 +2,7 @@
 host = https://www.transifex.com
 lang_map = ja_JP: ja
 
-[owncloud.files_paperhive]
+[o:owncloud-org:p:owncloud:r:files_paperhive]
 file_filter = <lang>/files_paperhive.po
 source_file = templates/files_paperhive.pot
 source_lang = en
