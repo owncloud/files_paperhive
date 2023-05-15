@@ -9,7 +9,7 @@
 
 To install, go to ```/apps``` in your ownCloud installation directory and ```git clone https://github.com/owncloud/files_paperhive```. In the apps admin panel enable PaperHive app.
 
-Remember about the correct permissions for the www folder after cloning the repository, otherwise app might not work correctly! `https://doc.owncloud.com/server/next/admin_manual/installation/installation_wizard.html`
+Remember about the correct permissions for the www folder after cloning the repository, otherwise app might not work correctly! `https://doc.owncloud.com/server/next/admin_manual/installation/installation_wizard.html#strong-perms-label`
 
 It is highly recommended, to place in each user root directory a default introduction PaperHive document, `https://paperhive.org/documents/items/ZYY0r21rJbqr` which will help the user orient in the new functionality!
 
