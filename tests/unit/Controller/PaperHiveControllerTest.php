@@ -35,7 +35,6 @@ use OCP\Lock\LockedException;
 use Test\TestCase;
 
 class PaperHiveControllerTest extends TestCase {
-
 	/** @var PaperHiveController */
 	protected $controller;
 

@@ -9,7 +9,9 @@ parameters:
     -
       message: '#Property OCA\\Files_PaperHive\\Controller\\PaperHiveController::\$logger is never read, only written.#'
       path: lib/Controller/PaperHiveController.php
+      count: 1
     -
       message: '#Static property OCA\\Files_PaperHive\\Hooks::\$instance \(OCA\\Files_PaperHive\\Hooks\) in isset\(\) is not nullable#'
       path: lib/Hooks.php
+      count: 1
 

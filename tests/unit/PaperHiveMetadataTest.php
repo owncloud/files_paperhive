@@ -34,7 +34,6 @@ use Test\TestCase;
  * @package OCA\Files_PaperHive\Tests
  */
 class PaperHiveMetadataTest extends TestCase {
-
 	/**
 	 * @var PaperHiveMetadata
 	 */

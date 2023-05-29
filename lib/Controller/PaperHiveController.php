@@ -34,7 +34,6 @@ use OCP\IRequest;
 use OCP\Lock\LockedException;
 
 class PaperHiveController extends Controller {
-
 	/** @var IL10N */
 	private $l;
 

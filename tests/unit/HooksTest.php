@@ -36,7 +36,6 @@ use Test\TestCase;
  * @package OCA\Files_PaperHive\Tests
  */
 class HooksTest extends TestCase {
-
 	/**
 	 * @var PaperHiveMetadata | \PHPUnit\Framework\MockObject\MockObject
 	 */

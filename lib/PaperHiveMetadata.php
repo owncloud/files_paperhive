@@ -29,7 +29,6 @@ use OCP\IDBConnection;
 use OCP\ILogger;
 
 class PaperHiveMetadata {
-
 	/**
 	 * Database connection
 	 *
