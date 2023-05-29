@@ -27,7 +27,6 @@ namespace OCA\Files_PaperHive;
 use OC\Files\View;
 
 class Hooks {
-
 	/**
 	 * @var View
 	 */
