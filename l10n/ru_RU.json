@@ -1,0 +1,27 @@
+{ "translations": {
+    "Show Paper" : "Показать бумагу",
+    "Visit PaperHive at" : "Посетите PaperHive по адресу",
+    "and transform reading into a process of collaboration!" : "и превратите чтение в процесс сотрудничества!",
+    "Your DocID" : "Ваш код документа",
+    "is the last fragment of PaperHive document URL." : "это последний фрагмент адреса документа в PaperHive.",
+    "Exemplary URL" : "Образцовый адрес",
+    "An error occurred!" : "Произошла ошибка!",
+    "Discuss" : "Обсуждение",
+    "Would you like to open in new window?" : "Хотите открыть это в новом окне?",
+    "PaperHive" : "PaperHive",
+    "DocID" : "Код документа",
+    "Saving..." : "Сохранение",
+    "Please reload the page, error occured" : "Пожалуйста перезагрузите страницу, произошла ошибка",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "Не удалось добавить ваш документ PaperHive с кодом книги {id}. {message}",
+    "No such document found in database." : "Такой документ не найден в базе данных.",
+    "Problem connecting to PaperHive." : "Проблема с подключением к PaperHive.",
+    "Received wrong response from PaperHive." : "Получен неправильный ответ от PaperHive.",
+    "Document with this BookID cannot be found" : "Не удалось найти документ с данным кодом кники",
+    "Problem connecting to PaperHive to fetch discussions." : "Проблема при подключении к PaperHive для загрузки обсуждений.",
+    "The file already exists." : "Файл уже существует.",
+    "Could not save document." : "Не удалось сохранить документ.",
+    "Could not save document metadata." : "Не удалось сохранить метаданные документа.",
+    "The file is locked." : "Файл заблокирован.",
+    "An internal server error occurred." : "Произошла внутренняя ошибка сервера."
+},"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
+}
