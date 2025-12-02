@@ -1,0 +1,27 @@
+OC.L10N.register(
+    "files_paperhive",
+    {
+    "Show Paper" : "Show Paper",
+    "Visit PaperHive at" : "Visit PaperHive at",
+    "and transform reading into a process of collaboration!" : "and transform reading into a process of collaboration!",
+    "Your DocID" : "Your DocID",
+    "is the last fragment of PaperHive document URL." : "is the last fragment of PaperHive document URL.",
+    "Exemplary URL" : "Exemplary URL",
+    "Discuss" : "Discuss",
+    "Would you like to open in new window?" : "Would you like to open in new window?",
+    "PaperHive" : "PaperHive",
+    "DocID" : "DocID",
+    "Saving..." : "Saving...",
+    "Please reload the page, error occured" : "Please reload the page, error occured",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "Cannot add your PaperHive document with BookID {id}. {message}",
+    "No such document found in database." : "No such document found in database.",
+    "Problem connecting to PaperHive." : "Problem connecting to PaperHive.",
+    "Received wrong response from PaperHive." : "Received wrong response from PaperHive.",
+    "Document with this BookID cannot be found" : "Document with this BookID cannot be found",
+    "Problem connecting to PaperHive to fetch discussions." : "Problem connecting to PaperHive to fetch discussions.",
+    "The file already exists." : "The file already exists.",
+    "Could not save document." : "Could not save document.",
+    "Could not save document metadata." : "Could not save document metadata.",
+    "The file is locked." : "The file is locked."
+},
+"nplurals=2; plural=(n != 1);");

@@ -1,0 +1,24 @@
+{ "translations": {
+    "Show Paper" : "顯示紙",
+    "Visit PaperHive at" : "访问 PaperHive",
+    "and transform reading into a process of collaboration!" : "并将阅读转化为协作的过程！",
+    "Your DocID" : "您的DocID",
+    "is the last fragment of PaperHive document URL." : "是 PaperHive 文档 URL 的最后一个片段。",
+    "Exemplary URL" : "示例网址",
+    "Discuss" : "討論",
+    "Would you like to open in new window?" : "您要在新窗口中開啟嗎？",
+    "PaperHive" : "PaperHive",
+    "DocID" : "文件ID",
+    "Saving..." : "保存中...",
+    "Please reload the page, error occured" : "請重新加載頁面，發生錯誤",
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "无法使用 BookID {id} 添加您的 PaperHive 文档。 {信息}",
+    "No such document found in database." : "資料庫找不到這樣的文件",
+    "Problem connecting to PaperHive." : "連接到PaperHive時出現問題。",
+    "Received wrong response from PaperHive." : "收到 PaperHive 的错误回复。",
+    "Document with this BookID cannot be found" : "找不到具有此 BookID 的文档",
+    "Problem connecting to PaperHive to fetch discussions." : "连接到 PaperHive 以获取讨论时出现问题。",
+    "The file already exists." : "此檔案已存在",
+    "Could not save document." : "無法儲存檔案",
+    "Could not save document metadata." : "無法儲存檔案的元資料"
+},"pluralForm" :"nplurals=1; plural=0;"
+}

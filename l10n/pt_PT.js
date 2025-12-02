@@ -1,14 +1,6 @@
 OC.L10N.register(
     "files_paperhive",
     {
-    "This file is too big to be opened. Please download the file instead." : "Este ficheiro é muito grande para ser aberto. Em vez disso, por favor, transfira o ficheiro.",
-    "Cannot read the file." : "Não é possível ler o ficheiro.",
-    "Invalid file path supplied." : "O caminho de ficheiro indicado é inválido.",
-    "The file is locked." : "O ficheiro está bloqueado.",
-    "An internal server error occurred." : "Ocorreu um erro interno no servidor.",
-    "Problem connecting to PaperHive." : "Problema ao ligar com PaperHive.",
-    "The file already exists." : "O ficheiro já existe.",
-    "Received wrong response from PaperHive." : "Recebida resposta errada de PaperHive.",
     "Show Paper" : "Mostrar Papel",
     "Visit PaperHive at" : "Visitar PaperHive em",
     "and transform reading into a process of collaboration!" : "e transformar a leitura em um processo de colaboração!",
@@ -17,11 +9,21 @@ OC.L10N.register(
     "Exemplary URL" : "URL Exemplar",
     "An error occurred!" : "Ocorreu um erro!",
     "Discuss" : "Discutir",
-    "Your [.paperhive] file is not a valid PaperHive document, please redownload document" : "O seu ficheiro [.paperhive] não é um documento PaperHive, por favor, volte a transferir o documento",
+    "Would you like to open in new window?" : "Gostaria de abrir em nova janela?",
     "PaperHive" : "PaperHive",
-    "URL or DocID" : "URL ou DocID",
+    "DocID" : "DocID",
     "Saving..." : "A guardar...",
     "Please reload the page, error occured" : "Por favor, recarregue a página, ocorreu um erro",
-    "Cannot add your PaperHive document of ID {id}. File exists or error connecting to PaperHive" : "Falha ao adicionar o seu documento PaperHive com o ID {id}. Ficheiro já existente ou erro de conexão ao PaperHive"
+    "Cannot add your PaperHive document with BookID {id}. {message}" : "Não é possível adicionar seu documento PaperHive com BookID {id}. {mensagem}",
+    "No such document found in database." : "Nenhum documento desse tipo encontrado no banco de dados.",
+    "Problem connecting to PaperHive." : "Problema ao ligar com PaperHive.",
+    "Received wrong response from PaperHive." : "Recebida resposta errada de PaperHive.",
+    "Document with this BookID cannot be found" : "Documento com este BookID não pode ser encontrado",
+    "Problem connecting to PaperHive to fetch discussions." : "Problema ao conectar-se ao PaperHive para buscar discussões.",
+    "The file already exists." : "O ficheiro já existe.",
+    "Could not save document." : "Não foi possível salvar o documento.",
+    "Could not save document metadata." : "Não foi possível salvar os metadados do documento.",
+    "The file is locked." : "O ficheiro está bloqueado.",
+    "An internal server error occurred." : "Ocorreu um erro interno no servidor."
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
