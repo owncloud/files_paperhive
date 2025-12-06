@@ -7,6 +7,7 @@ OC.L10N.register(
     "Your DocID" : "Your DocID",
     "is the last fragment of PaperHive document URL." : "is the last fragment of PaperHive document URL.",
     "Exemplary URL" : "Exemplary URL",
+    "An error occurred!" : "An error occurred!",
     "Discuss" : "Discuss",
     "Would you like to open in new window?" : "Would you like to open in new window?",
     "PaperHive" : "PaperHive",
@@ -22,6 +23,7 @@ OC.L10N.register(
     "The file already exists." : "The file already exists.",
     "Could not save document." : "Could not save document.",
     "Could not save document metadata." : "Could not save document metadata.",
-    "The file is locked." : "The file is locked."
+    "The file is locked." : "The file is locked.",
+    "An internal server error occurred." : "An internal server error occurred."
 },
 "nplurals=2; plural=(n != 1);");

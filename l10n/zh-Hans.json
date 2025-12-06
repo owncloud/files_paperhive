@@ -5,6 +5,7 @@
     "Your DocID" : "您的DocID",
     "is the last fragment of PaperHive document URL." : "是 PaperHive 文档 URL 的最后一个片段。",
     "Exemplary URL" : "示例网址",
+    "An error occurred!" : "发生错误！",
     "Discuss" : "討論",
     "Would you like to open in new window?" : "您要在新窗口中開啟嗎？",
     "PaperHive" : "PaperHive",
@@ -19,6 +20,8 @@
     "Problem connecting to PaperHive to fetch discussions." : "连接到 PaperHive 以获取讨论时出现问题。",
     "The file already exists." : "此檔案已存在",
     "Could not save document." : "無法儲存檔案",
-    "Could not save document metadata." : "無法儲存檔案的元資料"
+    "Could not save document metadata." : "無法儲存檔案的元資料",
+    "The file is locked." : "文件已被锁定",
+    "An internal server error occurred." : "内部服务器错误"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

@@ -7,6 +7,7 @@ OC.L10N.register(
     "Your DocID" : "您的DocID",
     "is the last fragment of PaperHive document URL." : "是 PaperHive 文档 URL 的最后一个片段。",
     "Exemplary URL" : "示例网址",
+    "An error occurred!" : "发生错误！",
     "Discuss" : "討論",
     "Would you like to open in new window?" : "您要在新窗口中開啟嗎？",
     "PaperHive" : "PaperHive",
@@ -22,6 +23,7 @@ OC.L10N.register(
     "The file already exists." : "此檔案已存在",
     "Could not save document." : "無法儲存檔案",
     "Could not save document metadata." : "無法儲存檔案的元資料",
-    "The file is locked." : "此檔案已被鎖定"
+    "The file is locked." : "此檔案已被鎖定",
+    "An internal server error occurred." : "内部服务器错误"
 },
 "nplurals=1; plural=0;");
