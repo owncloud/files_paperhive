@@ -24,7 +24,7 @@
  */
 namespace OCA\Files_PaperHive;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use OCP\IDBConnection;
 use OCP\ILogger;
 
@@ -67,7 +67,7 @@ class PaperHiveMetadata {
 			]);
 
 			return ($result === 1);
-		} catch (DBALException $e) {
+		} catch (Exception $e) {
 			$this->logger->logException($e, [
 				'app' => 'files_paperhive',
 				'message' => 'Could not add BookID to paperhive table'
@@ -88,12 +88,10 @@ class PaperHiveMetadata {
 			->where($qb->expr()->eq('fileid', $qb->createNamedParameter($fileId)))
 			->execute();
 
-		/* @phan-suppress-next-line PhanDeprecatedFunction */
-		while ($row = $cursor->fetch()) {
+		while ($row = $cursor->fetchAssociative()) {
 			return $row['bookid'];
 		}
-		/* @phan-suppress-next-line PhanDeprecatedFunction */
-		$cursor->closeCursor();
+		$cursor->free();
 
 		return null;
 	}

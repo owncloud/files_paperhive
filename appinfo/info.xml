@@ -21,7 +21,8 @@
 	<repository type="git">https://github.com/owncloud/files_paperhive.git</repository>
 	<ocsid>166000</ocsid>
 	<dependencies>
-		<owncloud min-version="10" max-version="10" />
+		<owncloud min-version="11" max-version="11" />
+		<php min-version="8.3" />
 	</dependencies>
 	<types>
 		<filesystem/>

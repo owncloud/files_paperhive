@@ -21,8 +21,9 @@
 
 namespace OCA\Files_PaperHive\Tests;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Result;
 use OCA\Files_PaperHive\PaperHiveMetadata;
 use OCP\DB\QueryBuilder\IExpressionBuilder;
 use OCP\DB\QueryBuilder\IQueryBuilder;
@@ -76,7 +77,7 @@ class PaperHiveMetadataTest extends TestCase {
 	 * Test if the basic parameters has changed
 	 */
 	public function testInsertException() {
-		$e = $this->createMock(DBALException::class);
+		$e = $this->createMock(Exception::class);
 		$this->connection->expects($this->once())
 			->method('insertIfNotExist')
 			->willThrowException($e);
@@ -96,7 +97,7 @@ class PaperHiveMetadataTest extends TestCase {
 		$qbExpr = $this->createMock(IExpressionBuilder::class);
 		$qbFrom = $this->createMock(IQueryBuilder::class);
 		$qbWhere = $this->createMock(IQueryBuilder::class);
-		$cursor = $this->createMock(Statement::class);
+		$cursor = $this->createMock(Result::class);
 
 		$qb->expects($this->once())
 			->method('select')->willReturn($qbSelect);
@@ -113,7 +114,7 @@ class PaperHiveMetadataTest extends TestCase {
 		$row = [];
 		$row["bookid"] = "abcd";
 		$cursor->expects($this->once())
-			->method('fetch')->willReturn($row);
+			->method('fetchAssociative')->willReturn($row);
 
 		$this->connection->expects($this->once())
 			->method('getQueryBuilder')->willReturnOnConsecutiveCalls($qb);
@@ -131,7 +132,7 @@ class PaperHiveMetadataTest extends TestCase {
 		$qbExpr = $this->createMock(IExpressionBuilder::class);
 		$qbFrom = $this->createMock(IQueryBuilder::class);
 		$qbWhere = $this->createMock(IQueryBuilder::class);
-		$cursor = $this->createMock(Statement::class);
+		$cursor = $this->createMock(Result::class);
 
 		$qb->expects($this->once())
 			->method('select')->willReturn($qbSelect);
@@ -147,7 +148,7 @@ class PaperHiveMetadataTest extends TestCase {
 			->method('execute')->willReturn($cursor);
 		$row = [];
 		$cursor->expects($this->once())
-			->method('fetch')->willReturn($row);
+			->method('fetchAssociative')->willReturn($row);
 
 		$this->connection->expects($this->once())
 			->method('getQueryBuilder')->willReturnOnConsecutiveCalls($qb);
