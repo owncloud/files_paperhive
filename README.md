@@ -1,66 +1,106 @@
-[![Build Status](https://travis-ci.org/owncloud/files_paperhive.svg?branch=master)](https://travis-ci.org/owncloud/files_paperhive)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=owncloud_files_paperhive&metric=alert_status)](https://sonarcloud.io/dashboard?id=owncloud_files_paperhive)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=owncloud_files_paperhive&metric=security_rating)](https://sonarcloud.io/dashboard?id=owncloud_files_paperhive)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=owncloud_files_paperhive&metric=coverage)](https://sonarcloud.io/dashboard?id=owncloud_files_paperhive)
+# ownCloud PaperHive Integration
 
-- [x] Support for 10.0
+<!-- OSPO-managed README | Generated: 2026-04-16 | v2 -->
 
-# Installation
+[![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE) [![ownCloud OSPO](https://img.shields.io/badge/OSPO-ownCloud-blue)](https://kiteworks.com/opensource) [![Docker Hub](https://img.shields.io/docker/pulls/owncloud)](https://hub.docker.com/r/owncloud/server)
 
-To install, go to ```/apps``` in your ownCloud installation directory and ```git clone https://github.com/owncloud/files_paperhive```. In the apps admin panel enable PaperHive app.
+An ownCloud Classic (OC10) app that integrates the [PaperHive](https://paperhive.org) collaborative reading platform with ownCloud. It enables users to access, share, and discuss published academic articles and books directly within the ownCloud interface, bringing collaborative annotation capabilities to the file sharing workflow.
 
-Remember about the correct permissions for the www folder after cloning the repository, otherwise app might not work correctly! `https://doc.owncloud.com/server/next/admin_manual/installation/installation_wizard.html#strong-perms-label`
+## Getting Started
 
-It is highly recommended, to place in each user root directory a default introduction PaperHive document, `https://paperhive.org/documents/items/ZYY0r21rJbqr` which will help the user orient in the new functionality!
+Install the app into your ownCloud `apps` directory:
 
-# About ownCloud and PaperHive
-Researchers, students, medicine and engineering specialists are among the core ownCloud users and ownCloud's team is committed to support them in the management and creation of research data and texts. To help users read, reference and discuss already published academic texts, ownCloud now integrates with PaperHive, a web platform for collaborative reading.
+```bash
+cd /path/to/owncloud/apps
+git clone https://github.com/owncloud/files_paperhive
+sudo -u www-data php occ app:enable files_paperhive
+```
 
-Researchers read 12-25 hours a week depending on their discipline. Yet, understanding research articles and books – some of the most complex documents in the world – is hard and inefficient in isolation. Students and inexperienced researchers waste time trying to decipher these texts alone, senior researchers dig through folders of articles irrelevant for their own work, and all at some point might repeat unknowingly others’ mistakes or include these as a citation in their own paper.
+It is recommended to place the default PaperHive introduction document in each user's root directory.
 
-PaperHive looks at how the web platform could transform reading into a more social and active process of collaboration. It is a cross-publisher layer of interaction on top of published research documents that enables contextual and structured discussions in real time. PaperHive's main benefits for users:
-* annotate and discuss published academic articles, books and textbooks
-* ask and answer questions, help and benefit from the knowledge, opinions and results of your colleagues and the broad research community
-* keep up-to-date with the newest developments around a specific research topic
-* improve research texts by discovering and correcting mistakes publicly, make complex concepts more accessible
-* share your thoughts and discoveries with the research community and increase your visibility as a researcher
-* give structured feedback to your colleagues
-* if you are a teacher, you can make lectures and seminars much more engaging for students
+## Documentation
 
-Close to 14 million academic articles and books can currently be read and discussed with PaperHive.
+- [PaperHive](https://paperhive.org)
+- [ownCloud Server Admin Manual](https://doc.owncloud.com/server/latest/admin_manual/)
 
-# Transforming Reading Into a Process of Collaboration
+## Part of ownCloud Classic (OC10)
 
-One of the greatest ownCloud features is sharing. Folders or files can be shared with groups, individual users or using password protected or public links.
+This app extends [ownCloud Server](https://github.com/owncloud/core) with academic document collaboration via PaperHive. It is shipped as part of the [ownCloud Server Docker image](https://hub.docker.com/r/owncloud/server).
 
-![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_1.png)
+## Community & Support
 
-The PaperHive documents in this shared folder allow copyright-compliant sharing of research publications with groups of users. By using the `Discuss` button in the file list a user is quickly redirected to the PaperHive page. The `Discuss` button also shows the current number of discussions online. 
-The user can now easily keep up-to-date with new developments around publications of interest and start public or private discussions to better understand or improve academic texts.
+**[Star](https://github.com/owncloud/files_paperhive)** this repo and **Watch** for release notifications!
 
-![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/sharing_documents_2.png)
+- [ownCloud Website](https://owncloud.com)
+- [Community Discussions](https://github.com/orgs/owncloud/discussions)
+- [Matrix Chat](https://app.element.io/#/room/#owncloud:matrix.org)
+- [Documentation](https://doc.owncloud.com)
+- [Enterprise Support](https://owncloud.com/contact-us/)
+- [OSPO Home](https://kiteworks.com/opensource)
 
-Transform your lectures, research and engineering work into a process of collaboration with ownCloud and PaperHive!
+## Contributing
 
-# Add PaperHive document to ownCloud
+We welcome contributions! Please read the [Contributing Guidelines](CONTRIBUTING.md)
+and our [Code of Conduct](CODE_OF_CONDUCT.md) before getting started.
 
-The PaperHive plugin is shipped with the new file menu button "PaperHive Document", which allows adding the documents found on the PaperHive website at `https://paperhive.org`. These are no different to your regular `.doc` or `.jpg` files and will behave the same as any other files in the ownCloud user interface.
+### Workflow
 
-Clicking on the "PaperHive Document" button will ask you for a PaperHive URL or DocID, displaying helpful information in the yellow popup on top of your file list. You are free to choose submitting just DocID or whole URL!
+- **Rebase Early, Rebase Often!** We use a rebase workflow. Always rebase on the target branch before submitting a PR.
+- **Dependabot**: Automated dependency updates are managed via Dependabot. Review and merge dependency PRs promptly.
+- **Signed Commits**: All commits **must** be PGP/GPG signed. See [GitHub's signing guide](https://docs.github.com/en/authentication/managing-commit-signature-verification).
+- **DCO Sign-off**: Every commit must carry a `Signed-off-by` line:
+  ```
+  git commit -s -S -m "your commit message"
+  ```
+- **GitHub Actions Policy**: Workflows may only use actions that are (a) owned by `owncloud`, (b) created by GitHub (`actions/*`), or (c) verified in the GitHub Marketplace.
 
-![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_1.png)
+## Translations
 
-DocID is an unique book identifier, which can be found in the URL of the document at `https://paperhive.org`, as shown in the example below, where URL is `https://paperhive.org/documents/items/ZYY0r21rJbqr` and unique DocID is `ZYY0r21rJbqr`.
+Help translate this project on Transifex:
+**<https://explore.transifex.com/owncloud-org/owncloud/>**
 
-![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_2.png)
+Please submit translations via Transifex -- do not open pull requests for translation changes.
 
-Desired URL or DocID has to be inserted into the field below and confirmed pressing ENTER.
+## Security
 
-![](https://github.com/mrow4a/files_paperhive/blob/master/screenshots/add_new_book_3.png)
+**Do not open a public GitHub issue for security vulnerabilities.**
 
-Your PaperHive Document is now in your synchronisation folder!
+Report vulnerabilities at **<https://security.owncloud.com>** -- see [SECURITY.md](SECURITY.md).
 
-# Used PaperHive API
+Bug bounty: [YesWeHack ownCloud Program](https://yeswehack.com/programs/owncloud-bug-bounty-program)
 
-- [Document Items API v1.1.3 (/api/document-items/[ItemID])](https://github.com/paperhive/frontend/blob/v1.1.3/app/services/document-items-api.ts)
-- [Discussion API v1.1.3 (/api/discussions?documentItem=[ItemID])](https://github.com/paperhive/frontend/blob/v1.1.3/app/components/document-item.ts)
+## License
+
+This project is licensed under the [AGPL-3.0](LICENSE).
+
+## About the ownCloud OSPO
+
+The [Kiteworks Open Source Program Office](https://kiteworks.com/opensource), operating under
+the [ownCloud](https://owncloud.com) brand, launched on May 5, 2026, to steward the open source
+ecosystem around ownCloud's products. The OSPO ensures transparent governance, license compliance,
+community health, and sustainable collaboration between the open source community and
+[Kiteworks](https://www.kiteworks.com), which acquired ownCloud in 2023.
+
+- **OSPO Home**: <https://kiteworks.com/opensource>
+- **GitHub**: <https://github.com/owncloud>
+- **ownCloud**: <https://owncloud.com>
+
+For questions about the OSPO or licensing, contact ospo@kiteworks.com.
+
+### License Migration to Apache 2.0
+
+The OSPO is driving a strategic relicensing of ownCloud repositories toward the
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0), following
+the [Apache Software Foundation's third-party license policy](https://www.apache.org/legal/resolved.html).
+
+Individual repositories will migrate as their audit is completed. The LICENSE file
+in each repo reflects its **current** license status (not the target).
+
+**Current license: AGPL-3.0** (Category X per Apache policy -- cannot be included in Apache-2.0 works).
+
+Migration prerequisites for this repository:
+
+- **CLA/DCO coverage**: All past contributors must have signed agreements permitting relicensing
+- **Copyleft dependency audit**: All AGPL/GPL dependencies must be replaced or isolated
+- **KDE heritage review**: Any code with KDE-era copyrights requires legal analysis
+- **Complete relicensing**: AGPL-3.0 is a strong copyleft license; migration requires full relicensing of all files, not just a header change
