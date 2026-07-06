@@ -1,3 +1,6 @@
+> **⚠️ This repository is archived and no longer maintained.**
+> It is read-only and will not receive further updates or contributions.
+
 [![Build Status](https://travis-ci.org/owncloud/files_paperhive.svg?branch=master)](https://travis-ci.org/owncloud/files_paperhive)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=owncloud_files_paperhive&metric=alert_status)](https://sonarcloud.io/dashboard?id=owncloud_files_paperhive)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=owncloud_files_paperhive&metric=security_rating)](https://sonarcloud.io/dashboard?id=owncloud_files_paperhive)
